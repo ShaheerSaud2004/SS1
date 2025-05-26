@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(270deg, #fff5f5, #ffeaea, #f87171, #fff5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            /* Allow vertical scroll if needed */
+            overflow-y: auto;
+        }
+        html, body {
+            height: 100%;
+        }
+        .w-full.max-w-md.mx-auto.animate-fade-in.relative {
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .dark-gradient {
+            background: linear-gradient(270deg, #18181b, #23272f, #991b1b, #18181b);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+
+        .scarlet-header {
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        .sniper-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px auto;
+            display: block;
+            z-index: 2;
+            position: relative;
+            animation: spinLogo 16s linear infinite;
+        }
+
+        @keyframes spinLogo {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .logo-glow {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #f87171 0%, #fff0 70%);
+            filter: blur(32px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(18px) saturate(1.5);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 40px 0 rgba(185, 28, 28, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.04);
+            transition: transform 0.18s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.18s;
+            animation: cardPulse 2.5s infinite alternate;
+        }
+
+        @keyframes cardPulse {
+            0% {
+                box-shadow: 0 8px 40px 0 rgba(185, 28, 28, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.04);
+            }
+
+            100% {
+                box-shadow: 0 16px 56px 0 rgba(185, 28, 28, 0.28), 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        .glass-effect:hover {
+            transform: scale(1.025);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b91c1c;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        .input-group input {
+            padding-left: 44px;
+            font-size: 1.08rem;
+            background: rgba(255, 255, 255, 0.85);
+            color: #b91c1c;
+            font-weight: 500;
+        }
+
+        .input-group input::placeholder {
+            color: #b91c1c;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.8s ease;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 0 #b91c1c);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 32px #b91c1c);
+            }
+        }
+
+        .animate-glow {
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            80% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-pop {
+            animation: pop 0.7s cubic-bezier(.68, -0.55, .27, 1.55);
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.13;
+            pointer-events: none;
+            animation: float 12s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-40px) scale(1.12);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle" aria-label="Toggle dark mode"
+        class="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full shadow-md p-2 transition-colors duration-200 focus:outline-none">
+        <svg id="darkModeIcon" class="h-6 w-6 text-gray-700 dark:text-yellow-300" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />
+        </svg>
+    </button>
+    <!-- Animated particles for background (smaller) -->
+    <div class="particle" style="width:22px;height:22px;left:10vw;top:20vh;background:#b91c1c;"></div>
+    <div class="particle" style="width:14px;height:14px;left:80vw;top:30vh;background:#f87171;"></div>
+    <div class="particle" style="width:10px;height:10px;left:50vw;top:80vh;background:#b91c1c;"></div>
+    <div class="particle" style="width:8px;height:8px;left:70vw;top:60vh;background:#f87171;"></div>
+    <div class="particle" style="width:6px;height:6px;left:20vw;top:70vh;background:#b91c1c;"></div>
+    <div class="w-full max-w-md mx-auto animate-fade-in relative">
+        <div class="logo-glow"></div>
+        <div class="text-center mb-8 relative z-10">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="28" cy="28" r="26" stroke="#b91c1c" stroke-width="4" fill="#fff" />
+                <circle cx="28" cy="28" r="12" stroke="#b91c1c" stroke-width="3" fill="#fff" />
+                <line x1="28" y1="4" x2="28" y2="18" stroke="#b91c1c" stroke-width="3" />
+                <line x1="28" y1="38" x2="28" y2="52" stroke="#b91c1c" stroke-width="3" />
+                <line x1="4" y1="28" x2="18" y2="28" stroke="#b91c1c" stroke-width="3" />
+                <line x1="38" y1="28" x2="52" y2="28" stroke="#b91c1c" stroke-width="3" />
+                <circle cx="28" cy="28" r="3" fill="#b91c1c" />
+            </svg>
+            <h1 class="text-4xl font-extrabold text-red-700 scarlet-header mb-2">Create Account</h1>
+            <p class="text-gray-700 text-lg font-semibold">Join ScarletSniper Today</p>
+            <p class="text-xs text-gray-400 mt-1">Start monitoring your courses instantly</p>
+        </div>
+        <div class="glass-effect rounded-2xl shadow-2xl p-10 border-t-8 border-red-700">
+            {% if error %}
+            <div class="mb-4 text-red-600 bg-red-100 rounded-lg p-3 text-center flex items-center justify-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                {{ error }}
+            </div>
+            {% endif %}
+            <form method="post" class="space-y-6" id="registerForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                        placeholder="Enter your email">
+                    <button type="button" id="sendCodeBtn"
+                        class="ml-2 px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 text-xs">Send
+                        Code</button>
+                </div>
+                <div class="text-xs text-gray-500 mb-2 ml-2">You need to verify your email to create your account.</div>
+                <div id="emailVerifySection" class="hidden mt-2">
+                    <input type="text" id="emailCodeInput" maxlength="6" pattern="\d{6}"
+                        class="w-32 rounded border-gray-300 px-2 py-1 text-center" placeholder="6-digit code">
+                    <button type="button" id="verifyCodeBtn"
+                        class="ml-2 px-3 py-1 rounded bg-green-600 text-white font-bold hover:bg-green-700 text-xs">Verify</button>
+                    <span id="emailVerifyMsg" class="ml-2 text-xs"></span>
+                </div>
+                <input type="hidden" id="emailVerified" name="email_verified" value="0">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="input-group flex-1">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="netid" name="netid" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Enter your NetID">
+                    </div>
+                    <div class="input-group flex-1">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" name="phone" pattern="\+?1?\d{10,15}" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Phone number (for future SMS alerts)">
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="input-group flex-1">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required minlength="8"
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Password (min 8 chars, 1 number, 1 uppercase)">
+                    </div>
+                    <div class="input-group flex-1">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password2" name="password2" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Confirm Password">
+                    </div>
+                </div>
+                <ul id="pwReqs" class="text-xs text-gray-600 mb-2">
+                    <li id="pwLen" class="">• At least 8 characters</li>
+                    <li id="pwNum" class="">• At least 1 number</li>
+                    <li id="pwUp" class="">• At least 1 uppercase letter</li>
+                    <li id="pwMatch" class="">• Passwords match</li>
+                </ul>
+                <div id="pwError" class="text-xs text-red-600 mb-2"></div>
+                <div class="text-xs text-gray-500 mb-2">Your phone number will be stored for future SMS alerts. You can
+                    update it anytime in your dashboard.</div>
+                <div id="dupCheckMsg" class="text-xs text-red-600 mb-2"></div>
+                <!-- Inline error message for registration -->
+                <div id="registerInlineMsg" class="text-xs text-red-600 mb-3 text-center" style="display:none;"></div>
+                <button type="submit" id="registerBtn"
+                    class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center shadow-lg hover:shadow-xl">
+                    <span id="registerBtnText">Create Account</span>
+                    <svg id="registerSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                    </svg>
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <a href="{{ url_for('login') }}"
+                    class="text-red-700 hover:text-red-800 font-medium transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Already have an account? Login
+                </a>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers
+            University.</div>
+    </div>
+    <div id="registerSuccessAnim"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="flex flex-col items-center animate-fade-in">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff" />
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff" />
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3" />
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3" />
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3" />
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3" />
+                <circle cx="24" cy="24" r="3" fill="#b91c1c" />
+            </svg>
+            <svg class="h-20 w-20 text-green-500 mt-6 animate-pop" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-white animate-fade-in">Account Created!</div>
+            <canvas id="registerConfettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+        </div>
+    </div>
+    <script>
+        console.log('SCRIPT LOADED');
+        const registerForm = document.getElementById('registerForm');
+        const registerBtn = document.getElementById('registerBtn');
+        const registerBtnText = document.getElementById('registerBtnText');
+        const registerSpinner = document.getElementById('registerSpinner');
+
+        const pw = document.getElementById('password');
+        const pw2 = document.getElementById('password2');
+        const pwLen = document.getElementById('pwLen');
+        const pwNum = document.getElementById('pwNum');
+        const pwUp = document.getElementById('pwUp');
+        const pwMatch = document.getElementById('pwMatch');
+        const pwError = document.getElementById('pwError');
+
+        const email = document.getElementById('email');
+        const sendCodeBtn = document.getElementById('sendCodeBtn');
+        const emailVerifySection = document.getElementById('emailVerifySection');
+        const emailCodeInput = document.getElementById('emailCodeInput');
+        const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+        const emailVerifyMsg = document.getElementById('emailVerifyMsg');
+        const emailVerified = document.getElementById('emailVerified');
+        let emailIsVerified = false;
+        // Disable register button until email is verified
+        registerBtn.disabled = true;
+
+        const netid = document.getElementById('netid');
+        const phone = document.getElementById('phone');
+
+        registerForm.addEventListener('submit', async function (e) {
+            const allFilled = email.value && netid.value && pw.value && pw2.value && phone.value;
+            const pwValid = checkPw();
+            const emailVerifiedVal = emailIsVerified;
+            const dupMsg = document.getElementById('dupCheckMsg').textContent.trim() === '';
+            const canRegister = allFilled && pwValid && emailVerifiedVal && dupMsg;
+            const inlineMsg = document.getElementById('registerInlineMsg');
+            if (!canRegister) {
+                e.preventDefault();
+                let msg = "Please fill out all required information.";
+                if (!emailVerifiedVal) {
+                    msg = "You must verify your email with the code.";
+                } else if (!pwValid) {
+                    msg = "Password requirements not met or passwords do not match.";
+                } else if (!dupMsg) {
+                    msg = "Email or NetID already exists.";
+                }
+                inlineMsg.textContent = msg;
+                inlineMsg.style.display = 'block';
+                return false;
+            } else {
+                inlineMsg.style.display = 'none';
+            }
+            registerBtnText.textContent = 'Creating Account...';
+            registerSpinner.classList.remove('hidden');
+
+            if (!emailIsVerified) {
+                emailVerifyMsg.textContent = 'Please verify your email before registering.';
+                emailVerifyMsg.className = 'ml-2 text-xs text-red-600';
+                e.preventDefault();
+                return false;
+            }
+
+            if (!checkPw()) {
+                pwError.textContent = 'Password requirements not met or passwords do not match.';
+                e.preventDefault();
+                return false;
+            }
+
+            const formData = new FormData(registerForm);
+            const response = await fetch("/register", {
+                method: "POST",
+                body: formData
+            });
+            const html = await response.text();
+
+            if (response.redirected || html.includes('login')) {
+                document.getElementById('registerSuccessAnim').classList.remove('hidden');
+                launchRegisterConfetti();
+                setTimeout(() => { window.location.href = "/login"; }, 1500);
+            } else {
+                document.open(); document.write(html); document.close();
+            }
+        });
+
+        function launchRegisterConfetti() {
+            const canvas = document.getElementById('registerConfettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let confetti = [];
+            for (let i = 0; i < 120; i++) {
+                confetti.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * -canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * 40 + 10,
+                    color: `hsl(${Math.random() * 360},90%,60%)`,
+                    tilt: Math.random() * 10 - 10
+                });
+            }
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confetti.forEach(c => {
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+                    ctx.fillStyle = c.color;
+                    ctx.fill();
+                });
+                update();
+            }
+            let angle = 0;
+            function update() {
+                angle += 0.01;
+                confetti.forEach(c => {
+                    c.y += Math.cos(angle + c.d) + 2 + c.r / 2;
+                    c.x += Math.sin(angle) * 2;
+                    if (c.y > canvas.height) {
+                        c.x = Math.random() * canvas.width;
+                        c.y = -10;
+                    }
+                });
+            }
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        function checkPw() {
+            const v = pw.value;
+            let valid = true;
+            if (v.length >= 8) { pwLen.classList.add('text-green-600'); pwLen.classList.remove('text-gray-600'); } else { pwLen.classList.remove('text-green-600'); pwLen.classList.add('text-gray-600'); valid = false; }
+            if (/[0-9]/.test(v)) { pwNum.classList.add('text-green-600'); pwNum.classList.remove('text-gray-600'); } else { pwNum.classList.remove('text-green-600'); pwNum.classList.add('text-gray-600'); valid = false; }
+            if (/[A-Z]/.test(v)) { pwUp.classList.add('text-green-600'); pwUp.classList.remove('text-gray-600'); } else { pwUp.classList.remove('text-green-600'); pwUp.classList.add('text-gray-600'); valid = false; }
+            if (pw.value && pw.value === pw2.value) { pwMatch.classList.add('text-green-600'); pwMatch.classList.remove('text-gray-600'); } else { pwMatch.classList.remove('text-green-600'); pwMatch.classList.add('text-gray-600'); valid = false; }
+            return valid;
+        }
+        pw.oninput = pw2.oninput = checkPw;
+
+        sendCodeBtn.onclick = async function () {
+            emailVerifyMsg.textContent = '';
+            emailVerifySection.classList.remove('hidden');
+            sendCodeBtn.disabled = true;
+            sendCodeBtn.textContent = 'Sending...';
+            const resp = await fetch('/send_verification_email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email.value })
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+                emailVerifyMsg.textContent = 'Code sent! Check your email.';
+                emailVerifyMsg.className = 'ml-2 text-xs text-green-700';
+            } else {
+                emailVerifyMsg.textContent = data.error || 'Failed to send code.';
+                emailVerifyMsg.className = 'ml-2 text-xs text-red-600';
+            }
+            sendCodeBtn.disabled = false;
+            sendCodeBtn.textContent = 'Send Code';
+        };
+        verifyCodeBtn.onclick = async function () {
+            emailVerifyMsg.textContent = '';
+            verifyCodeBtn.disabled = true;
+            verifyCodeBtn.textContent = 'Verifying...';
+            const resp = await fetch('/verify_email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email.value, code: emailCodeInput.value })
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+                emailVerifyMsg.textContent = 'Email verified!';
+                emailVerifyMsg.className = 'ml-2 text-xs text-green-700';
+                emailVerified.value = '1';
+                emailIsVerified = true;
+                email.readOnly = true;
+                sendCodeBtn.disabled = true;
+                emailCodeInput.disabled = true;
+                verifyCodeBtn.disabled = true;
+                checkDuplicates(); // Re-check duplicates after verification
+            } else {
+                emailVerifyMsg.textContent = data.error || 'Incorrect code.';
+                emailVerifyMsg.className = 'ml-2 text-xs text-red-600';
+            }
+            verifyCodeBtn.disabled = false;
+            verifyCodeBtn.textContent = 'Verify';
+        };
+
+        async function checkDuplicates() {
+            const emailVal = email.value.trim().toLowerCase();
+            const netidVal = netid.value.trim();
+            let msg = '';
+            let hasDup = false;
+            if (emailVal.length > 0) {
+                const resp = await fetch(`/admin/data/users`);
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data.users.some(u => u.email === emailVal)) {
+                        msg += 'An account with this email already exists. ';
+                        hasDup = true;
+                    }
+                    if (netidVal.length > 0 && data.users.some(u => u.netid === netidVal)) {
+                        msg += 'An account with this NetID already exists.';
+                        hasDup = true;
+                    }
+                }
+            }
+            document.getElementById('dupCheckMsg').textContent = msg;
+            registerBtn.disabled = hasDup || !emailIsVerified;
+            checkDuplicates(); // Call here after duplicate check
+        }
+        email.addEventListener('blur', checkDuplicates);
+        netid.addEventListener('blur', checkDuplicates);
+
+        phone.addEventListener('input', function(e) {
+            let value = phone.value.replace(/\D/g, ''); // Remove all non-digits
+            if (value.startsWith('1') && value.length > 1) {
+                value = value.substring(1); // Remove leading country code for formatting
+            }
+            let formatted = '';
+            if (value.length > 0) {
+                formatted = '(' + value.substring(0, 3);
+            }
+            if (value.length >= 4) {
+                formatted += ') ' + value.substring(3, 6);
+            }
+            if (value.length >= 7) {
+                formatted += '-' + value.substring(6, 10);
+            }
+            phone.value = '+1 ' + formatted.trim();
+        });
+
+        // Dark mode toggle logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark-gradient');
+                document.body.style.color = '#f3f4f6';
+                document.querySelectorAll('.glass-effect').forEach(el => {
+                    el.classList.remove('bg-white');
+                    el.classList.add('bg-gray-900', 'text-gray-100');
+                });
+                document.querySelectorAll('.scarlet-header').forEach(el => {
+                    el.classList.remove('text-red-700');
+                    el.classList.add('text-red-400');
+                });
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.add('hover:bg-gray-800');
+                });
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark-gradient');
+                document.body.style.background = '';
+                document.body.style.color = '';
+                document.querySelectorAll('.glass-effect').forEach(el => {
+                    el.classList.remove('bg-gray-900', 'text-gray-100');
+                    el.classList.add('bg-white');
+                });
+                document.querySelectorAll('.scarlet-header').forEach(el => {
+                    el.classList.remove('text-red-400');
+                    el.classList.add('text-red-700');
+                });
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.remove('hover:bg-gray-800');
+                });
+            }
+            // Icon
+            darkModeIcon.innerHTML = enabled
+                ? '<path id="moonIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />'
+                : '<path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />';
+        }
+        // Load preference
+        const darkPref = localStorage.getItem('scarlet_dark_mode') === 'true';
+        setDarkMode(darkPref);
+        darkModeToggle.onclick = () => {
+            const enabled = !document.documentElement.classList.contains('dark');
+            setDarkMode(enabled);
+            localStorage.setItem('scarlet_dark_mode', enabled);
+        };
+    </script>
+</body>
+
+</html>

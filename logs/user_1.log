@@ -1,0 +1,269 @@
+[2025-05-24 00:17:20] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:17:20] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:17:22] [1] Pressed Enter after password.
+[2025-05-24 00:18:16] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:18:16] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:18:20] [1] Pressed Enter after password.
+[2025-05-24 00:18:23] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:18:53] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:18:54] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:18:54] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:18:58] [1] Pressed Enter after password.
+[2025-05-24 00:19:00] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:19:13] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:19:20] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:19:23] [1] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:19:27] [1] WebReg login successful. Session is now active.
+[2025-05-24 00:19:51] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:20:11] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:20:50] [1] Invalid course index: 928312. Monitoring stopped.
+[2025-05-24 00:24:37] [1] Stopped monitoring course 928312
+[2025-05-24 00:24:44] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:24:44] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:24:46] [1] Pressed Enter after password.
+[2025-05-24 00:25:07] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:25:07] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:25:07] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:26:51] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:26:51] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:26:54] [1] Pressed Enter after password.
+[2025-05-24 00:27:02] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:02] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:02] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:21] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:27:21] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:27:23] [1] Pressed Enter after password.
+[2025-05-24 00:27:35] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:35] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:35] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:51] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:27:51] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:27:55] [1] Pressed Enter after password.
+[2025-05-24 00:27:57] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:28:32] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:28:53] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:30:02] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:30:02] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:30:06] [1] Pressed Enter after password.
+[2025-05-24 00:30:08] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:30:37] [1] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:30:41] [1] WebReg login successful. Session is now active.
+[2025-05-24 00:31:29] [1] Section 20740 is OPEN! Attempting to register...
+[2025-05-24 00:31:43] [1] Stopped monitoring course 20740
+[2025-05-24 00:31:58] [1] Registration failed for course 20740. Will retry.
+[2025-05-24 00:58:04] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:58:04] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:58:07] [1] Pressed Enter after password.
+[2025-05-24 00:59:08] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:59:19] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:59:19] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:59:23] [1] Pressed Enter after password.
+[2025-05-24 00:59:38] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:59:59] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 01:00:23] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 01:00:54] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 01:01:14] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 12:29:13] [1] Opened WebReg login page in Selenium.
+[2025-05-24 12:29:13] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 12:29:13] [1] Exception in selenium_login_flow: 'NoneType' object is not iterable
+[2025-05-24 12:29:29] [1] Opened WebReg login page in Selenium.
+[2025-05-24 12:29:29] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 12:29:30] [1] Exception in selenium_login_flow: 'NoneType' object is not iterable

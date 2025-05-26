@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="/static/sniper-icon.svg">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f3e8ff 0%, #fff5f5 100%);
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 48px 0 rgba(0,0,0,0.10);
+            backdrop-filter: blur(12px);
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 0.01em;
+        }
+        .leaderboard-gradient {
+            background: linear-gradient(90deg, #a78bfa 0%, #f87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .leaderboard-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white/90 shadow-md py-6 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <img src="/static/sniper-icon.svg" alt="ScarletSniper Logo" class="h-10 w-10">
+            <span class="text-2xl font-extrabold text-red-700 tracking-wide">ScarletSniper</span>
+        </div>
+        <a href="/dashboard" class="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold shadow hover:from-blue-700 hover:to-blue-500 transition-all duration-200">Back to Dashboard</a>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center px-4 py-12">
+        <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Leaderboard -->
+            <section class="glass-card p-10 flex flex-col justify-center mb-6 md:mb-0">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="leaderboard-icon text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h2a4 4 0 014 4v2" /></svg>
+                    <span class="section-title leaderboard-gradient">Top Course Indexes</span>
+                </div>
+                <div class="overflow-x-auto mt-4">
+                    <table class="min-w-full text-left text-gray-700">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 font-bold">Rank</th>
+                                <th class="py-2 px-4 font-bold">Course Index</th>
+                                <th class="py-2 px-4 font-bold"># of Monitors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in leaderboard %}
+                            <tr class="hover:bg-purple-50">
+                                <td class="py-2 px-4 font-bold text-lg">{{ loop.index }}</td>
+                                <td class="py-2 px-4 font-mono text-blue-700">{{ row.index }}</td>
+                                <td class="py-2 px-4">{{ row.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- How it works -->
+            <section class="glass-card p-10 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="leaderboard-icon text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" /></svg>
+                    <span class="section-title leaderboard-gradient">How Leaderboard Works</span>
+                </div>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>The leaderboard shows the most-monitored course indexes by all ScarletSniper users.</li>
+                    <li>Ranks are updated in real-time as users add or remove monitors.</li>
+                    <li>Use this info to see which classes are in highest demand!</li>
+                </ul>
+                <div class="mt-4 text-sm text-gray-500">No personal data is shown. Only aggregate course index stats are displayed.</div>
+            </section>
+        </div>
+        <!-- Call to Action -->
+        <div class="max-w-3xl w-full mt-12 flex flex-col items-center">
+            <div class="glass-card p-8 flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-blue-700 mb-2">Want to get your course on the leaderboard?</h2>
+                <p class="text-gray-700 mb-4">Add your course index to ScarletSniper and join the race for the most popular classes!</p>
+                <a href="/dashboard" class="px-7 py-3 rounded-xl bg-gradient-to-r from-red-600 to-pink-400 text-white font-bold text-lg shadow-lg hover:scale-105 hover:from-red-700 hover:to-pink-500 transition-all duration-200 flex items-center gap-2">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    Go to Dashboard
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 text-center text-xs text-gray-400">&copy; 2024 ScarletSniper. Not affiliated with Rutgers University.</footer>
+</body>
+</html> 

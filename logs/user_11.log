@@ -1,0 +1,56 @@
+[2025-05-23 17:47:15] [11] Invalid course index: 09306. Monitoring stopped.
+[2025-05-23 18:06:11] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:06:11] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:06:15] [11] Submitted WebReg login form.
+[2025-05-23 18:06:35] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 18:06:40] [11] WebReg login successful. Session is now active.
+[2025-05-23 18:13:54] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:13:54] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:13:58] [11] Submitted WebReg login form.
+[2025-05-23 18:14:18] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 18:14:28] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 18:30:15] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:30:15] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:30:21] [11] Submitted WebReg login form.
+[2025-05-23 18:30:28] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 18:30:32] [11] WebReg login successful. Session is now active.
+[2025-05-23 22:13:28] [11] Opened WebReg login page in Selenium.
+[2025-05-23 22:13:28] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 22:13:31] [11] Submitted WebReg login form.
+[2025-05-23 22:13:51] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 22:14:01] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 22:19:33] [11] Opened WebReg login page in Selenium.
+[2025-05-23 22:19:33] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 22:19:38] [11] Submitted WebReg login form.
+[2025-05-23 22:19:47] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 22:19:51] [11] WebReg login successful. Session is now active.
+[2025-05-23 22:20:05] [11] Stopped monitoring course 09306
+[2025-05-23 22:20:44] [11] Invalid course index: 123143. Monitoring stopped.
+[2025-05-23 22:42:58] [11] Stopped monitoring course 123143
+[2025-05-23 23:48:47] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:48:47] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:48:53] [11] Submitted WebReg login form.
+[2025-05-23 23:49:14] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 23:49:34] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 23:55:45] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:55:45] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:55:49] [11] Submitted WebReg login form.
+[2025-05-23 23:56:20] [11] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-23 23:56:40] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 23:59:19] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:59:19] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:59:23] [11] Submitted WebReg login form.
+[2025-05-24 00:03:33] [11] Opened WebReg login page in Selenium.
+[2025-05-24 00:03:33] [11] Filling NetID and password in WebReg login form.
+[2025-05-24 00:03:39] [11] Pressed Enter after password.
+[2025-05-24 00:03:39] [11] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:03:47] [11] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:03:51] [11] WebReg login successful. Session is now active.
+[2025-05-24 00:04:42] [11] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 00:04:54] [11] Stopped monitoring course 123212
+[2025-05-24 00:05:42] [11] Invalid course index: sodas. Monitoring stopped.
+[2025-05-24 00:08:13] [11] Invalid course index: 123212. Monitoring stopped.

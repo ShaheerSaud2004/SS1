@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScarletSniper Waitlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(270deg, #fff5f5, #ffeaea, #f87171, #fff5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .scarlet-header {
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .sniper-icon {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 18px auto;
+            display: block;
+            filter: drop-shadow(0 0 0 #b91c1c);
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0%,100% { filter: drop-shadow(0 0 0 #b91c1c); }
+            50% { filter: drop-shadow(0 0 32px #b91c1c); }
+        }
+        .fade-in-card {
+            animation: fadeInCard 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @media (max-width: 640px) {
+            .w-full.max-w-2xl.mx-auto.fade-in-card {
+                padding: 0 !important;
+            }
+            .bg-white.rounded-2xl.shadow-2xl.p-8.border-t-8.border-red-700 {
+                padding: 1rem !important;
+            }
+            .text-4xl {
+                font-size: 2rem !important;
+            }
+            .text-2xl {
+                font-size: 1.2rem !important;
+            }
+            .py-4 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+            .py-3 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+            .py-2\.5 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+            .px-6, .px-4, .px-3 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .rounded-2xl, .rounded-lg {
+                border-radius: 0.75rem !important;
+            }
+            .p-8 {
+                padding: 1rem !important;
+            }
+            .mb-8 {
+                margin-bottom: 1.5rem !important;
+            }
+            .mb-6 {
+                margin-bottom: 1rem !important;
+            }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 1rem !important;
+            }
+        }
+        @keyframes rotateShape {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-2xl mx-auto fade-in-card">
+        <div class="flex justify-between items-center mb-4">
+            <div></div>
+            <a href="/" class="inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-gray-200 to-gray-100 text-red-700 font-semibold shadow hover:bg-gray-300 hover:text-red-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 text-base md:text-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Go back to Home
+            </a>
+        </div>
+        <div class="text-center mb-8">
+            <svg class="sniper-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <h1 class="text-4xl font-extrabold text-red-700 scarlet-header mb-3">Join the Waitlist</h1>
+            <p class="text-gray-600 text-lg">Be among the first to experience ScarletSniper</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-2xl p-8 border-t-8 border-red-700">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Why Join ScarletSniper?</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start">
+                        <i class="fas fa-robot text-red-500 mt-1 mr-2"></i>
+                        <span><span class="font-bold text-red-700">Automatic course registration</span> — ScarletSniper will <span class="font-bold">register you for a course the moment a spot opens</span>, not just notify you like SwiftRU, CourseSniper, and others.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bolt text-yellow-500 mt-1 mr-2"></i>
+                        <span><span class="font-bold">No manual intervention required</span> — You don't have to wake up early or keep checking. ScarletSniper does it all for you, 24/7.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bell text-green-500 mt-1 mr-2"></i>
+                        <span><span class="font-bold">Fastest real-time notifications</span> — Get notified instantly and let the bot handle the rest.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-blue-500 mt-1 mr-2"></i>
+                        <span><span class="font-bold">Priority access to new features & support</span> — Be the first to try new tools and get help when you need it.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-trophy text-purple-500 mt-1 mr-2"></i>
+                        <span>ScarletSniper is <span class="font-bold">superior to SiftRU and similar tools</span> because it actually registers you, not just monitors or alerts.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-shield-alt text-gray-700 mt-1 mr-2"></i>
+                        <span><span class="font-bold">Your data is never saved or shared</span> — ScarletSniper does not store your NetID password or sensitive information. All actions are performed securely and in real time.<br>
+                        <span class="text-xs text-gray-500">(ScarletSniper uses industry-standard encryption and never shares your data. See our <a href='/privacy-policy' class='underline text-blue-600'>privacy policy</a>.)</span></span>
+                    </li>
+                </ul>
+            </div>
+
+            <form id="waitlistForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" name="firstName" required
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                            placeholder="Enter your first name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" name="lastName" required
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                            placeholder="Enter your last name">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Rutgers Email</label>
+                    <input type="email" name="email" required
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                        placeholder="Enter your Rutgers email">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">NetID</label>
+                    <input type="text" name="netid" required
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                        placeholder="Enter your NetID">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" name="phone" required
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                        placeholder="Enter your phone number">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join ScarletSniper?</label>
+                    <textarea name="reason" required rows="4"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5"
+                        placeholder="Tell us why you're interested in ScarletSniper"></textarea>
+                </div>
+
+                <div id="formMessage" class="hidden text-sm font-medium"></div>
+
+                <button type="submit"
+                    class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center shadow-lg hover:shadow-xl">
+                    <span id="submitBtnText">Join Waitlist</span>
+                    <svg id="submitSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-8 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</div>
+    </div>
+
+    <script>
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const submitBtnText = document.getElementById('submitBtnText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtnText.textContent = 'Submitting...';
+            submitSpinner.classList.remove('hidden');
+            formMessage.classList.add('hidden');
+            
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('/join_waitlist', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    formMessage.textContent = 'Successfully joined the waitlist! Check your email for confirmation.';
+                    formMessage.classList.remove('hidden', 'text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    this.reset();
+                } else {
+                    formMessage.textContent = data.error || 'Failed to join waitlist. Please try again.';
+                    formMessage.classList.remove('hidden', 'text-green-600');
+                    formMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                formMessage.textContent = 'An error occurred. Please try again.';
+                formMessage.classList.remove('hidden', 'text-green-600');
+                formMessage.classList.add('text-red-600');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.textContent = 'Join Waitlist';
+                submitSpinner.classList.add('hidden');
+            }
+        });
+
+        // Phone number formatting
+        const phoneInput = document.querySelector('input[name="phone"]');
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('1') && value.length > 1) {
+                value = value.substring(1);
+            }
+            let formatted = '';
+            if (value.length > 0) {
+                formatted = '(' + value.substring(0, 3);
+            }
+            if (value.length >= 4) {
+                formatted += ') ' + value.substring(3, 6);
+            }
+            if (value.length >= 7) {
+                formatted += '-' + value.substring(6, 10);
+            }
+            e.target.value = '+1 ' + formatted.trim();
+        });
+    </script>
+</body>
+</html> 

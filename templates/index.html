@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(270deg, #fff5f5, #ffeaea, #f87171, #fff5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .dark-gradient {
+            background: linear-gradient(270deg, #18181b, #23272f, #991b1b, #18181b);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+        .scarlet-header {
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .sniper-icon {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 18px auto;
+            display: block;
+            filter: drop-shadow(0 0 0 #b91c1c);
+            animation: glow 1.5s infinite alternate, floatUpDown 2.5s ease-in-out infinite;
+            z-index: 2;
+            position: relative;
+        }
+        .logo-pulse {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 128px;
+            height: 128px;
+            z-index: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #b91c1c33 0%, #fff0 80%);
+            animation: pulseShadow 2s infinite;
+        }
+        @keyframes glow {
+            0%,100% { filter: drop-shadow(0 0 0 #b91c1c); }
+            50% { filter: drop-shadow(0 0 32px #b91c1c); }
+        }
+        @keyframes floatUpDown {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulseShadow {
+            0%,100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.15); }
+        }
+        .fade-in-card {
+            animation: fadeInCard 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.13;
+            animation: float 8s ease-in-out infinite, rotateShape 30s linear infinite;
+        }
+        .shape1 { width: 48px; height: 48px; background: #b91c1c; left: 5vw; top: 10vh; animation-delay: 0s, 0s; }
+        .shape2 { width: 32px; height: 32px; background: #2563eb; right: 8vw; top: 30vh; animation-delay: 2s, 5s; }
+        .shape3 { width: 24px; height: 24px; background: #f59e42; left: 20vw; bottom: 8vh; animation-delay: 4s, 10s; }
+        @keyframes float {
+            0%,100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-18px) scale(1.08); }
+        }
+        @keyframes rotateShape {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .typewriter {
+            display: inline-block;
+            border-right: 2px solid #b91c1c;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 1.125rem;
+            color: #374151;
+            font-weight: 500;
+            width: 0;
+            animation: typing 2.2s steps(40, end) 0.5s forwards, blink-caret 0.7s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            0%,100% { border-color: transparent; }
+            50% { border-color: #b91c1c; }
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .w-full.max-w-md {
+                width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .sniper-icon {
+                width: 64px;
+                height: 64px;
+            }
+            
+            .logo-pulse {
+                width: 96px;
+                height: 96px;
+            }
+            
+            h1.text-5xl {
+                font-size: 2.5rem;
+            }
+            
+            .typewriter {
+                font-size: 1rem;
+            }
+            
+            .max-w-md.mx-auto.bg-white {
+                padding: 1.5rem;
+            }
+            
+            button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1.25rem;
+            }
+            
+            #registerModal .w-full.max-w-md {
+                width: 95%;
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            #registerModal .text-4xl {
+                font-size: 2rem;
+            }
+            
+            #registerModal .text-lg {
+                font-size: 1rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .input-group button {
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+            
+            #emailVerifySectionModal {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            #emailVerifySectionModal button {
+                width: 100%;
+            }
+        }
+        
+        /* Tablet Responsive Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .w-full.max-w-md {
+                width: 90%;
+            }
+            
+            .sniper-icon {
+                width: 76px;
+                height: 76px;
+            }
+            
+            h1.text-5xl {
+                font-size: 3rem;
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            button:hover {
+                transform: none;
+            }
+            
+            .quick-link-card:hover {
+                transform: none;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .darkModeToggle,
+            .floating-shape,
+            #confettiCanvas,
+            #logoutAnim {
+                display: none;
+            }
+            
+            .w-full.max-w-md {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle" aria-label="Toggle dark mode" class="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full shadow-md p-2 transition-colors duration-200 focus:outline-none">
+        <svg id="darkModeIcon" class="h-6 w-6 text-gray-700 dark:text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />
+        </svg>
+    </button>
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+    <div class="w-full max-w-md mx-auto fade-in-card relative z-10">
+        <div class="text-center mb-8 relative">
+            <div class="logo-pulse"></div>
+            <svg class="sniper-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <h1 class="text-5xl font-extrabold text-red-700 scarlet-header mb-3">ScarletSniper</h1>
+            <span id="typewriter" class="typewriter"></span>
+        </div>
+        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center space-y-8 border-t-8 border-red-700">
+            <button id="openLoginModal" class="w-full text-center py-4 px-6 rounded bg-blue-600 text-white font-semibold text-2xl hover:bg-blue-700 hover:scale-105 transition-all duration-200 shadow-md">Login</button>
+            <button id="openRegisterModal" class="w-full text-center py-4 px-6 rounded bg-gray-100 text-blue-700 font-semibold text-2xl hover:bg-gray-200 hover:scale-105 transition-all duration-200 shadow-md">Register</button>
+            <a href="{{ url_for('waitlist') }}" class="w-full text-center py-4 px-6 rounded bg-red-700 text-white font-semibold text-2xl hover:bg-red-800 hover:scale-105 transition-all duration-200 shadow-md block">Join Waitlist</a>
+        </div>
+        <div class="mt-8 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</div>
+    </div>
+    <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+    <div id="logoutAnim" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="flex flex-col items-center animate-fade-in">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-white animate-fade-in">👋 Logged out!</div>
+        </div>
+    </div>
+    <!-- Registration Modal -->
+    <div id="registerModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
+        <div class="w-full max-w-2xl mx-auto animate-fade-in relative bg-white rounded-2xl shadow-2xl p-10 border-t-8 border-red-700 max-h-[95vh] overflow-y-auto">
+            <button id="closeRegisterModal" class="sticky top-4 float-right right-4 text-gray-400 hover:text-red-700 text-2xl font-bold z-50 bg-white bg-opacity-80 rounded-full px-2">&times;</button>
+            <div class="logo-glow"></div>
+            <div class="text-center mb-8 relative z-10">
+                <svg class="sniper-icon animate-glow" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="28" cy="28" r="26" stroke="#b91c1c" stroke-width="4" fill="#fff" />
+                    <circle cx="28" cy="28" r="12" stroke="#b91c1c" stroke-width="3" fill="#fff" />
+                    <line x1="28" y1="4" x2="28" y2="18" stroke="#b91c1c" stroke-width="3" />
+                    <line x1="28" y1="38" x2="28" y2="52" stroke="#b91c1c" stroke-width="3" />
+                    <line x1="4" y1="28" x2="18" y2="28" stroke="#b91c1c" stroke-width="3" />
+                    <line x1="38" y1="28" x2="52" y2="28" stroke="#b91c1c" stroke-width="3" />
+                    <circle cx="28" cy="28" r="3" fill="#b91c1c" />
+                </svg>
+                <h1 class="text-4xl font-extrabold text-red-700 scarlet-header mb-2">Create Account</h1>
+                <p class="text-gray-700 text-lg font-semibold">Join ScarletSniper Today</p>
+                <p class="text-xs text-gray-400 mt-1">Start monitoring your courses instantly</p>
+            </div>
+            <form method="post" action="/register" class="space-y-6" id="registerFormModal">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="emailModal" name="email" required
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                        placeholder="Enter your email">
+                    <button type="button" id="sendCodeBtnModal"
+                        class="ml-2 px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 text-xs">Send
+                        Code</button>
+                </div>
+                <div class="text-xs text-gray-500 mb-2 ml-2">You need to verify your email to create your account.</div>
+                <div id="emailVerifySectionModal" class="hidden mt-2">
+                    <input type="text" id="emailCodeInputModal" maxlength="6" pattern="\d{6}"
+                        class="w-32 rounded border-gray-300 px-2 py-1 text-center" placeholder="6-digit code">
+                    <button type="button" id="verifyCodeBtnModal"
+                        class="ml-2 px-3 py-1 rounded bg-green-600 text-white font-bold hover:bg-green-700 text-xs">Verify</button>
+                    <span id="emailVerifyMsgModal" class="ml-2 text-xs"></span>
+                </div>
+                <input type="hidden" id="emailVerifiedModal" name="email_verified" value="0">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="input-group flex-1">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="netidModal" name="netid" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Enter your NetID">
+                    </div>
+                    <div class="input-group flex-1">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phoneModal" name="phone" pattern="^\+1 \(\d{3}\) \d{3}-\d{4}$" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Phone number (for future SMS alerts)">
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="input-group flex-1">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="passwordModal" name="password" required minlength="8"
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Password (min 8 chars, 1 number, 1 uppercase)">
+                    </div>
+                    <div class="input-group flex-1">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password2Modal" name="password2" required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                            placeholder="Confirm Password">
+                    </div>
+                </div>
+                <ul id="pwReqsModal" class="text-xs text-gray-600 mb-2">
+                    <li id="pwLenModal" class="">• At least 8 characters</li>
+                    <li id="pwNumModal" class="">• At least 1 number</li>
+                    <li id="pwUpModal" class="">• At least 1 uppercase letter</li>
+                    <li id="pwMatchModal" class="">• Passwords match</li>
+                </ul>
+                <div id="pwErrorModal" class="text-xs text-red-600 mb-2"></div>
+                <div class="text-xs text-gray-500 mb-2">Your phone number will be stored for future SMS alerts. You can
+                    update it anytime in your dashboard.</div>
+                <div id="dupCheckMsgModal" class="text-xs text-red-600 mb-2"></div>
+                <!-- Inline error message for registration -->
+                <div id="registerInlineMsgModal" class="text-xs text-red-600 mb-3 text-center" style="display:none;"></div>
+                <button type="submit" id="registerBtnModal"
+                    class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center shadow-lg hover:shadow-xl">
+                    <span id="registerBtnTextModal">Create Account</span>
+                    <svg id="registerSpinnerModal" class="hidden animate-spin ml-2 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                    </svg>
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <a href="{{ url_for('login') }}"
+                    class="text-red-700 hover:text-red-800 font-medium transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Already have an account? Login
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Registration Success Modal -->
+    <div id="registerSuccessModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+        <div class="flex flex-col items-center justify-center bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full animate-fade-in">
+            <svg class="h-20 w-20 text-green-500 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="4" fill="#fff"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-green-700 animate-fade-in">Account Created!</div>
+            <div class="mt-2 text-lg text-gray-700 text-center">Your account was created successfully.<br>You can now log in.</div>
+            <button id="goToLoginBtn" class="mt-8 px-6 py-3 rounded-lg bg-green-600 text-white font-bold text-lg shadow hover:bg-green-700 transition-all">Go to Login</button>
+        </div>
+    </div>
+    <!-- Login Modal -->
+    <div id="loginModal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
+        <div class="w-full max-w-md mx-auto animate-fade-in relative bg-white rounded-2xl shadow-2xl p-10 border-t-8 border-red-700 max-h-[95vh] overflow-y-auto">
+            <button id="closeLoginModal" class="absolute top-0 right-0 m-3 text-gray-400 hover:text-red-700 text-2xl font-bold z-50 bg-white bg-opacity-80 rounded-full px-2">&times;</button>
+            <div class="text-center mb-8 relative z-10 flex flex-col items-center justify-center">
+                <div class="flex items-center justify-center relative w-full" style="height: 110px;">
+                    <span class="logo-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></span>
+                    <svg class="sniper-icon animate-glow relative z-10" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="28" cy="28" r="26" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                        <circle cx="28" cy="28" r="12" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                        <line x1="28" y1="4" x2="28" y2="18" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="28" y1="38" x2="28" y2="52" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="4" y1="28" x2="18" y2="28" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="38" y1="28" x2="52" y2="28" stroke="#b91c1c" stroke-width="3"/>
+                        <circle cx="28" cy="28" r="3" fill="#b91c1c"/>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-extrabold text-red-700 scarlet-header mb-2">Login</h1>
+                <p class="text-gray-700 text-lg font-semibold">Welcome back to ScarletSniper</p>
+            </div>
+            <form method="post" class="space-y-6" id="loginFormModal">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="emailLoginModal" name="email" required autocomplete="username"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                        placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="passwordLoginModal" name="password" required autocomplete="current-password"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                        placeholder="Enter your password">
+                </div>
+                <div id="loginInlineMsgModal" class="text-xs text-red-600 mb-3 text-center" style="display:none;"></div>
+                <button type="submit" id="loginBtnModal"
+                    class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center shadow-lg hover:shadow-xl">
+                    <span id="loginBtnTextModal">Login</span>
+                    <svg id="loginSpinnerModal" class="hidden animate-spin ml-2 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                    </svg>
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <button id="openRegisterFromLoginModal" class="text-red-700 hover:text-red-800 font-medium transition-colors duration-200 flex items-center justify-center bg-transparent mx-auto">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Don't have an account? Register
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Login Success Modal/Anim -->
+    <div id="loginSuccessAnimModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="flex flex-col items-center animate-fade-in">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <svg class="h-20 w-20 text-green-500 mt-6 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-white animate-fade-in">Welcome to <span class="text-red-500">ScarletSniper!</span></div>
+            <canvas id="confettiCanvasLogin" class="fixed inset-0 pointer-events-none z-50"></canvas>
+        </div>
+    </div>
+    <!-- NOTE: Make sure your Stripe webhook endpoint is deployed and configured in your Stripe dashboard for slot upgrades to work after payment. -->
+    <div class="mt-10 max-w-xl mx-auto">
+        <div class="bg-white bg-opacity-80 rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-red-700 mb-6 text-center">Why ScarletSniper?</h2>
+            <ul class="space-y-6">
+                <li class="flex items-start">
+                    <span class="text-red-600 mr-4 text-2xl"><svg xmlns='http://www.w3.org/2000/svg' class='h-7 w-7' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zm0 2c-2.21 0-4 1.79-4 4v5h8v-5c0-2.21-1.79-4-4-4z' /></svg></span>
+                    <div>
+                        <span class="font-semibold text-lg">Automatic course registration</span> — ScarletSniper will register you for a course the moment a spot opens, <span class="font-semibold text-red-700">not just notify you</span> like SwiftRU, CourseSniper, and others.
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-600 mr-4 text-2xl"><svg xmlns='http://www.w3.org/2000/svg' class='h-7 w-7' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zm0 2c-2.21 0-4 1.79-4 4v5h8v-5c0-2.21-1.79-4-4-4z' /></svg></span>
+                    <div>
+                        <span class="font-semibold text-lg">No manual intervention required</span> — You don't have to wake up early or keep checking. ScarletSniper does it all for you, <span class="font-semibold text-red-700">24/7</span>.
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-600 mr-4 text-2xl"><svg xmlns='http://www.w3.org/2000/svg' class='h-7 w-7' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z' /></svg></span>
+                    <div>
+                        <span class="font-semibold text-lg">Fastest real-time notifications</span> — Get notified instantly and let the bot handle the rest.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+    if (window.location.search.includes('logout=1')) {
+        const logoutAnim = document.getElementById('logoutAnim');
+        logoutAnim.classList.remove('hidden');
+        setTimeout(() => { logoutAnim.classList.add('hidden'); }, 1500);
+    }
+
+    // Typewriter effect for tagline
+    const tagline = "Automated Course Registration System";
+    const typewriter = document.getElementById('typewriter');
+    let i = 0;
+    function type() {
+        if (i <= tagline.length) {
+            typewriter.textContent = tagline.slice(0, i);
+            i++;
+            setTimeout(type, 40);
+        }
+    }
+    setTimeout(type, 600);
+
+    // Falling leaves/flowers on page load
+    function launchConfetti() {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const leafTypes = [
+            // Scarlet maple leaf SVG path
+            {type: 'svg', color: '#b91c1c', draw: (ctx, x, y, r, rot) => {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rot);
+                ctx.scale(r/24, r/24);
+                ctx.beginPath();
+                ctx.moveTo(24,2);ctx.lineTo(28,18);ctx.lineTo(44,12);ctx.lineTo(30,22);ctx.lineTo(46,28);ctx.lineTo(28,26);ctx.lineTo(36,44);ctx.lineTo(24,30);ctx.lineTo(12,44);ctx.lineTo(20,26);ctx.lineTo(2,28);ctx.lineTo(18,22);ctx.lineTo(4,12);ctx.lineTo(20,18);ctx.closePath();
+                ctx.fillStyle = '#b91c1c';
+                ctx.globalAlpha = 0.85;
+                ctx.shadowColor = '#b91c1c';
+                ctx.shadowBlur = 4;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.restore();
+            }},
+            // Scarlet flower SVG path
+            {type: 'svg', color: '#e11d48', draw: (ctx, x, y, r, rot) => {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rot);
+                ctx.scale(r/24, r/24);
+                ctx.beginPath();
+                for(let i=0;i<5;i++){
+                    ctx.ellipse(0,8,6,14,Math.PI*2*i/5,0,2*Math.PI);
+                }
+                ctx.fillStyle = '#e11d48';
+                ctx.globalAlpha = 0.8;
+                ctx.shadowColor = '#e11d48';
+                ctx.shadowBlur = 3;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.restore();
+            }},
+            // Sakura petal (emoji for simplicity)
+            {type: 'emoji', char: '🌸'},
+            // Maple leaf emoji
+            {type: 'emoji', char: '🍁'}
+        ];
+        let confetti = [];
+        for (let i = 0; i < 60; i++) {
+            const leaf = leafTypes[Math.floor(Math.random()*leafTypes.length)];
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                r: Math.random() * 14 + 10,
+                d: Math.random() * 40 + 10,
+                rot: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random()-0.5)*0.03,
+                drift: (Math.random()-0.5)*2.2,
+                type: leaf,
+            });
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confetti.forEach(c => {
+                if (c.type.type === 'svg') {
+                    c.type.draw(ctx, c.x, c.y, c.r, c.rot);
+                } else if (c.type.type === 'emoji') {
+                    ctx.save();
+                    ctx.font = `${c.r}px serif`;
+                    ctx.globalAlpha = 0.92;
+                    ctx.translate(c.x, c.y);
+                    ctx.rotate(c.rot);
+                    ctx.fillText(c.type.char, 0, 0);
+                    ctx.globalAlpha = 1;
+                    ctx.restore();
+                }
+            });
+            update();
+        }
+        function update() {
+            confetti.forEach(c => {
+                c.y += 1.2 + c.r/32;
+                c.x += Math.sin(c.d + c.y/60) * 0.8 + c.drift;
+                c.rot += c.rotSpeed;
+            });
+        }
+        function animate() {
+            draw();
+            confetti = confetti.filter(c => c.y < canvas.height + 40);
+            if (confetti.length > 0) {
+                requestAnimationFrame(animate);
+            }
+        }
+        animate();
+    }
+    window.onload = launchConfetti;
+
+    // Dark mode toggle logic
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    function setDarkMode(enabled) {
+        if (enabled) {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark-gradient');
+            document.body.style.color = '#f3f4f6';
+            // Update floating shapes
+            document.querySelectorAll('.floating-shape').forEach((el, i) => {
+                if (i === 0) el.style.background = '#991b1b';
+                if (i === 1) el.style.background = '#2563eb';
+                if (i === 2) el.style.background = '#f59e42';
+                el.style.opacity = 0.18;
+            });
+            // Update card
+            document.querySelectorAll('.bg-white').forEach(el => {
+                el.classList.remove('bg-white');
+                el.classList.add('bg-gray-900');
+                el.classList.add('text-gray-100');
+            });
+            // Update links
+            document.querySelectorAll('a').forEach(el => {
+                el.classList.add('hover:bg-gray-800');
+            });
+            // Change icon to moon
+            darkModeIcon.innerHTML = '<path id="moonIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark-gradient');
+            document.body.style.background = '';
+            document.body.style.color = '';
+            document.querySelectorAll('.floating-shape').forEach((el, i) => {
+                if (i === 0) el.style.background = '#b91c1c';
+                if (i === 1) el.style.background = '#2563eb';
+                if (i === 2) el.style.background = '#f59e42';
+                el.style.opacity = 0.13;
+            });
+            document.querySelectorAll('.bg-gray-900').forEach(el => {
+                el.classList.remove('bg-gray-900');
+                el.classList.remove('text-gray-100');
+                el.classList.add('bg-white');
+            });
+            document.querySelectorAll('a').forEach(el => {
+                el.classList.remove('hover:bg-gray-800');
+            });
+            // Change icon to sun
+            darkModeIcon.innerHTML = '<path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />';
+        }
+    }
+    // Load preference
+    const darkPref = localStorage.getItem('scarlet_dark_mode') === 'true';
+    setDarkMode(darkPref);
+    darkModeToggle.onclick = () => {
+        const enabled = !document.documentElement.classList.contains('dark');
+        setDarkMode(enabled);
+        localStorage.setItem('scarlet_dark_mode', enabled);
+    };
+
+    // Modal logic
+    const openRegisterModal = document.getElementById('openRegisterModal');
+    const closeRegisterModal = document.getElementById('closeRegisterModal');
+    const registerModal = document.getElementById('registerModal');
+    openRegisterModal.addEventListener('click', () => {
+        registerModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+    closeRegisterModal.addEventListener('click', () => {
+        registerModal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+    // Registration logic for modal (copy and adapt from register.html, using Modal IDs)
+    let emailIsVerifiedModal = false;
+    const registerFormModal = document.getElementById('registerFormModal');
+    const registerBtnModal = document.getElementById('registerBtnModal');
+    const registerBtnTextModal = document.getElementById('registerBtnTextModal');
+    const registerSpinnerModal = document.getElementById('registerSpinnerModal');
+    const pwModal = document.getElementById('passwordModal');
+    const pw2Modal = document.getElementById('password2Modal');
+    const pwLenModal = document.getElementById('pwLenModal');
+    const pwNumModal = document.getElementById('pwNumModal');
+    const pwUpModal = document.getElementById('pwUpModal');
+    const pwMatchModal = document.getElementById('pwMatchModal');
+    const pwErrorModal = document.getElementById('pwErrorModal');
+    const emailModal = document.getElementById('emailModal');
+    const sendCodeBtnModal = document.getElementById('sendCodeBtnModal');
+    const emailVerifySectionModal = document.getElementById('emailVerifySectionModal');
+    const emailCodeInputModal = document.getElementById('emailCodeInputModal');
+    const verifyCodeBtnModal = document.getElementById('verifyCodeBtnModal');
+    const emailVerifyMsgModal = document.getElementById('emailVerifyMsgModal');
+    const emailVerifiedModal = document.getElementById('emailVerifiedModal');
+    const netidModal = document.getElementById('netidModal');
+    const phoneModal = document.getElementById('phoneModal');
+    const dupCheckMsgModal = document.getElementById('dupCheckMsgModal');
+    const registerInlineMsgModal = document.getElementById('registerInlineMsgModal');
+
+    function checkPwModal() {
+        const v = pwModal.value;
+        let valid = true;
+        if (v.length >= 8) { pwLenModal.classList.add('text-green-600'); pwLenModal.classList.remove('text-gray-600'); } else { pwLenModal.classList.remove('text-green-600'); pwLenModal.classList.add('text-gray-600'); valid = false; }
+        if (/[0-9]/.test(v)) { pwNumModal.classList.add('text-green-600'); pwNumModal.classList.remove('text-gray-600'); } else { pwNumModal.classList.remove('text-green-600'); pwNumModal.classList.add('text-gray-600'); valid = false; }
+        if (/[A-Z]/.test(v)) { pwUpModal.classList.add('text-green-600'); pwUpModal.classList.remove('text-gray-600'); } else { pwUpModal.classList.remove('text-green-600'); pwUpModal.classList.add('text-gray-600'); valid = false; }
+        if (pwModal.value && pwModal.value === pw2Modal.value) { pwMatchModal.classList.add('text-green-600'); pwMatchModal.classList.remove('text-gray-600'); } else { pwMatchModal.classList.remove('text-green-600'); pwMatchModal.classList.add('text-gray-600'); valid = false; }
+        return valid;
+    }
+    pwModal.oninput = pw2Modal.oninput = checkPwModal;
+
+    sendCodeBtnModal.onclick = async function() {
+        emailVerifyMsgModal.textContent = '';
+        emailVerifySectionModal.classList.remove('hidden');
+        sendCodeBtnModal.disabled = true;
+        sendCodeBtnModal.textContent = 'Sending...';
+        const resp = await fetch('/send_verification_email', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: emailModal.value})
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+            emailVerifyMsgModal.textContent = 'Code sent! Check your email.';
+            emailVerifyMsgModal.className = 'ml-2 text-xs text-green-700';
+        } else {
+            emailVerifyMsgModal.textContent = data.error || 'Failed to send code.';
+            emailVerifyMsgModal.className = 'ml-2 text-xs text-red-600';
+        }
+        sendCodeBtnModal.disabled = false;
+        sendCodeBtnModal.textContent = 'Send Code';
+    };
+    verifyCodeBtnModal.onclick = async function() {
+        emailVerifyMsgModal.textContent = '';
+        verifyCodeBtnModal.disabled = true;
+        verifyCodeBtnModal.textContent = 'Verifying...';
+        const resp = await fetch('/verify_email', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: emailModal.value, code: emailCodeInputModal.value})
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+            emailVerifyMsgModal.textContent = 'Email verified!';
+            emailVerifyMsgModal.className = 'ml-2 text-xs text-green-700';
+            emailVerifiedModal.value = '1';
+            emailIsVerifiedModal = true;
+            emailModal.readOnly = true;
+            sendCodeBtnModal.disabled = true;
+            emailCodeInputModal.disabled = true;
+            verifyCodeBtnModal.disabled = true;
+        } else {
+            emailVerifyMsgModal.textContent = data.error || 'Incorrect code.';
+            emailVerifyMsgModal.className = 'ml-2 text-xs text-red-600';
+        }
+        verifyCodeBtnModal.disabled = false;
+        verifyCodeBtnModal.textContent = 'Verify';
+    };
+
+    async function checkDuplicatesModal() {
+        const emailVal = emailModal.value.trim().toLowerCase();
+        const netidVal = netidModal.value.trim();
+        let msg = '';
+        let hasDup = false;
+        if (emailVal.length > 0) {
+            const resp = await fetch(`/admin/data/users`);
+            if (resp.ok) {
+                const data = await resp.json();
+                if (data.users.some(u => u.email === emailVal)) {
+                    msg += 'An account with this email already exists. ';
+                    hasDup = true;
+                }
+                if (netidVal.length > 0 && data.users.some(u => u.netid === netidVal)) {
+                    msg += 'An account with this NetID already exists.';
+                    hasDup = true;
+                }
+            }
+        }
+        dupCheckMsgModal.textContent = msg;
+        return !hasDup;
+    }
+    emailModal.addEventListener('blur', checkDuplicatesModal);
+    netidModal.addEventListener('blur', checkDuplicatesModal);
+
+    phoneModal.addEventListener('input', function(e) {
+        let value = phoneModal.value.replace(/\D/g, ''); // Remove all non-digits
+        if (value.startsWith('1') && value.length > 1) {
+            value = value.substring(1); // Remove leading country code for formatting
+        }
+        let formatted = '';
+        if (value.length > 0) {
+            formatted = '(' + value.substring(0, 3);
+        }
+        if (value.length >= 4) {
+            formatted += ') ' + value.substring(3, 6);
+        }
+        if (value.length >= 7) {
+            formatted += '-' + value.substring(6, 10);
+        }
+        phoneModal.value = '+1 ' + formatted.trim();
+    });
+
+    registerFormModal.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const allFilled = emailModal.value && netidModal.value && pwModal.value && pw2Modal.value && phoneModal.value;
+        const pwValid = checkPwModal();
+        const emailVerifiedVal = emailIsVerifiedModal;
+        const noDup = await checkDuplicatesModal();
+        const canRegister = allFilled && pwValid && emailVerifiedVal && noDup;
+        if (!canRegister) {
+            let msg = "Please fill out all required information.";
+            if (!emailVerifiedVal) {
+                msg = "You must verify your email with the code.";
+            } else if (!pwValid) {
+                msg = "Password requirements not met or passwords do not match.";
+            } else if (!noDup) {
+                msg = "Email or NetID already exists.";
+            }
+            registerInlineMsgModal.textContent = msg;
+            registerInlineMsgModal.style.display = 'block';
+            return false;
+        } else {
+            registerInlineMsgModal.style.display = 'none';
+        }
+        registerBtnTextModal.textContent = 'Creating Account...';
+        registerSpinnerModal.classList.remove('hidden');
+        const formData = new FormData(registerFormModal);
+        const response = await fetch("/register", {
+            method: "POST",
+            body: formData
+        });
+        const html = await response.text();
+        if (response.redirected || (html.includes('login') && !html.toLowerCase().includes('duplicate'))) {
+            registerModal.style.display = 'none';
+            document.body.style.overflow = '';
+            document.getElementById('registerSuccessModal').style.display = 'flex';
+        } else {
+            let errorMsg = "Registration failed. Please check your info.";
+            if (html.toLowerCase().includes('duplicate')) {
+                errorMsg = "Email or NetID already exists.";
+            } else {
+                const match = html.match(/<div[^>]*class=["'][^"']*text-red-600[^"']*["'][^>]*>(.*?)<\/div>/i);
+                if (match && match[1]) {
+                    errorMsg = match[1];
+                }
+            }
+            registerInlineMsgModal.textContent = errorMsg;
+            registerInlineMsgModal.style.display = 'block';
+            registerBtnTextModal.textContent = 'Create Account';
+            registerSpinnerModal.classList.add('hidden');
+        }
+    });
+    // Success modal: Go to login
+    document.getElementById('goToLoginBtn').onclick = function() {
+        document.getElementById('registerSuccessModal').style.display = 'none';
+        window.location.href = '/login';
+    };
+
+    // Modal logic for Login
+    const openLoginModal = document.getElementById('openLoginModal');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+    const loginModal = document.getElementById('loginModal');
+    openLoginModal.addEventListener('click', () => {
+        loginModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+    closeLoginModal.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+    // Switch to Register from Login Modal
+    document.getElementById('openRegisterFromLoginModal').onclick = function() {
+        loginModal.style.display = 'none';
+        registerModal.style.display = 'flex';
+    };
+    // Update all login links in modals to open modal
+    document.querySelectorAll('a[href*="login"]').forEach(a => {
+        a.onclick = function(e) {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+    });
+    // Login Modal AJAX logic
+    const loginFormModal = document.getElementById('loginFormModal');
+    const loginBtnModal = document.getElementById('loginBtnModal');
+    const loginBtnTextModal = document.getElementById('loginBtnTextModal');
+    const loginSpinnerModal = document.getElementById('loginSpinnerModal');
+    const loginInlineMsgModal = document.getElementById('loginInlineMsgModal');
+    loginFormModal.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        loginBtnModal.disabled = true;
+        loginBtnTextModal.textContent = 'Logging in...';
+        loginSpinnerModal.classList.remove('hidden');
+        loginInlineMsgModal.style.display = 'none';
+        const formData = new FormData(loginFormModal);
+        const response = await fetch("/login", {
+            method: "POST",
+            body: formData
+        });
+        if (response.redirected && (response.url.includes('/dashboard') || response.url.includes('/admin'))) {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = '';
+            document.getElementById('loginSuccessAnimModal').classList.remove('hidden');
+            launchConfettiLogin();
+            setTimeout(() => { window.location.href = response.url; }, 1500);
+        } else {
+            const html = await response.text();
+            // Try to extract error message
+            let msg = "Login failed. Please check your credentials.";
+            const match = html.match(/<div[^>]*class=["'][^"']*text-red-600[^"']*["'][^>]*>(.*?)<\/div>/i);
+            if (match && match[1]) {
+                msg = match[1];
+            }
+            loginInlineMsgModal.textContent = msg;
+            loginInlineMsgModal.style.display = 'block';
+        }
+        loginBtnModal.disabled = false;
+        loginBtnTextModal.textContent = 'Login';
+        loginSpinnerModal.classList.add('hidden');
+    });
+    // Confetti for login success
+    function launchConfettiLogin() {
+        const canvas = document.getElementById('confettiCanvasLogin');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let confetti = [];
+        for (let i = 0; i < 120; i++) {
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                r: Math.random() * 6 + 4,
+                d: Math.random() * 40 + 10,
+                color: `hsl(${Math.random()*360},90%,60%)`,
+                tilt: Math.random() * 10 - 10
+            });
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confetti.forEach(c => {
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+                ctx.fillStyle = c.color;
+                ctx.fill();
+            });
+            update();
+        }
+        let angle = 0;
+        function update() {
+            angle += 0.01;
+            confetti.forEach(c => {
+                c.y += Math.cos(angle + c.d) + 2 + c.r/2;
+                c.x += Math.sin(angle) * 2;
+                if (c.y > canvas.height) {
+                    c.x = Math.random() * canvas.width;
+                    c.y = -10;
+                }
+            });
+        }
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+    </script>
+</body>
+</html> 

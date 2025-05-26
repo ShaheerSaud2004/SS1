@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Phone - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-50">
+    <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl p-10 border-t-8 border-red-700 mt-12">
+        <h1 class="text-2xl font-extrabold text-red-700 mb-2 text-center">Verify Your Phone</h1>
+        <p class="text-gray-700 text-center mb-4">A 6-digit code was sent to <span class="font-bold">{{ phone }}</span>. Enter it below to complete registration.</p>
+        {% if error %}
+        <div class="mb-4 text-red-600 bg-red-100 rounded-lg p-3 text-center flex items-center justify-center">
+            <svg class="h-5 w-5 mr-2 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            {{ error }}
+        </div>
+        {% endif %}
+        <form method="post" class="space-y-6">
+            <input type="text" name="code" maxlength="6" pattern="\d{6}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 text-center text-xl tracking-widest" placeholder="Enter 6-digit code">
+            <button type="submit" class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200">Verify</button>
+        </form>
+        <div class="mt-4 text-xs text-gray-500 text-center">Didn't get a code? Please check your phone number and try again.</div>
+    </div>
+</body>
+</html> 

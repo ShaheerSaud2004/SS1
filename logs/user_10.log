@@ -1,0 +1,30 @@
+[2025-05-23 09:32:02] [10] Invalid course index: 123122. Monitoring stopped.
+
+def get_chrome_driver(user_id=None):
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    import shutil, os
+
+    options = Options()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--disable-popup-blocking')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    if user_id:
+        profile_dir = os.path.abspath(f'chrome_profile_{user_id}')
+        if os.path.exists(profile_dir):
+            shutil.rmtree(profile_dir)
+    else:
+        profile_dir = os.path.abspath('chrome_profile')
+        if os.path.exists(profile_dir):
+            shutil.rmtree(profile_dir)
+    options.add_argument(f"--user-data-dir={profile_dir}")
+    print(f"[DEBUG] Launching Chrome with profile: {profile_dir}")
+    service = Service('/opt/homebrew/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
+    print("[DEBUG] Chrome driver launched successfully.")
+    return driver

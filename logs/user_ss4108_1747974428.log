@@ -1,0 +1,4 @@
+[2025-05-23 00:27:08] [ss4108_1747974428] User logged in and started monitoring courses: 123456
+[2025-05-23 00:27:21] [ss4108_1747974428] Stopped monitoring course 123456
+[2025-05-23 00:27:39] [ss4108_1747974428] Invalid course index: 123456. Monitoring stopped.
+[2025-05-23 00:27:39] [ss4108_1747974428] Error monitoring course 123456: '123456'

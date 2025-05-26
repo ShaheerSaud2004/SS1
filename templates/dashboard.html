@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dashboard - ScarletSniper</title>
+    <link rel="icon" href="/static/sniper-icon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            background: linear-gradient(120deg, #fff5f5 0%, #ffeaea 50%, #f3f4f6 100%);
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+        }
+        .sidebar {
+            background: linear-gradient(120deg, #ffeaea 0%, #f87171 100%);
+            box-shadow: 2px 0 16px 0 rgba(249,113,113,0.08);
+        }
+        .sidebar a.active, .sidebar a:hover {
+            background: linear-gradient(90deg, #f87171 0%, #fff5f5 100%);
+            color: #b91c1c !important;
+        }
+        .main-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.07);
+            backdrop-filter: blur(8px);
+            animation: fade-in 0.7s;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: none; }
+        }
+        .quick-link-card {
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .quick-link-card:hover {
+            box-shadow: 0 8px 32px 0 rgba(59,130,246,0.12);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .panel-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+        }
+        .input-modern {
+            border-radius: 0.75rem;
+            border: 2px solid #e5e7eb;
+            background: #f9fafb;
+            font-size: 1.1rem;
+            padding: 0.75rem 1.25rem;
+            transition: border 0.2s;
+        }
+        .input-modern:focus {
+            border-color: #2563eb;
+            outline: none;
+            background: #fff;
+        }
+        .btn-modern {
+            border-radius: 0.75rem;
+            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.75rem 2rem;
+            box-shadow: 0 2px 8px 0 rgba(59,130,246,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .btn-modern:hover {
+            background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
+            transform: scale(1.04);
+        }
+        .status-chip {
+            display: inline-block;
+            padding: 0.25em 0.75em;
+            border-radius: 9999px;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-left: 0.5em;
+        }
+        .status-active { background: #d1fae5; color: #047857; }
+        .status-stopped { background: #fee2e2; color: #b91c1c; }
+        .status-registered { background: #dbeafe; color: #1d4ed8; }
+        .status-invalid { background: #fef3c7; color: #b45309; }
+        .shadow-xl { box-shadow: 0 4px 32px 0 rgba(0,0,0,0.07); }
+        .shadow-2xl { box-shadow: 0 8px 48px 0 rgba(0,0,0,0.10); }
+        .shadow-3xl { box-shadow: 0 16px 64px 0 rgba(0,0,0,0.13); }
+        .glass-blur { backdrop-filter: blur(12px); background: rgba(255,255,255,0.7); }
+        .focus-ring:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .flex {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                height: auto;
+                padding: 1rem;
+                z-index: 40;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-top: 2px solid #b91c1c;
+                border-right: none;
+            }
+            
+            .sidebar nav {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .sidebar nav a {
+                font-size: 0.875rem;
+                padding: 0.5rem;
+                white-space: nowrap;
+            }
+            
+            .sidebar .flex.items-center {
+                display: none;
+            }
+            
+            .sidebar .mb-4 {
+                display: none;
+            }
+            
+            .main-content {
+                margin-bottom: 4rem;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 1.25rem 1rem;
+                border-radius: 0 0 1.5rem 1.5rem;
+            }
+            
+            header > div {
+                width: 100%;
+                align-items: flex-start !important;
+            }
+            
+            header .flex.items-center.gap-3.mt-1 {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .input-modern {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .btn-modern {
+                width: 100%;
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .quick-link-card {
+                width: 100%;
+            }
+            
+            .status-chip {
+                font-size: 0.875rem;
+            }
+            
+            #credFormDiv form {
+                padding: 1rem;
+            }
+            
+            #credFormDiv .flex-col.md\:flex-row {
+                flex-direction: column;
+            }
+            
+            #credFormDiv button {
+                width: 100%;
+            }
+        }
+        
+        /* Tablet Responsive Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .main-content {
+                margin-left: 200px;
+            }
+            
+            .quick-link-card {
+                width: calc(50% - 1rem);
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            .quick-link-card:hover {
+                transform: none;
+            }
+            
+            .btn-modern:hover {
+                transform: none;
+            }
+        }
+    </style>
+    <style>
+        body, html { overflow-y: auto !important; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle" aria-label="Toggle dark mode" class="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full shadow-md p-2 transition-colors duration-200 focus:outline-none">
+        <svg id="darkModeIcon" class="h-6 w-6 text-gray-700 dark:text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />
+        </svg>
+    </button>
+    <!-- Animated particles for background (smaller) -->
+
+    <!-- Layout wrapper -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 min-h-screen bg-gradient-to-b from-[#fff5f5] via-[#ffeaea] to-[#f87171]/20 border-r border-red-200 flex flex-col justify-between py-8 px-4 shadow-2xl z-30 transition-all duration-300">
+            <div>
+                <div class="flex items-center mb-8">
+                    <svg class="sniper-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                        <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                        <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                        <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                        <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+                    </svg>
+                    <span class="text-2xl font-extrabold text-red-700 scarlet-header">ScarletSniper</span>
+                </div>
+                <nav class="flex flex-col gap-4">
+                    <a href="/dashboard" class="text-lg font-extrabold text-white bg-gradient-to-r from-red-600 to-red-400 shadow-md rounded-lg px-3 py-2 mb-1 border border-red-200 hover:from-red-700 hover:to-red-500 transition">Dashboard</a>
+                    <div class="border-t border-red-100 my-2"></div>
+                    <!-- Quick Navigation -->
+                    <span class="text-xs font-bold text-gray-400 mt-2 mb-1">Quick Navigation</span>
+                    <div class="bg-gradient-to-r from-[#fff0f0] to-[#ffeaea] rounded-lg py-2 px-2 mb-2 flex flex-col gap-1 shadow-sm border border-red-50">
+                        <a href="#index-putter" class="sidebar-jump text-base font-medium text-gray-700 hover:bg-red-100 hover:text-red-700 rounded px-2 py-1 transition">Index Putter</a>
+                        <a href="#past-requests" class="sidebar-jump text-base font-medium text-gray-700 hover:bg-red-100 hover:text-red-700 rounded px-2 py-1 transition">Past Requests</a>
+                        <a href="#active-monitors" class="sidebar-jump text-base font-medium text-red-600 font-semibold bg-red-100 rounded px-2 py-1 transition">Active Monitors</a>
+                    </div>
+                    <div class="border-t border-red-100 my-2"></div>
+                    <a href="/about" class="text-lg font-extrabold text-red-700 hover:bg-red-100 hover:text-red-900 rounded px-2 py-1 transition">About Us</a>
+                    <a href="/how-to-use" class="text-lg font-extrabold text-red-700 hover:bg-red-100 hover:text-red-900 rounded px-2 py-1 transition mt-2">How to Use</a>
+                    <a href="/leaderboard" class="text-lg font-extrabold text-red-700 hover:bg-red-100 hover:text-red-900 rounded px-2 py-1 transition mt-2">Leaderboard</a>
+                </nav>
+            </div>
+            <div class="mb-4">
+                <a href="{{ url_for('logout') }}" class="text-red-700 hover:underline font-semibold">Logout</a>
+            </div>
+        </aside>
+        <!-- Main area -->
+        <div class="flex-1 flex flex-col min-h-screen main-content">
+            <!-- Top bar -->
+            <header class="flex items-center justify-between py-6 px-10 bg-gradient-to-r from-white via-red-50 to-white shadow-lg rounded-b-2xl border-b-4 border-red-700 z-20 mb-4 transition-all duration-300">
+                <div class="flex flex-col gap-1">
+                    <span class="text-2xl font-bold text-gray-800">Welcome, {{ user_info.netid }}</span>
+                    <div class="flex items-center gap-4 mt-1">
+                        <span class="text-xs text-gray-500">Account: <span id="accountType" class="font-semibold text-blue-700">Loading...</span></span>
+                        <span class="text-xs text-gray-500">Slots used: <span id="slotUsage" class="font-semibold text-indigo-700">Loading...</span></span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                    <div class="mb-1 text-right">
+                        <h3 class="text-sm font-semibold text-gray-700">Contact Information</h3>
+                        <p class="text-gray-600 text-xs">Email: {{ user_info.email }}</p>
+                        <p class="text-gray-600 text-xs">Phone: {{ user_info.phone }}</p>
+                    </div>
+                    <div class="flex items-center gap-3 mt-1">
+                        <div id="webregSessionStatus" class="flex items-center text-xs font-semibold">
+                            <span id="webregStatusDot" class="inline-block w-3 h-3 rounded-full mr-2 bg-red-500 border-2 border-white shadow"></span>
+                            <span id="webregStatusText" class="px-2 py-1 rounded-full bg-gray-100 text-gray-700 font-semibold shadow-sm">WebReg Session: Inactive</span>
+                        </div>
+                        <div id="webregStatusDebug" class="text-xs text-yellow-600 mt-1"></div>
+                        <button id="webregLogoutBtn" class="px-3 py-1 rounded-lg bg-red-600 text-white font-bold hover:bg-red-700 shadow transition text-xs" style="display:none;">Log out of WebReg</button>
+                        <button id="upgradeOrBuyBtn" class="ml-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold text-xs shadow hover:from-blue-700 hover:to-blue-500 transition-all duration-200">Buy More Slots</button>
+                    </div>
+                </div>
+            </header>
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-8">
+                <!-- NetID/Password inline form (shown if missing) -->
+                <div id="credFormDiv" class="mb-6 hidden">
+                    <form id="credForm" class="bg-white/80 dark:bg-gray-900/80 border-l-8 border-blue-600 dark:border-blue-400 rounded-2xl shadow-2xl p-8 flex flex-col gap-6 backdrop-blur-md">
+                        <div class="mb-2 flex items-center gap-2">
+                            <i class="fas fa-user-shield text-blue-600 text-2xl"></i>
+                            <h3 class="text-2xl font-extrabold text-blue-700 dark:text-blue-300">NetID and Password Login</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Save your credentials to enable automated registration. Your credentials are used only for Rutgers WebReg automation and are securely stored for your session.</p>
+                        <div class="flex flex-col md:flex-row md:items-end gap-4">
+                            <div class="flex-1">
+                                <label for="netid" class="block text-sm font-semibold mb-1">NetID</label>
+                                <div class="relative">
+                                    <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-blue-400"></i>
+                                    <input type="text" id="netid" name="netid" pattern="^[a-zA-Z0-9]+$" title="Enter your Rutgers NetID (not email)"
+                                        class="w-full rounded-lg border-2 border-gray-200 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100 px-10 py-2 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-blue-200"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <label for="password" class="block text-sm font-semibold mb-1">Password</label>
+                                <div class="relative">
+                                    <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-blue-400"></i>
+                                    <input type="password" id="password" name="password"
+                                        class="w-full rounded-lg border-2 border-gray-200 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100 px-10 py-2 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-blue-200"
+                                        required>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="px-7 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold text-lg shadow-lg hover:scale-105 hover:from-blue-700 hover:to-blue-500 transition-all duration-200 flex items-center gap-2">
+                                <i class="fas fa-sign-in-alt"></i> Save & Login
+                            </button>
+                        </div>
+                        <div id="credFormMsg" class="mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Program/account explanation -->
+                <div class="mb-8 p-6 rounded-xl shadow bg-white dark:bg-gray-900 dark:text-gray-100 border-l-8 border-red-700 dark:border-red-500">
+                    <h2 class="text-2xl font-bold mb-2 text-red-700 dark:text-red-400">Welcome to ScarletSniper</h2>
+                    <p class="mb-2">ScarletSniper is an automated course monitoring and registration system for Rutgers students. It monitors your selected courses and attempts to register you instantly when a spot opens up, so you never miss your chance.</p>
+                    <ul class="mb-2 list-disc pl-6">
+                        <li><b>Free Account:</b> Monitor/register for <b>1 class</b> at a time, completely free.</li>
+                        <li><b>Paid Account:</b> Monitor/register for as many classes as you want—just <b>$5 per class slot</b>. Buy more slots anytime.</li>
+                    </ul>
+                    <p class="mb-1">You can upgrade your account or buy more slots at any time. All payments are handled securely via Stripe.</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">ScarletSniper is not affiliated with Rutgers University. For support, contact the developer.</p>
+                </div>
+                {% if last_authenticated %}
+                  <div class="text-xs text-gray-500 mb-2 text-right">Last authentication: {{ last_authenticated }}</div>
+                {% endif %}
+                <div id="slotLimitMsg" class="hidden mb-4 text-center text-red-600 font-semibold"></div>
+                <div id="buySlotDiv" class="hidden flex justify-center mb-6">
+                    <button id="buySlotBtn" class="px-5 py-2 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 shadow transition">Buy More Slots ($5 each)</button>
+                </div>
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div id="index-putter" class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-8 mb-8 border border-gray-200 hover:shadow-3xl transition-all duration-200">
+                            <div class="mb-2 text-sm text-gray-600 font-medium">Enter the <b>index</b> of the course(s) you want to monitor below. (e.g. 12345, 67890)</div>
+                            <form id="addCourseForm" class="flex flex-col md:flex-row md:items-center gap-4">
+                                <input type="text" id="courseIndexes" name="course_indexes" placeholder="e.g. 12345, 67890" title="Enter one or more course indexes, separated by commas" class="flex-1 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 px-4 py-3 bg-white/80 shadow-sm text-lg placeholder-gray-400 transition-all duration-200" required>
+                                <button type="submit" id="addCoursesBtn" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold text-lg shadow-lg hover:scale-105 hover:from-blue-700 hover:to-blue-500 transition-all duration-200 flex items-center gap-2">
+                                    <span id="addCoursesBtnText">Add Courses</span>
+                                    <svg id="addCoursesSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                                </button>
+                            </form>
+                            <div id="addCourseMsg" class="mt-2 text-sm flex items-center"></div>
+                        </div>
+                        <div id="active-monitors" class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200 hover:shadow-3xl transition-all duration-200">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4">Active Monitors</h2>
+                            <div id="courseStatuses" class="space-y-4">
+                                {% for course in user_info.course_indexes %}
+                                <div id="status-{{ course }}" class="p-4 rounded-xl bg-yellow-100/80 text-yellow-900 flex items-center justify-between shadow">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                        <span class="font-medium">Course {{ course }}</span>
+                                    </div>
+                                    <button onclick="stopMonitoring('{{ course }}')" 
+                                        class="text-sm px-4 py-2 rounded-xl bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 font-semibold shadow hover:from-gray-300 hover:to-gray-400 transition-all duration-200">
+                                        Stop
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="past-requests" class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200 hover:shadow-3xl transition-all duration-200">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4">Past Requests</h2>
+                            <div id="pastRequests" class="space-y-2">
+                                {% for req in past_requests %}
+                                <div class="p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between {{ 'bg-red-100/80 text-red-800' if req.status == 'invalid' else 'bg-gray-100/80 text-gray-800' }} shadow">
+                                    <div>
+                                        <span class="font-medium">Course {{ req.index }}</span> -
+                                        <span class="font-semibold">{{ req.status|capitalize }}</span>
+                                        <span class="text-xs text-gray-500 ml-2">{{ req.timestamp }}</span>
+                                        <span class="block text-xs text-gray-500">{{ req.reason }}</span>
+                                    </div>
+                                    <button onclick="remonitorCourse('{{ req.index }}')" class="mt-2 md:mt-0 text-xs px-4 py-2 rounded-xl bg-gradient-to-r from-blue-200 to-blue-400 text-blue-900 font-semibold shadow hover:from-blue-300 hover:to-blue-500 transition-all duration-200">Re-monitor</button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dashboard Quick Links Widgets + Discord Support -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <a href="/about" class="quick-link-card block bg-white/80 hover:bg-blue-50 border-l-8 border-blue-600 rounded-2xl shadow-xl p-6 transition-all duration-200 group">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="h-8 w-8 text-blue-600 group-hover:text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
+                            <span class="text-xl font-bold text-blue-700 group-hover:text-blue-900">About Us</span>
+                        </div>
+                        <div class="text-gray-600">Learn what ScarletSniper is and how it helps you get the classes you want.</div>
+                    </a>
+                    <a href="/how-to-use" class="quick-link-card block bg-white/80 hover:bg-indigo-50 border-l-8 border-indigo-600 rounded-2xl shadow-xl p-6 transition-all duration-200 group">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="h-8 w-8 text-indigo-600 group-hover:text-indigo-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17l4 4 4-4m0-5a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span class="text-xl font-bold text-indigo-700 group-hover:text-indigo-900">How to Use</span>
+                        </div>
+                        <div class="text-gray-600">Step-by-step guide to using ScarletSniper. Perfect for new users!</div>
+                    </a>
+                    <a href="/leaderboard" class="quick-link-card block bg-white/80 hover:bg-purple-50 border-l-8 border-purple-600 rounded-2xl shadow-xl p-6 transition-all duration-200 group">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="h-8 w-8 text-purple-600 group-hover:text-purple-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h2a4 4 0 014 4v2" /></svg>
+                            <span class="text-xl font-bold text-purple-700 group-hover:text-purple-900">Leaderboard</span>
+                        </div>
+                        <div class="text-gray-600">See the most popular course indexes among all users!</div>
+                    </a>
+                    <a href="https://discord.gg/your-server" target="_blank" class="quick-link-card block bg-white/80 hover:bg-indigo-100 border-l-8 border-indigo-400 rounded-2xl shadow-xl p-6 transition-all duration-200 group">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="h-8 w-8 text-indigo-500 group-hover:text-indigo-700" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.211.375-.444.864-.608 1.249-1.844-.276-3.68-.276-5.486 0-.163-.385-.405-.874-.617-1.249a.077.077 0 00-.079-.037c-1.67.285-3.27.822-4.885 1.515a.069.069 0 00-.032.027C.533 7.042-.32 9.579.099 12.057c.002.014.01.028.021.037a19.978 19.978 0 005.993 3.036.077.077 0 00.084-.027c.461-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.104 13.087 13.087 0 01-1.872-.893.077.077 0 01-.008-.127c.126-.094.252-.192.371-.291a.074.074 0 01.077-.01c3.927 1.793 8.18 1.793 12.061 0a.075.075 0 01.078.009c.12.099.245.198.372.292a.077.077 0 01-.006.127 12.64 12.64 0 01-1.873.893.076.076 0 00-.04.105c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.978 19.978 0 005.994-3.036.077.077 0 00.021-.037c.5-3.177-.838-5.68-3.548-7.661a.061.061 0 00-.031-.027zM8.02 13.331c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.418 2.156-2.418 1.21 0 2.175 1.095 2.156 2.418 0 1.334-.955 2.419-2.156 2.419zm7.974 0c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.418 2.156-2.418 1.21 0 2.175 1.095 2.156 2.418 0 1.334-.946 2.419-2.156 2.419z"/></svg>
+                            <span class="text-xl font-bold text-indigo-700 group-hover:text-indigo-900">Discord</span>
+                        </div>
+                        <div class="text-gray-600">Join our Discord community for live support, questions, and updates!</div>
+                        <div class="mt-3"><span class="inline-block px-4 py-2 rounded-full bg-indigo-600 text-white font-bold text-sm shadow hover:bg-indigo-700 transition">Join our Discord</span></div>
+                    </a>
+                </div>
+            </main>
+            <footer class="mt-12 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</footer>
+        </div>
+    </div>
+    <div id="dashboardAnim" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-40 hidden pointer-events-none">
+        <div id="dashboardAnimContent" class="flex flex-col items-center"></div>
+        <canvas id="dashboardConfettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+    </div>
+    {% if session.get('impersonator') %}
+    <div class="fixed top-0 left-0 w-full bg-yellow-300 text-yellow-900 font-bold py-2 px-4 flex items-center justify-between z-50 shadow">
+        <span>You are impersonating a user. <span class="font-semibold">Return to your admin account?</span></span>
+        <a href="/admin/return_to_admin" class="ml-4 px-4 py-1 rounded bg-yellow-500 text-white font-bold hover:bg-yellow-600">Return to Admin</a>
+    </div>
+    <div style="height: 48px;"></div>
+    {% endif %}
+    <!-- Selenium Progress Modal -->
+    <div id="seleniumProgressModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">WebReg Login in Progress</h3>
+            </div>
+            <p id="seleniumProgressMsg" class="text-gray-600 dark:text-gray-300 mb-6">Opening WebReg and logging in...</p>
+            <button id="seleniumProgressClose" class="w-full py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                Cancel
+            </button>
+        </div>
+    </div>
+    <!-- Selenium Success Modal -->
+    <div id="seleniumSuccessModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center">
+                    <i class="fas fa-check text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Login Successful!</h3>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">Your WebReg session is now active. You can now add courses to monitor.</p>
+        </div>
+    </div>
+    <!-- Add a toast notification container -->
+    <div id="toast" class="fixed top-6 right-6 z-50 hidden px-6 py-4 rounded-xl shadow-2xl bg-blue-700 text-white font-bold text-lg transition-all duration-300"></div>
+    <script>
+        const socket = io();
+        const userId = "{{ user_info.netid }}_{{ user_info.course_indexes[0] if user_info.course_indexes else '' }}";
+
+        socket.on('course_status', function(data) {
+            if (data.user_id === userId) {
+                updateCourseStatus(data);
+            }
+        });
+
+        socket.on('activity_log', function(data) {
+            if (data.user_id == "{{ session['user_id'] }}") {
+                const logDiv = document.getElementById('activityLog');
+                const entry = document.createElement('div');
+                entry.className = 'flex items-start space-x-2 text-sm text-gray-700 animate-fade-in';
+                entry.innerHTML = `<span class="font-mono text-xs text-gray-400">${data.entry.slice(0,20)}</span><span>${data.entry.slice(21)}</span>`;
+                logDiv.prepend(entry);
+                logDiv.scrollTop = 0;
+            }
+        });
+
+        function updateCourseStatus(data) {
+            const { index, status, message } = data;
+            const statusDiv = document.getElementById(`status-${index}`);
+            if (statusDiv) {
+                statusDiv.className = `p-4 rounded-lg ${
+                    status === 'open' ? 'bg-green-100 text-green-800' :
+                    status === 'registered' ? 'bg-blue-100 text-blue-800' :
+                    status === 'failed' ? 'bg-red-100 text-red-800' :
+                    status === 'error' ? 'bg-red-100 text-red-800' :
+                    status === 'invalid' ? 'bg-red-200 text-red-900 font-bold' :
+                    'bg-yellow-100 text-yellow-800'
+                }`;
+                
+                statusDiv.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Course ${index}</span>
+                        <button onclick="stopMonitoring('${index}')" 
+                            class="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">
+                            Stop
+                        </button>
+                    </div>
+                    <p class="mt-2">${status === 'invalid' ? 'Invalid course index. Monitoring stopped.' : message}</p>
+                `;
+                // If invalid or stopped, move to past requests immediately
+                if (status === 'invalid' || status === 'stopped' || status === 'registered') {
+                    setTimeout(() => {
+                        if (statusDiv) statusDiv.remove();
+                        addToPastRequests(index, status, new Date().toLocaleString(), status === 'invalid' ? 'Invalid course index' : (status === 'stopped' ? 'Stopped by user' : 'Successfully registered'), true);
+                    }, 500);
+                }
+            }
+        }
+
+        function addToPastRequests(index, status, timestamp, reason, immediate) {
+            const pastRequests = document.getElementById('pastRequests');
+            const div = document.createElement('div');
+            div.className = `p-3 rounded flex flex-col md:flex-row md:items-center justify-between ${status === 'invalid' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'}`;
+            div.innerHTML = `
+                <div>
+                    <span class="font-medium">Course ${index}</span> -
+                    <span class="font-semibold">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                    <span class="text-xs text-gray-500 ml-2">${timestamp}</span>
+                    <span class="block text-xs text-gray-500">${reason}</span>
+                </div>
+                <button onclick="remonitorCourse('${index}')" class="mt-2 md:mt-0 text-xs px-3 py-1 rounded bg-blue-200 hover:bg-blue-300 text-blue-900">Re-monitor</button>
+            `;
+            pastRequests.appendChild(div);
+        }
+
+        // On page load, ensure past requests are visible even if no active monitors
+        document.addEventListener('DOMContentLoaded', function() {
+            const pastRequests = document.getElementById('pastRequests');
+            if (!pastRequests.innerHTML.trim()) {
+                pastRequests.innerHTML = '<div class="text-gray-400">No past requests yet.</div>';
+            }
+        });
+
+        function showToast(msg, color = 'bg-blue-700') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = `fixed top-6 right-6 z-50 px-6 py-4 rounded-xl shadow-2xl text-white font-bold text-lg transition-all duration-300 ${color}`;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 1800);
+        }
+
+        async function stopMonitoring(index) {
+            try {
+                const response = await fetch('/stop_monitoring', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ course_index: index }),
+                });
+                if (response.ok) {
+                    const statusDiv = document.getElementById(`status-${index}`);
+                    if (statusDiv) {
+                        statusDiv.remove();
+                        addToPastRequests(index, 'stopped', new Date().toLocaleString(), 'Stopped by user', true);
+                    }
+                    showDashboardAnim('stop');
+                    showToast('Stopped monitoring course.', 'bg-red-600');
+                }
+            } catch (error) {
+                console.error('Error stopping monitoring:', error);
+            }
+        }
+
+        async function remonitorCourse(index) {
+            try {
+                const response = await fetch('/remonitor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ course_index: index }),
+                });
+                if (response.ok) {
+                    // Remove from past requests and add to active monitors
+                    showDashboardAnim('remonitor');
+                    showToast('Re-monitoring course!', 'bg-green-600');
+                    setTimeout(() => location.reload(), 800);
+                }
+            } catch (error) {
+                console.error('Error re-monitoring course:', error);
+            }
+        }
+
+        function showDashboardAnim(type) {
+            const animDiv = document.getElementById('dashboardAnim');
+            const contentDiv = document.getElementById('dashboardAnimContent');
+            const confettiCanvas = document.getElementById('dashboardConfettiCanvas');
+            contentDiv.innerHTML = '';
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            if (type === 'add') {
+                contentDiv.innerHTML = '<svg class="h-24 w-24 text-green-500 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><div class="mt-4 text-2xl font-bold text-white animate-fade-in">Course Added!</div>';
+                launchDashboardConfetti();
+            } else if (type === 'stop') {
+                contentDiv.innerHTML = '<svg class="h-20 w-20 text-green-500 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><div class="mt-4 text-xl font-bold text-white animate-fade-in">Stopped</div>';
+            } else if (type === 'remonitor') {
+                contentDiv.innerHTML = '<svg class="h-20 w-20 text-blue-500 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v16m16-8H4" /></svg><div class="mt-4 text-xl font-bold text-white animate-fade-in">Re-monitoring</div>';
+            }
+            animDiv.classList.remove('hidden');
+            setTimeout(() => { animDiv.classList.add('hidden'); }, 1200);
+        }
+
+        function launchDashboardConfetti() {
+            const canvas = document.getElementById('dashboardConfettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let confetti = [];
+            for (let i = 0; i < 80; i++) {
+                confetti.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * -canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * 40 + 10,
+                    color: `hsl(${Math.random()*360},90%,60%)`,
+                    tilt: Math.random() * 10 - 10
+                });
+            }
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confetti.forEach(c => {
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+                    ctx.fillStyle = c.color;
+                    ctx.fill();
+                });
+                update();
+            }
+            let angle = 0;
+            function update() {
+                angle += 0.01;
+                confetti.forEach(c => {
+                    c.y += Math.cos(angle + c.d) + 2 + c.r/2;
+                    c.x += Math.sin(angle) * 2;
+                    if (c.y > canvas.height) {
+                        c.x = Math.random() * canvas.width;
+                        c.y = -10;
+                    }
+                });
+            }
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Set upgrade/buy button click handler
+        const buyMoreSlotsBtn = document.getElementById('upgradeOrBuyBtn');
+        if (buyMoreSlotsBtn) {
+            buyMoreSlotsBtn.onclick = async function() {
+                const resp = await fetch('/buy_slot', {method: 'POST'});
+                const data = await resp.json();
+                if (data.checkout_url) {
+                    window.location = data.checkout_url;
+                }
+            };
+        }
+        // Call this after fetching slot info
+        async function fetchSlotInfo() {
+            const resp = await fetch('/get_slot_info');
+            if (!resp.ok) return;
+            const data = await resp.json();
+            document.getElementById('accountType').textContent = data.account_type === 'paid' ? 'Paid' : 'Free';
+            document.getElementById('slotUsage').textContent = `${data.current_count} / ${data.max_count}`;
+            // Show buy button if at limit
+            if ((data.account_type === 'free' && data.current_count >= 1) || (data.account_type === 'paid' && data.current_count >= data.max_count)) {
+                document.getElementById('buySlotDiv').classList.remove('hidden');
+            } else {
+                document.getElementById('buySlotDiv').classList.add('hidden');
+            }
+        }
+        fetchSlotInfo();
+        document.getElementById('buySlotBtn').onclick = async function() {
+            const resp = await fetch('/buy_slot', {method: 'POST'});
+            const data = await resp.json();
+            if (data.checkout_url) {
+                window.location = data.checkout_url;
+            }
+        };
+        // Show upgrade message if free user tries to add more than 1 class
+        document.getElementById('addCourseForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const indexes = document.getElementById('courseIndexes').value;
+            const msgDiv = document.getElementById('addCourseMsg');
+            const btn = document.getElementById('addCoursesBtn');
+            const btnText = document.getElementById('addCoursesBtnText');
+            const spinner = document.getElementById('addCoursesSpinner');
+            msgDiv.textContent = '';
+            btn.disabled = true;
+            btnText.textContent = 'Adding...';
+            spinner.classList.remove('hidden');
+            try {
+                const response = await fetch('/add_courses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ course_indexes: indexes })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    msgDiv.innerHTML = '<svg class="h-5 w-5 text-green-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> <span class="text-green-600">Courses added!</span>';
+                    showDashboardAnim('add');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    msgDiv.innerHTML = '<svg class="h-5 w-5 text-red-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg> <span class="text-red-600">' + (data.error || 'Failed to add courses.') + '</span>';
+                    if (data.error && (data.error.includes('Free accounts') || data.error.includes('paid class limit'))) {
+                        document.getElementById('slotLimitMsg').textContent = data.error;
+                        document.getElementById('slotLimitMsg').classList.remove('hidden');
+                        document.getElementById('buySlotDiv').classList.remove('hidden');
+                    }
+                }
+            } catch (error) {
+                msgDiv.innerHTML = '<svg class="h-5 w-5 text-red-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg> <span class="text-red-600">Error adding courses.</span>';
+            }
+            btn.disabled = false;
+            btnText.textContent = 'Add Courses';
+            spinner.classList.add('hidden');
+        });
+
+        // Dark mode toggle logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark-gradient');
+                document.body.style.color = '#f3f4f6';
+                // Card backgrounds
+                document.querySelectorAll('.bg-white').forEach(el => {
+                    el.classList.remove('bg-white');
+                    el.classList.add('bg-gray-900','text-gray-100','shadow-xl');
+                });
+                // Card borders
+                document.querySelectorAll('.border-red-700').forEach(el => {
+                    el.classList.remove('border-red-700');
+                    el.classList.add('border-red-500');
+                });
+                // Headings
+                document.querySelectorAll('.text-gray-800').forEach(el => {
+                    el.classList.remove('text-gray-800');
+                    el.classList.add('text-gray-100');
+                });
+                document.querySelectorAll('.text-red-700').forEach(el => {
+                    el.classList.remove('text-red-700');
+                    el.classList.add('text-red-400');
+                });
+                // Inputs
+                document.querySelectorAll('input').forEach(el => {
+                    el.classList.add('bg-gray-800','text-gray-100','placeholder-gray-400','border-gray-700');
+                    el.classList.remove('bg-white','border-gray-300');
+                });
+                // Buttons
+                document.querySelectorAll('button').forEach(el => {
+                    el.classList.add('bg-gray-800','text-gray-100','hover:bg-gray-700','border-gray-700');
+                    el.classList.remove('bg-gray-200','bg-gray-300','bg-blue-600','bg-blue-700','bg-red-700','bg-red-800','bg-blue-200','bg-blue-300','bg-yellow-100','bg-green-100','bg-red-100','bg-red-200','bg-gray-100');
+                });
+                // Links
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.add('hover:bg-gray-800');
+                });
+                // Activity log
+                document.querySelectorAll('#activityLog').forEach(el => {
+                    el.classList.add('bg-gray-800','text-gray-200','border-gray-700');
+                    el.classList.remove('bg-gray-50','text-gray-700','border-gray-200');
+                });
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark-gradient');
+                document.body.style.background = '';
+                document.body.style.color = '';
+                document.querySelectorAll('.bg-gray-900').forEach(el => {
+                    el.classList.remove('bg-gray-900','text-gray-100','shadow-xl');
+                    el.classList.add('bg-white');
+                });
+                document.querySelectorAll('.border-red-500').forEach(el => {
+                    el.classList.remove('border-red-500');
+                    el.classList.add('border-red-700');
+                });
+                document.querySelectorAll('.text-gray-100').forEach(el => {
+                    el.classList.remove('text-gray-100');
+                    el.classList.add('text-gray-800');
+                });
+                document.querySelectorAll('.text-red-400').forEach(el => {
+                    el.classList.remove('text-red-400');
+                    el.classList.add('text-red-700');
+                });
+                document.querySelectorAll('input').forEach(el => {
+                    el.classList.remove('bg-gray-800','text-gray-100','placeholder-gray-400','border-gray-700');
+                    el.classList.add('bg-white','border-gray-300');
+                });
+                document.querySelectorAll('button').forEach(el => {
+                    el.classList.remove('bg-gray-800','text-gray-100','hover:bg-gray-700','border-gray-700');
+                });
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.remove('hover:bg-gray-800');
+                });
+                document.querySelectorAll('#activityLog').forEach(el => {
+                    el.classList.remove('bg-gray-800','text-gray-200','border-gray-700');
+                    el.classList.add('bg-gray-50','text-gray-700','border-gray-200');
+                });
+            }
+            // Icon
+            darkModeIcon.innerHTML = enabled
+                ? '<path id="moonIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />'
+                : '<path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />';
+        }
+        // Load preference
+        const darkPref = localStorage.getItem('scarlet_dark_mode') === 'true';
+        setDarkMode(darkPref);
+        darkModeToggle.onclick = () => {
+            const enabled = !document.documentElement.classList.contains('dark');
+            setDarkMode(enabled);
+            localStorage.setItem('scarlet_dark_mode', enabled);
+        };
+
+        // Show NetID/password form if missing and session is inactive
+        async function checkCredsAndSession() {
+            // First, check WebReg session status
+            const sessionResp = await fetch('/check_selenium_login_status');
+            const sessionData = await sessionResp.json();
+            if (sessionData.status === 'complete') {
+                // Session is active, hide the NetID/password form
+                document.getElementById('credFormDiv').classList.add('hidden');
+                return;
+            }
+            // If not active, check if creds are missing
+            const resp = await fetch('/get_user_creds');
+            if (!resp.ok) return;
+            const data = await resp.json();
+            if (!data.netid || !data.password) {
+                document.getElementById('credFormDiv').classList.remove('hidden');
+                document.getElementById('netid').value = '';
+                document.getElementById('password').value = '';
+            }
+        }
+        checkCredsAndSession();
+        document.getElementById('credForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const netid = document.getElementById('netid').value;
+            const password = document.getElementById('password').value;
+            const msg = document.getElementById('credFormMsg');
+            msg.textContent = '';
+            msg.className = 'mt-2 text-sm';
+            
+            try {
+                // Save credentials
+                const resp = await fetch('/save_credentials', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({netid, password})
+                });
+                
+                if (resp.ok) {
+                    msg.textContent = 'Credentials saved! Launching WebReg login...';
+                    msg.className = 'mt-2 text-sm text-green-600';
+                    
+                    // Show progress modal
+                    document.getElementById('seleniumProgressModal').classList.remove('hidden');
+                    document.getElementById('seleniumProgressMsg').textContent = 'Opening WebReg and logging in…';
+                    
+                    // Trigger Selenium login
+                    const loginResp = await fetch('/trigger_selenium_login', {method: 'POST'});
+                    if (!loginResp.ok) {
+                        throw new Error('Failed to start login process');
+                    }
+                    
+                    // Poll for status
+                    let pollCount = 0;
+                    async function pollStatus() {
+                        try {
+                            const statusResp = await fetch('/check_selenium_login_status');
+                            const statusData = await statusResp.json();
+                            
+                            if (statusData.status === 'complete') {
+                                document.getElementById('seleniumProgressMsg').textContent = 'Login successful!';
+                                // Only clear form and hide it after successful login
+                                document.getElementById('netid').value = '';
+                                document.getElementById('password').value = '';
+                                document.getElementById('credFormDiv').classList.add('hidden');
+                                setTimeout(() => {
+                                    document.getElementById('seleniumProgressModal').classList.add('hidden');
+                                    showSeleniumSuccess();
+                                }, 800);
+                            } else if (statusData.status === 'error') {
+                                document.getElementById('seleniumProgressMsg').textContent = 'Error during login. Please try again.';
+                                setTimeout(() => {
+                                    document.getElementById('seleniumProgressModal').classList.add('hidden');
+                                }, 2000);
+                            } else {
+                                pollCount++;
+                                if (pollCount < 90) { // 3 minutes max
+                                    setTimeout(pollStatus, 2000);
+                                } else {
+                                    document.getElementById('seleniumProgressMsg').textContent = 'Login timed out. Please try again.';
+                                    setTimeout(() => {
+                                        document.getElementById('seleniumProgressModal').classList.add('hidden');
+                                    }, 2000);
+                                }
+                            }
+                        } catch (error) {
+                            console.error('Error polling status:', error);
+                            document.getElementById('seleniumProgressMsg').textContent = 'Error checking login status. Please try again.';
+                            setTimeout(() => {
+                                document.getElementById('seleniumProgressModal').classList.add('hidden');
+                            }, 2000);
+                        }
+                    }
+                    pollStatus();
+                } else {
+                    const data = await resp.json();
+                    msg.textContent = data.error || 'Error saving credentials.';
+                    msg.className = 'mt-2 text-sm text-red-600';
+                }
+            } catch (error) {
+                console.error('Error in form submission:', error);
+                msg.textContent = 'An error occurred. Please try again.';
+                msg.className = 'mt-2 text-sm text-red-600';
+            }
+        };
+        // Selenium login modal logic
+        function showSeleniumModal() {
+            document.getElementById('seleniumModal').classList.remove('hidden');
+        }
+        function hideSeleniumModal() {
+            document.getElementById('seleniumModal').classList.add('hidden');
+        }
+        document.getElementById('seleniumModalClose').onclick = hideSeleniumModal;
+        function showSeleniumSuccess() {
+            document.getElementById('seleniumSuccessModal').classList.remove('hidden');
+            // Automatically hide after 5 seconds
+            setTimeout(() => {
+                document.getElementById('seleniumSuccessModal').classList.add('hidden');
+                document.getElementById('credFormDiv').classList.add('hidden');
+                if (typeof updateWebregSessionStatus === 'function') {
+                    updateWebregSessionStatus();
+                }
+            }, 5000);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Success modal close handler (robust, with debug, double update)
+            function attachSeleniumSuccessListeners() {
+                var seleniumSuccessCloseBtn = document.getElementById('seleniumSuccessClose');
+                var seleniumSuccessXBtn = document.getElementById('seleniumSuccessX');
+                function closeSuccessModalAndUpdate() {
+                    console.log('DEBUG: Success modal closed!');
+                    document.getElementById('seleniumSuccessModal').classList.add('hidden');
+                    document.getElementById('credFormDiv').classList.add('hidden');
+                    if (typeof updateWebregSessionStatus === 'function') {
+                        updateWebregSessionStatus();
+                        setTimeout(updateWebregSessionStatus, 1000); // Extra robustness
+                    }
+                }
+                if (seleniumSuccessCloseBtn) {
+                    seleniumSuccessCloseBtn.removeAttribute('disabled');
+                    seleniumSuccessCloseBtn.onclick = closeSuccessModalAndUpdate;
+                    console.log('DEBUG: Attached listener to Continue button');
+                } else {
+                    console.warn('WARNING: Continue button not found');
+                }
+                if (seleniumSuccessXBtn) {
+                    seleniumSuccessXBtn.onclick = closeSuccessModalAndUpdate;
+                    console.log('DEBUG: Attached listener to X button');
+                } else {
+                    console.warn('WARNING: X button not found');
+                }
+            }
+            attachSeleniumSuccessListeners();
+            // Progress modal close handler
+            var seleniumProgressCloseBtn = document.getElementById('seleniumProgressClose');
+            if (seleniumProgressCloseBtn) {
+                seleniumProgressCloseBtn.addEventListener('click', function() {
+                    document.getElementById('seleniumProgressModal').classList.add('hidden');
+                });
+            }
+            // Detailed log modal close handler
+            var closeDetailedLogModalBtn = document.getElementById('closeDetailedLogModal');
+            if (closeDetailedLogModalBtn) {
+                closeDetailedLogModalBtn.addEventListener('click', function() {
+                    document.getElementById('detailedLogModal').classList.add('hidden');
+                });
+            }
+            // Ensure NetID/password section is always present (already in DOM, just not hidden unless session is active)
+            // No change needed here, as checkCredsAndSession() already handles visibility.
+        });
+        // When adding a course, if backend says login required, show modal and trigger Selenium login
+        async function tryAddCourse(indexes) {
+            const msgDiv = document.getElementById('addCourseMsg');
+            const btn = document.getElementById('addCoursesBtn');
+            const btnText = document.getElementById('addCoursesBtnText');
+            const spinner = document.getElementById('addCoursesSpinner');
+            msgDiv.textContent = '';
+            btn.disabled = true;
+            btnText.textContent = 'Adding...';
+            spinner.classList.remove('hidden');
+            const response = await fetch('/add_courses', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ course_indexes: indexes })
+            });
+            const data = await response.json();
+            if (response.status === 428) {
+                showSeleniumModal();
+                // Trigger backend to launch Selenium login
+                await fetch('/trigger_selenium_login', {method: 'POST'});
+                hideSeleniumModal();
+                showSeleniumSuccess();
+                setTimeout(() => location.reload(), 1200);
+                return;
+            }
+            if (response.ok) {
+                msgDiv.innerHTML = '<svg class="h-5 w-5 text-green-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> <span class="text-green-600">Courses added!</span>';
+                showDashboardAnim('add');
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                msgDiv.innerHTML = '<svg class="h-5 w-5 text-red-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg> <span class="text-red-600">' + (data.error || 'Failed to add courses.') + '</span>';
+            }
+            btn.disabled = false;
+            btnText.textContent = 'Add Courses';
+            spinner.classList.add('hidden');
+        }
+        // Replace addCourseForm submit with tryAddCourse
+        document.getElementById('addCourseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const indexes = document.getElementById('courseIndexes').value;
+            tryAddCourse(indexes);
+        });
+
+        // Session status indicator logic
+        async function updateWebregSessionStatus() {
+            const statusDot = document.getElementById('webregStatusDot');
+            const statusText = document.getElementById('webregStatusText');
+            const logoutBtn = document.getElementById('webregLogoutBtn');
+            const debugDiv = document.getElementById('webregStatusDebug');
+            try {
+                const resp = await fetch('/check_selenium_login_status');
+                if (!resp.ok) throw new Error('Network response was not ok');
+                const data = await resp.json();
+                if (data.status === 'complete') {
+                    if (statusDot) {
+                        statusDot.classList.remove('bg-red-500');
+                        statusDot.classList.add('bg-green-500');
+                    }
+                    if (statusText) statusText.textContent = 'WebReg Session: Active';
+                    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+                    if (debugDiv) debugDiv.textContent = '';
+                } else {
+                    if (statusDot) {
+                        statusDot.classList.remove('bg-green-500');
+                        statusDot.classList.add('bg-red-500');
+                    }
+                    if (statusText) statusText.textContent = 'WebReg Session: Inactive';
+                    if (logoutBtn) logoutBtn.style.display = 'none';
+                    if (debugDiv) debugDiv.textContent = 'WebReg session is not active. Please complete login or try again.';
+                }
+            } catch (e) {
+                // On error, show inactive and a warning
+                if (statusDot) {
+                    statusDot.classList.remove('bg-green-500');
+                    statusDot.classList.add('bg-red-500');
+                }
+                if (statusText) statusText.textContent = 'WebReg Session: Inactive';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+                if (debugDiv) debugDiv.textContent = 'Unable to check session status. Please refresh.';
+            }
+        }
+        updateWebregSessionStatus();
+        setInterval(updateWebregSessionStatus, 10000); // update every 10s
+        // Log out of WebReg handler
+        if (document.getElementById('webregLogoutBtn')) {
+            document.getElementById('webregLogoutBtn').onclick = async function() {
+                const resp = await fetch('/logout_webreg', {method: 'POST'});
+                if (resp.ok) {
+                    updateWebregSessionStatus();
+                    // Optionally, show a toast: "WebReg session logged out."
+                }
+            };
+        }
+
+        // Sidebar quick navigation highlight and scroll
+        const sidebarLinks = document.querySelectorAll('.sidebar-jump');
+        const sectionIds = ['index-putter', 'past-requests', 'active-monitors'];
+        sidebarLinks.forEach((link, i) => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove highlight from all links
+                sidebarLinks.forEach(l => l.classList.remove('bg-blue-100', 'text-blue-700', 'font-bold'));
+                // Highlight this link
+                link.classList.add('bg-blue-100', 'text-blue-700', 'font-bold');
+                // Scroll to section
+                const section = document.getElementById(sectionIds[i]);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Highlight section
+                    section.classList.add('ring-4', 'ring-blue-300');
+                    setTimeout(() => section.classList.remove('ring-4', 'ring-blue-300'), 1200);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

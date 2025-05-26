@@ -1,0 +1,6 @@
+[2025-05-26 18:07:10] [26] Opened WebReg login page in Selenium.
+[2025-05-26 18:07:10] [26] Filling NetID and password in WebReg login form.
+[2025-05-26 18:07:19] [26] Pressed Enter after password.
+[2025-05-26 18:07:19] [26] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-26 18:07:31] [26] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-26 18:07:35] [26] WebReg login successful. Session is now active.

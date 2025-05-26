@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ScarletSniper Waitlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(270deg, #fff5f5, #ffeaea, #f87171, #fff5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .scarlet-header {
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .sniper-icon {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 18px auto;
+            display: block;
+            filter: drop-shadow(0 0 0 #b91c1c);
+            animation: glow 1.5s infinite alternate, floatUpDown 2.5s ease-in-out infinite;
+            z-index: 2;
+            position: relative;
+        }
+        .logo-pulse {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 128px;
+            height: 128px;
+            z-index: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #b91c1c33 0%, #fff0 80%);
+            animation: pulseShadow 2s infinite;
+        }
+        @keyframes glow {
+            0%,100% { filter: drop-shadow(0 0 0 #b91c1c); }
+            50% { filter: drop-shadow(0 0 32px #b91c1c); }
+        }
+        @keyframes floatUpDown {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulseShadow {
+            0%,100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.15); }
+        }
+        .fade-in-card {
+            animation: fadeInCard 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.13;
+            animation: float 8s ease-in-out infinite, rotateShape 30s linear infinite;
+        }
+        .shape1 { width: 48px; height: 48px; background: #b91c1c; left: 5vw; top: 10vh; animation-delay: 0s, 0s; }
+        .shape2 { width: 32px; height: 32px; background: #2563eb; right: 8vw; top: 30vh; animation-delay: 2s, 5s; }
+        .shape3 { width: 24px; height: 24px; background: #f59e42; left: 20vw; bottom: 8vh; animation-delay: 4s, 10s; }
+        @keyframes float {
+            0%,100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-18px) scale(1.08); }
+        }
+        @keyframes rotateShape {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+    <div class="w-full max-w-md mx-auto fade-in-card relative z-10">
+        <div class="text-center mb-8 relative">
+            <div class="logo-pulse"></div>
+            <svg class="sniper-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <h1 class="text-5xl font-extrabold text-red-700 scarlet-header mb-3">ScarletSniper</h1>
+            <span class="text-lg text-gray-700 font-medium block">Automated Course Registration System</span>
+        </div>
+        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center space-y-8 border-t-8 border-red-700">
+            <a href="{{ url_for('waitlist') }}" class="w-full text-center py-4 px-6 rounded bg-red-700 text-white font-semibold text-2xl hover:bg-red-800 hover:scale-105 transition-all duration-200 shadow-md block mb-4">Join Waitlist</a>
+            <a href="{{ url_for('login') }}" class="w-full text-center py-4 px-6 rounded bg-blue-600 text-white font-semibold text-2xl hover:bg-blue-700 hover:scale-105 transition-all duration-200 shadow-md block">Login</a>
+        </div>
+        <div class="mt-8 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</div>
+    </div>
+    <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+    <script>
+    // Confetti animation (copied from index.html)
+    function launchConfetti() {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const leafTypes = [
+            {type: 'svg', color: '#b91c1c', draw: (ctx, x, y, r, rot) => {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rot);
+                ctx.scale(r/24, r/24);
+                ctx.beginPath();
+                ctx.moveTo(24,2);ctx.lineTo(28,18);ctx.lineTo(44,12);ctx.lineTo(30,22);ctx.lineTo(46,28);ctx.lineTo(28,26);ctx.lineTo(36,44);ctx.lineTo(24,30);ctx.lineTo(12,44);ctx.lineTo(20,26);ctx.lineTo(2,28);ctx.lineTo(18,22);ctx.lineTo(4,12);ctx.lineTo(20,18);ctx.closePath();
+                ctx.fillStyle = '#b91c1c';
+                ctx.globalAlpha = 0.85;
+                ctx.shadowColor = '#b91c1c';
+                ctx.shadowBlur = 4;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.restore();
+            }},
+            {type: 'svg', color: '#e11d48', draw: (ctx, x, y, r, rot) => {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rot);
+                ctx.scale(r/24, r/24);
+                ctx.beginPath();
+                for(let i=0;i<5;i++){
+                    ctx.ellipse(0,8,6,14,Math.PI*2*i/5,0,2*Math.PI);
+                }
+                ctx.fillStyle = '#e11d48';
+                ctx.globalAlpha = 0.8;
+                ctx.shadowColor = '#e11d48';
+                ctx.shadowBlur = 3;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.restore();
+            }},
+            {type: 'emoji', char: '🌸'},
+            {type: 'emoji', char: '🍁'}
+        ];
+        let confetti = [];
+        for (let i = 0; i < 60; i++) {
+            const leaf = leafTypes[Math.floor(Math.random()*leafTypes.length)];
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                r: Math.random() * 14 + 10,
+                d: Math.random() * 40 + 10,
+                rot: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random()-0.5)*0.03,
+                drift: (Math.random()-0.5)*2.2,
+                type: leaf,
+            });
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confetti.forEach(c => {
+                if (c.type.type === 'svg') {
+                    c.type.draw(ctx, c.x, c.y, c.r, c.rot);
+                } else if (c.type.type === 'emoji') {
+                    ctx.save();
+                    ctx.font = `${c.r}px serif`;
+                    ctx.globalAlpha = 0.92;
+                    ctx.translate(c.x, c.y);
+                    ctx.rotate(c.rot);
+                    ctx.fillText(c.type.char, 0, 0);
+                    ctx.globalAlpha = 1;
+                    ctx.restore();
+                }
+            });
+            update();
+        }
+        function update() {
+            confetti.forEach(c => {
+                c.y += 1.2 + c.r/32;
+                c.x += Math.sin(c.d + c.y/60) * 0.8 + c.drift;
+                c.rot += c.rotSpeed;
+            });
+        }
+        function animate() {
+            draw();
+            confetti = confetti.filter(c => c.y < canvas.height + 40);
+            if (confetti.length > 0) {
+                requestAnimationFrame(animate);
+            }
+        }
+        animate();
+    }
+    window.onload = launchConfetti;
+    </script>
+</body>
+</html> 

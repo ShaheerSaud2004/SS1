@@ -1,0 +1,46 @@
+[2025-05-23 02:16:19] [8] Error monitoring course 06309: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001026583e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001026506a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x000000010218dfbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001021c1104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x00000001021bd888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001022024e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000102201d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x00000001021c93f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x000000010261c804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x000000010261fad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x00000001025fddd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010262034c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x00000001025ef664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001026402b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x000000010264043c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001026502f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-23 02:16:24] [8] Error monitoring course 06309: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001026cc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001026c46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102201fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000102235104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000102231888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001022764e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000102275d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010223d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000102690804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000102693ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000102671dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010269434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000102663664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001026b42b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x00000001026b443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001026c42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-23 02:16:28] [8] Invalid course index: 123123. Monitoring stopped.
+[2025-05-23 02:16:38] [8] Stopped monitoring course 06309
+[2025-05-23 02:17:00] [8] Invalid course index: 06309. Monitoring stopped.
+[2025-05-23 02:17:00] [8] Error monitoring course 06309: '06309'

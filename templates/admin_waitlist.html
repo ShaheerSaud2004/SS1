@@ -1,0 +1,151 @@
+{% extends "admin_dashboard.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Waitlist Applications</h1>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NetID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applied</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for app in applications %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">{{ app.first_name }} {{ app.last_name }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ app.email }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ app.netid }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ app.phone }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                {% if app.status == 'pending' %}bg-yellow-100 text-yellow-800
+                                {% elif app.status == 'approved' %}bg-green-100 text-green-800
+                                {% else %}bg-red-100 text-red-800{% endif %}">
+                                {{ app.status|title }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{ app.created_at }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            {% if app.status == 'pending' %}
+                            <button onclick="updateStatus({{ app.id }}, 'approved')" 
+                                class="text-green-600 hover:text-green-900 mr-3">Approve</button>
+                            <button onclick="updateStatus({{ app.id }}, 'rejected')" 
+                                class="text-red-600 hover:text-red-900">Reject</button>
+                            {% endif %}
+                            <button onclick="viewDetails({{ app.id }})" 
+                                class="text-blue-600 hover:text-blue-900 ml-3">View Details</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Application Details Modal -->
+<div id="detailsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Application Details</h3>
+            <div id="modalContent" class="text-sm text-gray-500">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="mt-4">
+                <button onclick="closeModal()" 
+                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function updateStatus(appId, status) {
+    if (!confirm(`Are you sure you want to ${status} this application?`)) {
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('status', status);
+    
+    fetch(`/admin/waitlist/${appId}/update`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating the status');
+    });
+}
+
+function viewDetails(appId) {
+    const modal = document.getElementById('detailsModal');
+    const content = document.getElementById('modalContent');
+    
+    // Get application details from the table row
+    const row = event.target.closest('tr');
+    const name = row.cells[0].textContent.trim();
+    const email = row.cells[1].textContent.trim();
+    const netid = row.cells[2].textContent.trim();
+    const phone = row.cells[3].textContent.trim();
+    const status = row.cells[4].textContent.trim();
+    const applied = row.cells[5].textContent.trim();
+    
+    // Populate modal content
+    content.innerHTML = `
+        <div class="space-y-3">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>NetID:</strong> ${netid}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Status:</strong> ${status}</p>
+            <p><strong>Applied:</strong> ${applied}</p>
+            <p><strong>Reason:</strong></p>
+            <p class="mt-2 p-3 bg-gray-50 rounded">${row.dataset.reason || 'No reason provided'}</p>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('detailsModal').classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('detailsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+</script>
+{% endblock %} 

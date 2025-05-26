@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="/static/sniper-icon.svg">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f3e8ff 0%, #fff5f5 100%);
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 48px 0 rgba(0,0,0,0.10);
+            backdrop-filter: blur(12px);
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 0.01em;
+        }
+        .about-gradient {
+            background: linear-gradient(90deg, #2563eb 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .howto-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white/90 shadow-md py-6 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <img src="/static/sniper-icon.svg" alt="ScarletSniper Logo" class="h-10 w-10">
+            <span class="text-2xl font-extrabold text-red-700 tracking-wide">ScarletSniper</span>
+        </div>
+        <a href="/dashboard" class="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold shadow hover:from-blue-700 hover:to-blue-500 transition-all duration-200">Back to Dashboard</a>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center px-4 py-12">
+        <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Step-by-step guide -->
+            <section class="glass-card p-10 flex flex-col justify-center mb-6 md:mb-0">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="howto-icon text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17l4 4 4-4m0-5a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span class="section-title about-gradient">How to Use ScarletSniper</span>
+                </div>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-3 mb-4">
+                    <li><b>Log in or create your account.</b> Use your email and a password to sign up. If you already have an account, just log in.</li>
+                    <li><b>Enter your Rutgers NetID and password.</b> This is needed so ScarletSniper can register you for classes on your behalf. Your information is kept secure and private.</li>
+                    <li><b>Type the <span class='font-mono bg-gray-100 px-1 rounded'>index number</span> of the course(s) you want to monitor.</b> You can find the index number on the Rutgers course schedule. Enter it in the box on your dashboard (e.g. <span class='font-mono'>12345</span>).</li>
+                    <li><b>Click <span class='font-bold text-blue-600'>Add Courses</span>.</b> ScarletSniper will start monitoring those courses for you. You'll see them listed under "Active Monitors." </li>
+                    <li><b>Relax!</b> ScarletSniper checks for open spots 24/7. If a spot opens, it will try to register you instantly. You'll get a notification if you're registered or if there's an issue.</li>
+                    <li><b>Manage your courses.</b> You can stop monitoring a course at any time, or re-monitor a past request with one click.</li>
+                    <li><b>Upgrade if you need more slots.</b> Free accounts can monitor one class at a time. Paid accounts can monitor more—just click "Buy More Slots" if you need to track additional courses.</li>
+                </ol>
+                <div class="mt-4 text-sm text-gray-500">If you ever need help, just use the contact info at the top of your dashboard. We're here for you!</div>
+            </section>
+            <!-- Tips & Support -->
+            <section class="glass-card p-10 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="howto-icon text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
+                    <span class="section-title about-gradient">Tips & Support</span>
+                </div>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>Double-check your course index numbers for accuracy.</li>
+                    <li>Keep your NetID and password up to date for seamless registration.</li>
+                    <li>Upgrade your account if you need to monitor more classes.</li>
+                    <li>Join our <a href="https://discord.gg/your-server" target="_blank" class="text-indigo-700 underline font-semibold">Discord</a> for live support and updates.</li>
+                </ul>
+                <div class="mb-4 text-gray-700">
+                    <b>Need help?</b><br>
+                    Email: <a href="mailto:support@scarletsniper.com" class="text-blue-700 underline">support@scarletsniper.com</a><br>
+                    Or use the support widget in your dashboard.
+                </div>
+                <div class="mt-4 text-xs text-gray-400">We're here to help you succeed at Rutgers!</div>
+            </section>
+        </div>
+        <!-- Call to Action -->
+        <div class="max-w-3xl w-full mt-12 flex flex-col items-center">
+            <div class="glass-card p-8 flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-blue-700 mb-2">Ready to try ScarletSniper?</h2>
+                <p class="text-gray-700 mb-4">Get started now and never miss your chance to register for the classes you need.</p>
+                <a href="/dashboard" class="px-7 py-3 rounded-xl bg-gradient-to-r from-red-600 to-pink-400 text-white font-bold text-lg shadow-lg hover:scale-105 hover:from-red-700 hover:to-pink-500 transition-all duration-200 flex items-center gap-2">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    Go to Dashboard
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 text-center text-xs text-gray-400">&copy; 2024 ScarletSniper. Not affiliated with Rutgers University.</footer>
+</body>
+</html> 

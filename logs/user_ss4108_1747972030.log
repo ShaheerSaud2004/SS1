@@ -1,0 +1,27 @@
+[2025-05-22 23:47:10] User logged in and started monitoring courses: 10231
+[2025-05-22 23:47:13] Section 10231 is OPEN! Attempting to register...
+[2025-05-22 23:47:31] Error monitoring course 10231: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100f903e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100f886a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000100ac5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100aa0798 chromedriver + 133016
+4   chromedriver                        0x0000000100b35048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100b4db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100b013f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100f54804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100f57ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100f35dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100f5834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100f27664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100f782b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100f7843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100f882f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-22 23:47:37] Section 10231 is OPEN! Attempting to register...
+[2025-05-22 23:47:40] Stopped monitoring course 10231
+[2025-05-22 23:48:06] Registration failed for course 10231. Will retry.

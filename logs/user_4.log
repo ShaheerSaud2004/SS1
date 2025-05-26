@@ -1,0 +1,13 @@
+[2025-05-24 12:18:58] [4] Opened WebReg login page in Selenium.
+[2025-05-24 12:18:58] [4] Filling NetID and password in WebReg login form.
+[2025-05-24 12:19:01] [4] Pressed Enter after password.
+[2025-05-24 12:19:04] [4] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 12:19:39] [4] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 12:19:59] [4] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 12:20:38] [4] Opened WebReg login page in Selenium.
+[2025-05-24 12:20:38] [4] Filling NetID and password in WebReg login form.
+[2025-05-24 12:20:42] [4] Pressed Enter after password.
+[2025-05-24 12:20:44] [4] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 12:20:59] [4] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 12:21:03] [4] WebReg login successful. Session is now active.

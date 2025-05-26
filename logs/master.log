@@ -1,0 +1,887 @@
+[2025-05-23 00:04:50] [ss4108_1747973090] User logged in and started monitoring courses: 09306
+[2025-05-23 00:06:48] [ss4108_1747973090] Stopped monitoring course 09306
+[2025-05-23 00:09:12] [ss4108_1747973352] User logged in and started monitoring courses: 909213
+[2025-05-23 00:09:43] [ss4108_1747973352] Invalid course index: 909213. Monitoring stopped.
+[2025-05-23 00:15:15] [ss4108_1747973715] User logged in and started monitoring courses: 2131282
+[2025-05-23 00:15:46] [ss4108_1747973715] Invalid course index: 2131282. Monitoring stopped.
+[2025-05-23 00:18:02] [ss4108_1747973882] User logged in and started monitoring courses: 2139123
+[2025-05-23 00:18:33] [ss4108_1747973882] Invalid course index: 2139123. Monitoring stopped.
+[2025-05-23 00:18:42] [ss4108_1747973882] User logged out
+[2025-05-23 00:23:15] [ss4108@rutgers.edu_1747974195] User logged in and started monitoring courses: 213232
+[2025-05-23 00:23:46] [ss4108@rutgers.edu_1747974195] Invalid course index: 213232. Monitoring stopped.
+[2025-05-23 00:25:28] [ss4108@rutgers.edu_1747974195] User logged out
+[2025-05-23 00:27:08] [ss4108_1747974428] User logged in and started monitoring courses: 123456
+[2025-05-23 00:27:21] [ss4108_1747974428] Stopped monitoring course 123456
+[2025-05-23 00:27:39] [ss4108_1747974428] Invalid course index: 123456. Monitoring stopped.
+[2025-05-23 00:27:39] [ss4108_1747974428] Error monitoring course 123456: '123456'
+[2025-05-23 01:14:04] [2] Invalid course index: 123123. Monitoring stopped.
+[2025-05-23 01:50:35] [6] Stopped monitoring course 09306
+[2025-05-23 02:16:19] [8] Error monitoring course 06309: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001026583e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001026506a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x000000010218dfbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001021c1104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x00000001021bd888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001022024e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000102201d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x00000001021c93f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x000000010261c804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x000000010261fad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x00000001025fddd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010262034c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x00000001025ef664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001026402b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x000000010264043c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001026502f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-23 02:16:24] [8] Error monitoring course 06309: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001026cc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001026c46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102201fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000102235104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000102231888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001022764e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000102275d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010223d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000102690804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000102693ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000102671dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010269434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000102663664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001026b42b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x00000001026b443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001026c42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-23 02:16:28] [8] Invalid course index: 123123. Monitoring stopped.
+[2025-05-23 02:16:38] [8] Stopped monitoring course 06309
+[2025-05-23 02:17:00] [8] Invalid course index: 06309. Monitoring stopped.
+[2025-05-23 02:17:00] [8] Error monitoring course 06309: '06309'
+[2025-05-23 09:32:02] [10] Invalid course index: 123122. Monitoring stopped.
+[2025-05-23 17:47:15] [11] Invalid course index: 09306. Monitoring stopped.
+[2025-05-23 18:06:11] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:06:11] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:06:15] [11] Submitted WebReg login form.
+[2025-05-23 18:06:35] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 18:06:40] [11] WebReg login successful. Session is now active.
+[2025-05-23 18:13:54] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:13:54] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:13:58] [11] Submitted WebReg login form.
+[2025-05-23 18:14:18] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 18:14:28] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 18:30:15] [11] Opened WebReg login page in Selenium.
+[2025-05-23 18:30:15] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 18:30:21] [11] Submitted WebReg login form.
+[2025-05-23 18:30:28] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 18:30:32] [11] WebReg login successful. Session is now active.
+[2025-05-23 22:13:28] [11] Opened WebReg login page in Selenium.
+[2025-05-23 22:13:28] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 22:13:31] [11] Submitted WebReg login form.
+[2025-05-23 22:13:51] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 22:14:01] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 22:19:33] [11] Opened WebReg login page in Selenium.
+[2025-05-23 22:19:33] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 22:19:38] [11] Submitted WebReg login form.
+[2025-05-23 22:19:47] [11] Clicked 'Yes, this is my device' on Duo prompt.
+[2025-05-23 22:19:51] [11] WebReg login successful. Session is now active.
+[2025-05-23 22:20:05] [11] Stopped monitoring course 09306
+[2025-05-23 22:20:44] [11] Invalid course index: 123143. Monitoring stopped.
+[2025-05-23 22:42:58] [11] Stopped monitoring course 123143
+[2025-05-23 23:48:47] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:48:47] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:48:53] [11] Submitted WebReg login form.
+[2025-05-23 23:49:14] [11] 'Yes, this is my device' button not found, continuing.
+[2025-05-23 23:49:34] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 23:55:45] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:55:45] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:55:49] [11] Submitted WebReg login form.
+[2025-05-23 23:56:20] [11] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-23 23:56:40] [11] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-23 23:59:19] [11] Opened WebReg login page in Selenium.
+[2025-05-23 23:59:19] [11] Filling NetID and password in WebReg login form.
+[2025-05-23 23:59:23] [11] Submitted WebReg login form.
+[2025-05-24 00:03:33] [11] Opened WebReg login page in Selenium.
+[2025-05-24 00:03:33] [11] Filling NetID and password in WebReg login form.
+[2025-05-24 00:03:39] [11] Pressed Enter after password.
+[2025-05-24 00:03:39] [11] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:03:47] [11] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:03:51] [11] WebReg login successful. Session is now active.
+[2025-05-24 00:04:42] [11] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 00:04:54] [11] Stopped monitoring course 123212
+[2025-05-24 00:05:42] [11] Invalid course index: sodas. Monitoring stopped.
+[2025-05-24 00:08:13] [11] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 00:17:20] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:17:20] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:17:22] [1] Pressed Enter after password.
+[2025-05-24 00:18:16] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:18:16] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:18:20] [1] Pressed Enter after password.
+[2025-05-24 00:18:23] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:18:53] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:18:54] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:18:54] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:18:58] [1] Pressed Enter after password.
+[2025-05-24 00:19:00] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:19:13] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:19:20] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:19:23] [1] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:19:27] [1] WebReg login successful. Session is now active.
+[2025-05-24 00:19:51] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:20:11] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:20:50] [1] Invalid course index: 928312. Monitoring stopped.
+[2025-05-24 00:24:37] [1] Stopped monitoring course 928312
+[2025-05-24 00:24:44] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:24:44] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:24:46] [1] Pressed Enter after password.
+[2025-05-24 00:25:07] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:25:07] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:25:07] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000100ea03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100e986a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001009d5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001009b0798 chromedriver + 133016
+4   chromedriver                        0x0000000100a45048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000100a5db50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000100a113f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000100e64804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000100e67ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000100e45dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000100e6834c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000100e37664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000100e882b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000100e8843c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000100e982f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:26:51] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:26:51] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:26:54] [1] Pressed Enter after password.
+[2025-05-24 00:27:02] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:02] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:02] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x00000001049bc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001049b46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001044f1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001044cc798 chromedriver + 133016
+4   chromedriver                        0x0000000104561048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104579b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x000000010452d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000104980804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000104983ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000104961dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x000000010498434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000104953664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001049a42b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x00000001049a443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001049b42f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:21] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:27:21] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:27:23] [1] Pressed Enter after password.
+[2025-05-24 00:27:35] [1] Duo iframe/page not detected: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:35] [1] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:35] [1] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x000000010531c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001053146a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104e51fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104e2c798 chromedriver + 133016
+4   chromedriver                        0x0000000104ec1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000104ed9b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x0000000104e8d3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x00000001052e0804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x00000001052e3ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x00000001052c1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x00000001052e434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x00000001052b3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x00000001053042b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x000000010530443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x00000001053142f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 00:27:51] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:27:51] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:27:55] [1] Pressed Enter after password.
+[2025-05-24 00:27:57] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:28:32] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:28:53] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 00:30:02] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:30:02] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:30:06] [1] Pressed Enter after password.
+[2025-05-24 00:30:08] [1] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 00:30:37] [1] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 00:30:41] [1] WebReg login successful. Session is now active.
+[2025-05-24 00:31:29] [1] Section 20740 is OPEN! Attempting to register...
+[2025-05-24 00:31:43] [1] Stopped monitoring course 20740
+[2025-05-24 00:31:58] [1] Registration failed for course 20740. Will retry.
+[2025-05-24 00:58:04] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:58:04] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:58:07] [1] Pressed Enter after password.
+[2025-05-24 00:59:08] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 00:59:19] [1] Opened WebReg login page in Selenium.
+[2025-05-24 00:59:19] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 00:59:23] [1] Pressed Enter after password.
+[2025-05-24 00:59:38] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 00:59:59] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 01:00:23] [1] Duo iframe/page not detected: Message: 
+
+[2025-05-24 01:00:54] [1] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 01:01:14] [1] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 12:18:58] [4] Opened WebReg login page in Selenium.
+[2025-05-24 12:18:58] [4] Filling NetID and password in WebReg login form.
+[2025-05-24 12:19:01] [4] Pressed Enter after password.
+[2025-05-24 12:19:04] [4] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 12:19:39] [4] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 12:19:59] [4] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 12:20:38] [4] Opened WebReg login page in Selenium.
+[2025-05-24 12:20:38] [4] Filling NetID and password in WebReg login form.
+[2025-05-24 12:20:42] [4] Pressed Enter after password.
+[2025-05-24 12:20:44] [4] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 12:20:59] [4] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 12:21:03] [4] WebReg login successful. Session is now active.
+[2025-05-24 12:29:13] [1] Opened WebReg login page in Selenium.
+[2025-05-24 12:29:13] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 12:29:13] [1] Exception in selenium_login_flow: 'NoneType' object is not iterable
+[2025-05-24 12:29:29] [1] Opened WebReg login page in Selenium.
+[2025-05-24 12:29:29] [1] Filling NetID and password in WebReg login form.
+[2025-05-24 12:29:30] [1] Exception in selenium_login_flow: 'NoneType' object is not iterable
+[2025-05-24 20:27:12] [9] Opened WebReg login page in Selenium.
+[2025-05-24 20:27:12] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 20:27:16] [9] Pressed Enter after password.
+[2025-05-24 20:28:16] [9] Duo iframe/page not detected: Message: 
+
+[2025-05-24 20:28:47] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 20:29:07] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 20:32:22] [9] Opened WebReg login page in Selenium.
+[2025-05-24 20:32:22] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 20:32:26] [9] Pressed Enter after password.
+[2025-05-24 20:32:29] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 20:33:04] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 20:33:25] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 20:35:37] [9] Opened WebReg login page in Selenium.
+[2025-05-24 20:35:37] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 20:35:41] [9] Pressed Enter after password.
+[2025-05-24 20:35:43] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 20:36:19] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 20:36:39] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 20:43:56] [9] Opened WebReg login page in Selenium.
+[2025-05-24 20:43:56] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 20:44:00] [9] Pressed Enter after password.
+[2025-05-24 20:44:02] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 20:44:37] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 20:44:58] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 20:46:12] [9] Opened WebReg login page in Selenium.
+[2025-05-24 20:46:12] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 20:46:19] [9] Pressed Enter after password.
+[2025-05-24 20:46:19] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 20:46:27] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 20:46:31] [9] WebReg login successful. Session is now active.
+[2025-05-24 21:17:12] [9] Invalid course index: 132312. Monitoring stopped.
+[2025-05-24 21:53:17] [9] Stopped monitoring course 132312
+[2025-05-24 21:54:43] [9] Opened WebReg login page in Selenium.
+[2025-05-24 21:54:43] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 21:54:47] [9] Pressed Enter after password.
+[2025-05-24 21:54:49] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 21:55:25] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 21:55:31] [9] Opened WebReg login page in Selenium.
+[2025-05-24 21:55:31] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 21:55:35] [9] Pressed Enter after password.
+[2025-05-24 21:55:37] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 21:55:45] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 21:55:50] [9] Opened WebReg login page in Selenium.
+[2025-05-24 21:55:50] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 21:55:53] [9] Pressed Enter after password.
+[2025-05-24 21:56:13] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 21:56:33] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 21:56:40] [9] Opened WebReg login page in Selenium.
+[2025-05-24 21:56:40] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 21:56:43] [9] Pressed Enter after password.
+[2025-05-24 21:56:45] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 21:56:53] [9] Duo iframe/page not detected: Message: 
+
+[2025-05-24 21:57:03] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 21:57:08] [9] WebReg login successful. Session is now active.
+[2025-05-24 21:57:24] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 21:59:18] [9] Opened WebReg login page in Selenium.
+[2025-05-24 21:59:18] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 21:59:23] [9] Pressed Enter after password.
+[2025-05-24 21:59:23] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 21:59:36] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-24 21:59:40] [9] WebReg login successful. Session is now active.
+[2025-05-24 21:59:59] [9] Stopped monitoring course 123212
+[2025-05-24 22:00:21] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 22:00:22] [9] Error monitoring course 123212: '123212'
+[2025-05-24 22:00:51] [9] Stopped monitoring course 123212
+[2025-05-24 22:01:20] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 22:01:21] [9] Error monitoring course 123212: '123212'
+[2025-05-24 22:08:22] [9] Stopped monitoring course 123123
+[2025-05-24 22:08:50] [9] Invalid course index: 123123. Monitoring stopped.
+[2025-05-24 22:08:51] [9] Error monitoring course 123123: '123123'
+[2025-05-24 22:10:53] [9] Stopped monitoring course 123212
+[2025-05-24 22:11:17] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-24 22:11:18] [9] Error monitoring course 123212: '123212'
+[2025-05-24 22:35:27] [9] Stopped monitoring course 123212
+[2025-05-24 22:47:37] [9] Opened WebReg login page in Selenium.
+[2025-05-24 22:47:37] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 22:47:41] [9] Pressed Enter after password.
+[2025-05-24 22:48:41] [9] Duo iframe/page not detected: Message: 
+
+[2025-05-24 22:48:47] [9] Error while clicking 'Yes, this is my device': Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000102c4c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000102c446a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102781fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x000000010275c798 chromedriver + 133016
+4   chromedriver                        0x00000001027f1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000102809b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x00000001027bd3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000102c10804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000102c13ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000102bf1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000102c1434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000102be3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000102c342b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000102c3443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000102c442f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 22:48:47] [9] Waiting for screen change after Duo failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Stacktrace:
+0   chromedriver                        0x0000000102c4c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000102c446a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102781fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x000000010275c798 chromedriver + 133016
+4   chromedriver                        0x00000001027f1048 cxxbridge1$string$len + 544936
+5   chromedriver                        0x0000000102809b50 cxxbridge1$string$len + 646064
+6   chromedriver                        0x00000001027bd3f8 cxxbridge1$string$len + 332888
+7   chromedriver                        0x0000000102c10804 cxxbridge1$str$ptr + 2585200
+8   chromedriver                        0x0000000102c13ad4 cxxbridge1$str$ptr + 2598208
+9   chromedriver                        0x0000000102bf1dd8 cxxbridge1$str$ptr + 2459716
+10  chromedriver                        0x0000000102c1434c cxxbridge1$str$ptr + 2600376
+11  chromedriver                        0x0000000102be3664 cxxbridge1$str$ptr + 2400464
+12  chromedriver                        0x0000000102c342b0 cxxbridge1$str$ptr + 2731292
+13  chromedriver                        0x0000000102c3443c cxxbridge1$str$ptr + 2731688
+14  chromedriver                        0x0000000102c442f4 cxxbridge1$str$ptr + 2796896
+15  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-24 23:36:19] [9] Opened WebReg login page in Selenium.
+[2025-05-24 23:36:19] [9] Filling NetID and password in WebReg login form.
+[2025-05-24 23:36:25] [9] Pressed Enter after password.
+[2025-05-24 23:36:25] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-24 23:37:01] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-24 23:37:21] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-24 23:48:52] [9] Stopped monitoring course 123212
+[2025-05-25 00:36:55] [9] Opened WebReg login page in Selenium.
+[2025-05-25 00:36:55] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 00:36:59] [9] Pressed Enter after password.
+[2025-05-25 00:37:02] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 00:37:37] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 00:37:57] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-25 00:42:44] [9] Stopped monitoring course 123212
+[2025-05-25 01:01:03] [9] Stopped monitoring course 132312
+[2025-05-25 01:03:56] [9] Opened WebReg login page in Selenium.
+[2025-05-25 01:03:56] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 01:04:00] [9] Pressed Enter after password.
+[2025-05-25 01:04:02] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 01:04:37] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 01:04:58] [9] Waiting for screen change after Duo failed: Message: 
+
+[2025-05-25 01:12:27] [9] Stopped monitoring course 123212
+[2025-05-25 11:34:22] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:34:22] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:34:23] [9] Exception in selenium_login_flow: name 'human_type' is not defined
+[2025-05-25 11:34:29] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:34:29] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:34:31] [9] Exception in selenium_login_flow: name 'human_type' is not defined
+[2025-05-25 11:34:37] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:34:37] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:34:38] [9] Exception in selenium_login_flow: name 'human_type' is not defined
+[2025-05-25 11:37:29] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:37:29] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:37:39] [9] Pressed Enter after password.
+[2025-05-25 11:37:39] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 11:37:49] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 11:37:53] [9] WebReg login successful. Session is now active.
+[2025-05-25 11:46:13] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:46:13] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:46:23] [9] Pressed Enter after password.
+[2025-05-25 11:46:23] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 11:46:33] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 11:46:37] [9] WebReg login successful. Session is now active.
+[2025-05-25 11:54:09] [9] Opened WebReg login page in Selenium.
+[2025-05-25 11:54:09] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 11:54:17] [9] Pressed Enter after password.
+[2025-05-25 11:54:19] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 11:54:35] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 11:54:39] [9] WebReg login successful. Session is now active.
+[2025-05-25 15:53:37] [9] Opened WebReg login page in Selenium.
+[2025-05-25 15:53:37] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 15:53:47] [9] Pressed Enter after password.
+[2025-05-25 15:53:47] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 15:53:57] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 15:54:01] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:01:44] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:01:44] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:01:54] [9] Pressed Enter after password.
+[2025-05-25 16:01:54] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:02:04] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:02:08] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:08:08] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:08:08] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:08:18] [9] Pressed Enter after password.
+[2025-05-25 16:08:18] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:08:28] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:08:32] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:14:10] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:14:10] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:14:19] [9] Pressed Enter after password.
+[2025-05-25 16:14:19] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:14:29] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:14:33] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:21:57] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:21:57] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:22:04] [9] Pressed Enter after password.
+[2025-05-25 16:22:06] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:22:26] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:22:29] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:25:47] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:25:47] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:25:57] [9] Pressed Enter after password.
+[2025-05-25 16:25:57] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:26:07] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:26:11] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:31:23] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:31:23] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:31:33] [9] Pressed Enter after password.
+[2025-05-25 16:31:33] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:31:43] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:31:47] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:36:26] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:36:26] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:36:35] [9] Pressed Enter after password.
+[2025-05-25 16:36:35] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:36:45] [9] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-25 16:36:49] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:36:59] [9] Stopped monitoring course 123212
+[2025-05-25 16:45:10] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:45:10] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:45:18] [9] Pressed Enter after password.
+[2025-05-25 16:45:20] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:45:56] [9] Exception in selenium_login_flow (outer): Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001009cc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001009c46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000100501fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100535104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000100531888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001005764e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000100575d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010053d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000100990804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000100993ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000100971dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010099434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000100963664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001009b42b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x00000001009b443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001009c42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 16:46:15] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 16:46:15] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:46:33] [9] Exception in selenium_login_flow (outer): Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001012143e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x000000010120c6a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000100d49fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100d7d104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000100d79888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x0000000100dbe4e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000100dbdd54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x0000000100d853f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x00000001011d8804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x00000001011dbad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x00000001011b9dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x00000001011dc34c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x00000001011ab664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001011fc2b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x00000001011fc43c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x000000010120c2f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 16:49:50] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:49:50] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:49:59] [9] Pressed Enter after password.
+[2025-05-25 16:49:59] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 16:50:06] [9] Stopped monitoring course 123212
+[2025-05-25 16:50:55] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 16:50:55] [9] WebReg login successful. Session is now active.
+[2025-05-25 16:59:47] [9] Opened WebReg login page in Selenium.
+[2025-05-25 16:59:47] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 16:59:55] [9] Pressed Enter after password.
+[2025-05-25 16:59:55] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 17:00:06] [9] Stopped monitoring course 123212
+[2025-05-25 17:00:16] [9] Re-monitoring course 132312
+[2025-05-25 17:00:16] [9] Error monitoring course 132312: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001007ec3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001007e46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000100321fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100355104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000100351888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001003964e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000100395d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010035d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x00000001007b0804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x00000001007b3ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000100791dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x00000001007b434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000100783664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001007d42b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x00000001007d443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001007e42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 17:00:22] [9] Error monitoring course 132312: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x00000001008ac3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001008a46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001003e1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100415104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000100411888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001004564e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000100455d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010041d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000100870804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000100873ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000100851dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010087434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000100843664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001008942b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x000000010089443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001008a42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 17:00:24] [9] Stopped monitoring course 132312
+[2025-05-25 17:00:27] [9] Stopped monitoring course 123212
+[2025-05-25 17:00:42] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-25 17:08:46] [9] Opened WebReg login page in Selenium.
+[2025-05-25 17:08:46] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 17:08:54] [9] Pressed Enter after password.
+[2025-05-25 17:08:54] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 17:09:15] [9] Stopped monitoring course 123212
+[2025-05-25 17:09:18] [9] Stopped monitoring course 132312
+[2025-05-25 17:09:50] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 17:09:50] [9] WebReg login successful. Session is now active.
+[2025-05-25 18:00:26] [9] Stopped monitoring course 123212
+[2025-05-25 18:00:41] [9] Opened WebReg login page in Selenium.
+[2025-05-25 18:00:41] [9] Filling NetID and password in WebReg login form.
+[2025-05-25 18:00:50] [9] Pressed Enter after password.
+[2025-05-25 18:00:50] [9] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-25 18:01:24] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-25 18:01:46] [9] 'Yes, this is my device' button not found after retries, continuing.
+[2025-05-25 18:01:46] [9] WebReg login successful. Session is now active.
+[2025-05-25 18:34:49] [9] Re-monitoring course 123212
+[2025-05-25 18:34:54] [9] Re-monitoring course 123123
+[2025-05-25 18:34:54] [9] Error monitoring course 123123: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x000000010528c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001052846a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104dc1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104df5104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000104df1888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x0000000104e364e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000104e35d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x0000000104dfd3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000105250804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000105253ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000105231dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010525434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000105223664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001052742b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x000000010527443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001052842f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 18:34:59] [9] Error monitoring course 123123: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x0000000102ddc3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000102dd46a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000102911fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000102945104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000102941888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001029864e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000102985d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x000000010294d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000102da0804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000102da3ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000102d81dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x0000000102da434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000102d73664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x0000000102dc42b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x0000000102dc443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x0000000102dd42f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 18:35:04] [9] Error monitoring course 123123: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x0000000104f9c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000104f946a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x0000000104ad1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000104b05104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000104b01888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x0000000104b464e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000104b45d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x0000000104b0d3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000104f60804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000104f63ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000104f41dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x0000000104f6434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000104f33664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x0000000104f842b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x0000000104f8443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x0000000104f942f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 18:35:06] [9] Stopped monitoring course 123212
+[2025-05-25 18:35:08] [9] Stopped monitoring course 123212
+[2025-05-25 18:35:09] [9] Stopped monitoring course 123123
+[2025-05-25 18:35:09] [9] Error monitoring course 123123: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x000000010466c3e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x00000001046646a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001041a1fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x00000001041d5104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x00000001041d1888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x00000001042164e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000104215d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x00000001041dd3f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000104630804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000104633ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000104611dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x000000010463434c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000104603664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x00000001046542b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x000000010465443c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x00000001046642f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 18:35:20] [9] Invalid course index: 123212. Monitoring stopped.
+[2025-05-25 18:35:21] [9] Error monitoring course 123212: '123212'
+[2025-05-25 18:37:39] [9] Re-monitoring course 132312
+[2025-05-25 18:37:42] [9] Stopped monitoring course 132312
+[2025-05-25 18:37:46] [9] Re-monitoring course 123212
+[2025-05-25 18:37:46] [9] Error monitoring course 123212: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+0   chromedriver                        0x0000000100ab03e0 cxxbridge1$str$ptr + 2829900
+1   chromedriver                        0x0000000100aa86a8 cxxbridge1$str$ptr + 2797844
+2   chromedriver                        0x00000001005e5fbc cxxbridge1$string$len + 90140
+3   chromedriver                        0x0000000100619104 cxxbridge1$string$len + 299364
+4   chromedriver                        0x0000000100615888 cxxbridge1$string$len + 284904
+5   chromedriver                        0x000000010065a4e4 cxxbridge1$string$len + 566596
+6   chromedriver                        0x0000000100659d54 cxxbridge1$string$len + 564660
+7   chromedriver                        0x00000001006213f8 cxxbridge1$string$len + 332888
+8   chromedriver                        0x0000000100a74804 cxxbridge1$str$ptr + 2585200
+9   chromedriver                        0x0000000100a77ad4 cxxbridge1$str$ptr + 2598208
+10  chromedriver                        0x0000000100a55dd8 cxxbridge1$str$ptr + 2459716
+11  chromedriver                        0x0000000100a7834c cxxbridge1$str$ptr + 2600376
+12  chromedriver                        0x0000000100a47664 cxxbridge1$str$ptr + 2400464
+13  chromedriver                        0x0000000100a982b0 cxxbridge1$str$ptr + 2731292
+14  chromedriver                        0x0000000100a9843c cxxbridge1$str$ptr + 2731688
+15  chromedriver                        0x0000000100aa82f4 cxxbridge1$str$ptr + 2796896
+16  libsystem_pthread.dylib             0x00000001972a02e4 _pthread_start + 136
+17  libsystem_pthread.dylib             0x000000019729b0fc thread_start + 8
+
+[2025-05-25 18:37:49] [9] Stopped monitoring course 123212
+[2025-05-25 18:38:10] [9] Invalid course index: 132312. Monitoring stopped.
+[2025-05-25 18:38:11] [9] Error monitoring course 132312: '132312'
+[2025-05-26 14:07:40] [13] Opened WebReg login page in Selenium.
+[2025-05-26 14:07:40] [13] Filling NetID and password in WebReg login form.
+[2025-05-26 14:07:49] [13] Pressed Enter after password.
+[2025-05-26 14:07:49] [13] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-26 14:08:02] [13] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-26 14:08:06] [13] WebReg login successful. Session is now active.
+[2025-05-26 18:07:10] [26] Opened WebReg login page in Selenium.
+[2025-05-26 18:07:10] [26] Filling NetID and password in WebReg login form.
+[2025-05-26 18:07:19] [26] Pressed Enter after password.
+[2025-05-26 18:07:19] [26] Duo iframe/page detected. Waiting for user to approve on device.
+[2025-05-26 18:07:31] [26] Clicked 'Yes, this is my device' on Duo prompt (main doc).
+[2025-05-26 18:07:35] [26] WebReg login successful. Session is now active.

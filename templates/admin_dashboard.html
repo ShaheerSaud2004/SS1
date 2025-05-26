@@ -1,0 +1,158 @@
+<title>Admin Dashboard - ScarletSniper</title>
+<link rel="icon" href="/static/sniper-icon.svg">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    body {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffeaea 100%);
+    }
+    .scarlet-header {
+        letter-spacing: 2px;
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+    }
+    .sniper-icon {
+        width: 36px;
+        height: 36px;
+        margin-right: 10px;
+    }
+</style>
+<header class="flex items-center justify-between py-6 px-8 bg-white shadow-md rounded-b-2xl border-b-4 border-red-700 mb-8">
+    <div class="flex items-center">
+        <svg class="sniper-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+            <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+            <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+            <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+            <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+            <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+            <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+        </svg>
+        <span class="text-3xl font-extrabold text-red-700 scarlet-header">ScarletSniper Admin</span>
+    </div>
+    <div>
+        <span class="text-gray-700 font-medium mr-4">Welcome, {{ user.email }}</span>
+        <a href="{{ url_for('logout') }}" class="text-red-700 hover:underline font-semibold">Logout</a>
+    </div>
+</header>
+<footer class="mt-12 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</footer>
+
+<div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Waitlist Requests Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Waitlist Requests</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="waitlistTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Other Dashboard Sections -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Quick Stats</h2>
+            <!-- Add your existing dashboard content here -->
+        </div>
+    </div>
+</div>
+
+<script>
+// Function to load waitlist requests
+function loadWaitlistRequests() {
+    fetch('/admin/waitlist/data')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('waitlistTableBody');
+            tbody.innerHTML = '';
+            
+            data.applications.forEach(app => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50';
+                tr.innerHTML = `
+                    <td class="px-4 py-2">${app.first_name} ${app.last_name}</td>
+                    <td class="px-4 py-2">${app.email}</td>
+                    <td class="px-4 py-2">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            ${app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                              app.status === 'approved' ? 'bg-green-100 text-green-800' : 
+                              'bg-red-100 text-red-800'}">
+                            ${app.status}
+                        </span>
+                    </td>
+                    <td class="px-4 py-2">
+                        ${app.status === 'pending' ? `
+                            <button onclick="handleWaitlistAction(${app.id}, 'approve')" 
+                                class="text-green-600 hover:text-green-900 mr-2">Approve</button>
+                            <button onclick="handleWaitlistAction(${app.id}, 'reject')" 
+                                class="text-red-600 hover:text-red-900">Reject</button>
+                        ` : ''}
+                        <button onclick="viewWaitlistDetails(${app.id})" 
+                            class="text-blue-600 hover:text-blue-900 ml-2">View</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => console.error('Error loading waitlist requests:', error));
+}
+
+// Function to handle waitlist actions
+function handleWaitlistAction(appId, action) {
+    if (!confirm(`Are you sure you want to ${action} this application?`)) {
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('status', action === 'approve' ? 'approved' : 'rejected');
+    
+    fetch(`/admin/waitlist/${appId}/update`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            loadWaitlistRequests(); // Reload the table
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating the status');
+    });
+}
+
+// Function to view waitlist details
+function viewWaitlistDetails(appId) {
+    fetch(`/admin/waitlist/${appId}/details`)
+        .then(response => response.json())
+        .then(data => {
+            // Show details in a modal or expand the row
+            alert(`Details for application ${appId}:\n\n` +
+                  `Name: ${data.first_name} ${data.last_name}\n` +
+                  `Email: ${data.email}\n` +
+                  `NetID: ${data.netid}\n` +
+                  `Phone: ${data.phone}\n` +
+                  `Reason: ${data.reason}\n` +
+                  `Status: ${data.status}\n` +
+                  `Applied: ${data.created_at}`);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while fetching details');
+        });
+}
+
+// Load waitlist requests when the page loads
+document.addEventListener('DOMContentLoaded', loadWaitlistRequests);
+</script> 

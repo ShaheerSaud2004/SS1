@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="/static/sniper-icon.svg">
+    <style>
+        body {
+            background: linear-gradient(270deg, #fff5f5, #ffeaea, #f87171, #fff5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .dark-gradient {
+            background: linear-gradient(270deg, #18181b, #23272f, #991b1b, #18181b);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+        .scarlet-header {
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .sniper-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px auto;
+            display: block;
+            z-index: 2;
+            position: relative;
+            animation: spinLogo 16s linear infinite;
+        }
+        @keyframes spinLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .logo-glow {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #f87171 0%, #fff0 70%);
+            filter: blur(32px);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(18px) saturate(1.5);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 40px 0 rgba(185,28,28,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.04);
+            transition: transform 0.18s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.18s;
+            animation: cardPulse 2.5s infinite alternate;
+        }
+        @keyframes cardPulse {
+            0% { box-shadow: 0 8px 40px 0 rgba(185,28,28,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.04); }
+            100% { box-shadow: 0 16px 56px 0 rgba(185,28,28,0.28), 0 2px 12px 0 rgba(0,0,0,0.08); }
+        }
+        .glass-effect:hover {
+            transform: scale(1.025);
+        }
+        .input-group {
+            position: relative;
+        }
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b91c1c;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+        .input-group input {
+            padding-left: 44px;
+            font-size: 1.08rem;
+            background: rgba(255,255,255,0.85);
+            color: #b91c1c;
+            font-weight: 500;
+        }
+        .input-group input::placeholder {
+            color: #b91c1c;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in { animation: fade-in 0.8s ease; }
+        @keyframes glow {
+            0%,100% { filter: drop-shadow(0 0 0 #b91c1c); }
+            50% { filter: drop-shadow(0 0 32px #b91c1c); }
+        }
+        .animate-glow { animation: glow 1.5s infinite alternate; }
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.7s cubic-bezier(.68,-0.55,.27,1.55); }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.13;
+            pointer-events: none;
+            animation: float 12s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-40px) scale(1.12); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .w-full.max-w-md {
+                width: 100%;
+                margin-top: 2rem;
+            }
+            
+            .sniper-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .logo-glow {
+                width: 96px;
+                height: 96px;
+                top: 48px;
+            }
+            
+            h1.text-4xl {
+                font-size: 2rem;
+            }
+            
+            .text-lg {
+                font-size: 1rem;
+            }
+            
+            .glass-effect {
+                padding: 1.5rem;
+            }
+            
+            .input-group input {
+                font-size: 1rem;
+                padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            }
+            
+            .input-group i {
+                left: 10px;
+                font-size: 1rem;
+            }
+            
+            button[type="submit"] {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .particle {
+                display: none;
+            }
+        }
+        
+        /* Tablet Responsive Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .w-full.max-w-md {
+                width: 90%;
+            }
+            
+            .sniper-icon {
+                width: 52px;
+                height: 52px;
+            }
+            
+            h1.text-4xl {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            .glass-effect:hover {
+                transform: none;
+            }
+            
+            button[type="submit"]:hover {
+                transform: none;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .darkModeToggle,
+            .particle,
+            .logo-glow {
+                display: none;
+            }
+            
+            .glass-effect {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            button[type="submit"] {
+                border: 1px solid #b91c1c;
+                color: #b91c1c;
+                background: white;
+            }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .alert {
+            animation: slideIn 0.3s ease-out;
+        }
+        .alert.hide {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+        .success-alert {
+            background-color: #d1fae5;
+            border-color: #059669;
+            color: #065f46;
+        }
+        .error-alert {
+            background-color: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center p-4">
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle" aria-label="Toggle dark mode" class="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full shadow-md p-2 transition-colors duration-200 focus:outline-none">
+        <svg id="darkModeIcon" class="h-6 w-6 text-gray-700 dark:text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />
+        </svg>
+    </button>
+    <!-- Animated particles for background (smaller) -->
+    <div class="particle" style="width:22px;height:22px;left:10vw;top:20vh;background:#b91c1c;"></div>
+    <div class="particle" style="width:14px;height:14px;left:80vw;top:30vh;background:#f87171;"></div>
+    <div class="particle" style="width:10px;height:10px;left:50vw;top:80vh;background:#b91c1c;"></div>
+    <div class="particle" style="width:8px;height:8px;left:70vw;top:60vh;background:#f87171;"></div>
+    <div class="particle" style="width:6px;height:6px;left:20vw;top:70vh;background:#b91c1c;"></div>
+    <div class="w-full max-w-md mx-auto mt-12 animate-fade-in relative">
+        <div class="logo-glow"></div>
+        <div class="text-center mb-8 relative z-10">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="28" cy="28" r="26" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="28" cy="28" r="12" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="28" y1="4" x2="28" y2="18" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="28" y1="38" x2="28" y2="52" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="4" y1="28" x2="18" y2="28" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="38" y1="28" x2="52" y2="28" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="28" cy="28" r="3" fill="#b91c1c"/>
+            </svg>
+            <h1 class="text-4xl font-extrabold text-red-700 scarlet-header mb-2">Login</h1>
+            <p class="text-gray-700 text-lg font-semibold">Welcome back to ScarletSniper</p>
+        </div>
+        <form method="post" class="space-y-6" id="loginForm">
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" required autocomplete="username"
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                    placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" required autocomplete="current-password"
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-700 focus:ring-red-700 px-3 py-2.5 transition-all duration-200"
+                    placeholder="Enter your password">
+            </div>
+            <div id="loginInlineMsg" class="text-xs text-red-600 mb-3 text-center" style="display:none;"></div>
+            <button type="submit" id="loginBtn"
+                class="w-full py-3 px-4 rounded-lg bg-red-700 text-white font-semibold hover:bg-red-800 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center shadow-lg hover:shadow-xl">
+                <span id="loginBtnText">Login</span>
+                <svg id="loginSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                </svg>
+            </button>
+        </form>
+        <div class="mt-8 text-center text-xs text-gray-400">&copy; {{ 2024 }} ScarletSniper. Not affiliated with Rutgers University.</div>
+    </div>
+    <div id="loginSuccessAnim" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="flex flex-col items-center animate-fade-in">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <svg class="h-20 w-20 text-green-500 mt-6 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-white animate-fade-in">Welcome to <span class="text-red-500">ScarletSniper!</span></div>
+            <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+        </div>
+    </div>
+    <div id="loginErrorAnim" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="flex flex-col items-center animate-fade-in">
+            <svg class="sniper-icon animate-glow" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#b91c1c" stroke-width="4" fill="#fff"/>
+                <circle cx="24" cy="24" r="10" stroke="#b91c1c" stroke-width="3" fill="#fff"/>
+                <line x1="24" y1="2" x2="24" y2="14" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="24" y1="34" x2="24" y2="46" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="2" y1="24" x2="14" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <line x1="34" y1="24" x2="46" y2="24" stroke="#b91c1c" stroke-width="3"/>
+                <circle cx="24" cy="24" r="3" fill="#b91c1c"/>
+            </svg>
+            <svg class="h-20 w-20 text-red-500 mt-6 animate-pop" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <div class="mt-6 text-3xl font-extrabold text-white animate-fade-in">Login failed. Please try again.</div>
+            <canvas id="confettiCanvasError" class="fixed inset-0 pointer-events-none z-50"></canvas>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('loginBtn');
+            var text = document.getElementById('loginBtnText');
+            var spinner = document.getElementById('loginSpinner');
+            btn.disabled = true;
+            text.textContent = 'Logging in...';
+            spinner.classList.remove('hidden');
+
+            // Submit via fetch to check credentials
+            const formData = new FormData(loginForm);
+            const response = await fetch("/login", {
+                method: "POST",
+                body: formData
+            });
+            // Only show animation if redirected to dashboard or admin
+            if (response.redirected && (response.url.includes('/dashboard') || response.url.includes('/admin'))) {
+                document.getElementById('loginSuccessAnim').classList.remove('hidden');
+                launchConfetti();
+                setTimeout(() => { window.location.href = response.url; }, 1500);
+            } else {
+                const html = await response.text();
+                document.open(); document.write(html); document.close();
+            }
+        });
+
+        // Confetti animation
+        function launchConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let confetti = [];
+            for (let i = 0; i < 120; i++) {
+                confetti.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * -canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * 40 + 10,
+                    color: `hsl(${Math.random()*360},90%,60%)`,
+                    tilt: Math.random() * 10 - 10
+                });
+            }
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confetti.forEach(c => {
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+                    ctx.fillStyle = c.color;
+                    ctx.fill();
+                });
+                update();
+            }
+            let angle = 0;
+            function update() {
+                angle += 0.01;
+                confetti.forEach(c => {
+                    c.y += Math.cos(angle + c.d) + 2 + c.r/2;
+                    c.x += Math.sin(angle) * 2;
+                    if (c.y > canvas.height) {
+                        c.x = Math.random() * canvas.width;
+                        c.y = -10;
+                    }
+                });
+            }
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Dark mode toggle logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark-gradient');
+                document.body.style.color = '#f3f4f6';
+                document.querySelectorAll('.glass-effect').forEach(el => {
+                    el.classList.remove('bg-white');
+                    el.classList.add('bg-gray-900','text-gray-100');
+                });
+                document.querySelectorAll('.scarlet-header').forEach(el => {
+                    el.classList.remove('text-red-700');
+                    el.classList.add('text-red-400');
+                });
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.add('hover:bg-gray-800');
+                });
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark-gradient');
+                document.body.style.background = '';
+                document.body.style.color = '';
+                document.querySelectorAll('.glass-effect').forEach(el => {
+                    el.classList.remove('bg-gray-900','text-gray-100');
+                    el.classList.add('bg-white');
+                });
+                document.querySelectorAll('.scarlet-header').forEach(el => {
+                    el.classList.remove('text-red-400');
+                    el.classList.add('text-red-700');
+                });
+                document.querySelectorAll('a').forEach(el => {
+                    el.classList.remove('hover:bg-gray-800');
+                });
+            }
+            // Icon
+            darkModeIcon.innerHTML = enabled
+                ? '<path id="moonIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />'
+                : '<path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M12 7a5 5 0 100 10 5 5 0 000-10z" />';
+        }
+        // Load preference
+        const darkPref = localStorage.getItem('scarlet_dark_mode') === 'true';
+        setDarkMode(darkPref);
+        darkModeToggle.onclick = () => {
+            const enabled = !document.documentElement.classList.contains('dark');
+            setDarkMode(enabled);
+            localStorage.setItem('scarlet_dark_mode', enabled);
+        };
+
+        // Auto-hide alerts after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.classList.add('hide');
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html> 

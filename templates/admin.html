@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ScarletSniper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-600">Admin Dashboard</h1>
+            <div class="flex gap-2">
+                <a href="{{ url_for('admin_waitlist') }}" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors font-semibold">View Waitlist Requests</a>
+                <a href="{{ url_for('logout') }}" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">Logout</a>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">All Users</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">NetID</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Admin</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Account Type</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Paid Slots</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Last Login</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Last IP</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Session</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Active Monitors</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Past Requests</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for user in users %}
+                        <tr>
+                            <td class="px-4 py-2 font-semibold">{{ user[1] }}</td>
+                            <td class="px-4 py-2">{{ user[2] }}</td>
+                            <td class="px-4 py-2">{{ 'Yes' if user[3] else 'No' }}</td>
+                            <td class="px-4 py-2">
+                                <span class="inline-block px-2 py-1 rounded text-xs font-bold {{ 'bg-green-100 text-green-800' if all_monitoring[user[0]].account_type == 'paid' else 'bg-gray-200 text-gray-700' }}">
+                                    {{ all_monitoring[user[0]].account_type|capitalize }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 text-center">{{ all_monitoring[user[0]].paid_class_count }}</td>
+                            <td class="px-4 py-2">{{ user[4] or 'Never' }}</td>
+                            <td class="px-4 py-2">{{ all_monitoring[user[0]].last_ip or 'N/A' }}</td>
+                            <td class="px-4 py-2">
+                                <div class="flex items-center">
+                                    <span id="session-status-{{ user[0] }}" class="inline-flex items-center">
+                                        {% if user[0] in active_drivers %}
+                                            <span class="w-2 h-2 rounded-full bg-green-500 mr-1"></span>
+                                            <span>Active</span>
+                                        {% else %}
+                                            <span class="w-2 h-2 rounded-full bg-red-500 mr-1"></span>
+                                            <span>Inactive</span>
+                                        {% endif %}
+                                    </span>
+                                    <button onclick="refreshSessionStatus({{ user[0] }})" class="ml-2 text-xs text-blue-600 hover:text-blue-800">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="px-4 py-2">
+                                {% for course in all_monitoring[user[0]].course_indexes %}
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 rounded px-2 py-1 text-xs font-semibold mr-1 mb-1">{{ course }}</span>
+                                {% else %}
+                                    <span class="text-gray-400">None</span>
+                                {% endfor %}
+                            </td>
+                            <td class="px-4 py-2">
+                                {% for req in all_monitoring[user[0]].past_requests %}
+                                    <div class="mb-1">
+                                        <span class="inline-block {{ 'bg-red-100 text-red-800' if req.status == 'invalid' else 'bg-gray-100 text-gray-800' }} rounded px-2 py-1 text-xs font-semibold">{{ req.index }} - {{ req.status|capitalize }}</span>
+                                        <span class="text-xs text-gray-500 ml-2">{{ req.timestamp }}</span>
+                                        <span class="block text-xs text-gray-500">{{ req.reason }}</span>
+                                    </div>
+                                {% else %}
+                                    <span class="text-gray-400">None</span>
+                                {% endfor %}
+                            </td>
+                            <td class="px-4 py-2">
+                                {% if user[0] != session['user_id'] %}
+                                <div class="flex flex-col gap-1">
+                                    <button onclick="openEditModal('{{ user[0] }}')" class="px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold hover:bg-blue-600">Edit</button>
+                                    <button onclick="openResetModal('{{ user[0] }}')" class="px-2 py-1 rounded bg-yellow-500 text-white text-xs font-semibold hover:bg-yellow-600">Reset PW</button>
+                                    <button onclick="openImpersonateModal('{{ user[0] }}')" class="px-2 py-1 rounded bg-purple-500 text-white text-xs font-semibold hover:bg-purple-600">Impersonate</button>
+                                    <button onclick="openBanModal('{{ user[0] }}')" class="px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold hover:bg-red-500">Ban/Unban</button>
+                                    <button onclick="openNotifyModal('{{ user[0] }}')" class="px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold hover:bg-green-600">Notify</button>
+                                    <button onclick="deleteUser('{{ user[0] }}', '{{ user[1] }}')" class="px-2 py-1 rounded bg-red-600 text-white text-xs font-semibold hover:bg-red-700">Delete</button>
+                                </div>
+                                {% else %}
+                                <span class="text-gray-400 text-xs">(You)</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Admin Logs Section -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mt-8">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-2xl font-bold text-red-700 mb-4 flex items-center"><svg class="h-6 w-6 mr-2 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h2a4 4 0 014 4v2" /></svg>Admin Logs</h2>
+                <button id="viewAdminLogsBtn" class="px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 shadow transition text-xs">View Admin Logs</button>
+            </div>
+            <!-- Admin Logs Modal -->
+            <div id="adminLogsModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 max-w-2xl w-full text-left animate-fade-in overflow-y-auto" style="max-height:80vh;">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-red-700 dark:text-red-400">Admin Logs</h3>
+                        <button id="closeAdminLogsModal" class="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-bold hover:bg-gray-400 dark:hover:bg-gray-600">Close</button>
+                    </div>
+                    <pre id="adminLogsContent" class="bg-gray-100 dark:bg-gray-800 rounded p-4 text-xs overflow-x-auto" style="max-height:60vh;"></pre>
+                </div>
+            </div>
+        </div>
+        <!-- Admin Statistics Section -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mt-8">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center"><svg class="h-6 w-6 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>Admin Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-blue-100 rounded-lg p-4 shadow">
+                    <h3 class="text-lg font-semibold text-blue-800">Total Users</h3>
+                    <p class="text-2xl font-bold text-blue-600">{{ users|length }}</p>
+                </div>
+                <div class="bg-green-100 rounded-lg p-4 shadow">
+                    <h3 class="text-lg font-semibold text-green-800">Active Monitors</h3>
+                    <p class="text-2xl font-bold text-green-600">
+                        {% set active_monitors_count = 0 %}
+                        {% for user_data in all_monitoring.values() %}
+                            {% set active_monitors_count = active_monitors_count + user_data.course_indexes|length %}
+                        {% endfor %}
+                        {{ active_monitors_count }}
+                    </p>
+                </div>
+                <div class="bg-yellow-100 rounded-lg p-4 shadow">
+                    <h3 class="text-lg font-semibold text-yellow-800">Paid Users</h3>
+                    <p class="text-2xl font-bold text-yellow-600">{{ all_monitoring.values()|selectattr('account_type', 'equalto', 'paid')|list|length }}</p>
+                </div>
+                <div class="bg-purple-100 rounded-lg p-4 shadow">
+                    <h3 class="text-lg font-semibold text-purple-800">Total Past Requests</h3>
+                    <p class="text-2xl font-bold text-purple-600">
+                        {% set total_past_requests = 0 %}
+                        {% for user_data in all_monitoring.values() %}
+                            {% set total_past_requests = total_past_requests + user_data.past_requests|length %}
+                        {% endfor %}
+                        {{ total_past_requests }}
+                    </p>
+                </div>
+            </div>
+            <!-- Extra stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                <div class="bg-blue-50 rounded-lg p-4 shadow flex flex-col">
+                    <span class="font-semibold text-blue-800">Admins</span>
+                    <span class="text-xl font-bold">{{ extra_stats.admin_count }}</span>
+                </div>
+                <div class="bg-red-50 rounded-lg p-4 shadow flex flex-col">
+                    <span class="font-semibold text-red-800">Banned Users</span>
+                    <span class="text-xl font-bold">{{ extra_stats.banned_count }}</span>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 shadow flex flex-col">
+                    <span class="font-semibold text-green-800">SMS Enabled</span>
+                    <span class="text-xl font-bold">{{ extra_stats.sms_enabled_count }}</span>
+                </div>
+                <div class="bg-yellow-50 rounded-lg p-4 shadow flex flex-col">
+                    <span class="font-semibold text-yellow-800">Recent Logins (24h)</span>
+                    <span class="text-xl font-bold">{{ extra_stats.recent_logins }}</span>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 shadow flex flex-col">
+                    <span class="font-semibold text-purple-800">Most Monitored Course</span>
+                    <span class="text-xl font-bold">{{ extra_stats.most_monitored_course or 'N/A' }}</span>
+                </div>
+            </div>
+            <!-- Stripe Dashboard Link -->
+            <div class="mt-8 flex justify-end">
+                <a href="{{ stripe_admin_url }}" target="_blank" class="px-6 py-2 rounded bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow">View Stripe Dashboard</a>
+            </div>
+        </div>
+        <!-- Admin Data Explorer Section -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center"><svg class="h-6 w-6 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5h3a1 1 0 011 1v4m-1 4v4a1 1 0 01-1 1h-3m-10 0H4a1 1 0 01-1-1v-4" /></svg>Data Explorer</h2>
+            <div class="mb-4 flex gap-2">
+                <button class="tab-btn px-4 py-2 rounded bg-blue-100 text-blue-700 font-bold" data-tab="users">Users</button>
+                <button class="tab-btn px-4 py-2 rounded bg-green-100 text-green-700 font-bold" data-tab="courses">Courses</button>
+                <button class="tab-btn px-4 py-2 rounded bg-yellow-100 text-yellow-700 font-bold" data-tab="monitors">Monitors</button>
+                <button class="tab-btn px-4 py-2 rounded bg-purple-100 text-purple-700 font-bold" data-tab="requests">Requests</button>
+                <button class="tab-btn px-4 py-2 rounded bg-pink-100 text-pink-700 font-bold" data-tab="payments">Payments</button>
+                <button class="tab-btn px-4 py-2 rounded bg-indigo-100 text-indigo-700 font-bold" data-tab="trends">Trends</button>
+                <button class="tab-btn px-4 py-2 rounded bg-orange-100 text-orange-700 font-bold" data-tab="scheduled">Scheduled Notifications</button>
+                <button class="tab-btn px-4 py-2 rounded bg-gray-100 text-gray-700 font-bold" data-tab="templates">Templates</button>
+                <button class="tab-btn px-4 py-2 rounded bg-lime-100 text-lime-700 font-bold" data-tab="server">Server Health</button>
+            </div>
+            <div id="tab-users" class="tab-content">
+                <div class="flex justify-between items-center mb-2">
+                    <input type="text" id="userSearch" placeholder="Search users..." class="px-2 py-1 border rounded w-full max-w-xs">
+                    <button onclick="exportCSV('users')" class="ml-2 px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 text-xs">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto"><table id="usersTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-courses" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <input type="text" id="courseSearch" placeholder="Search courses..." class="px-2 py-1 border rounded w-full max-w-xs">
+                    <button onclick="exportCSV('courses')" class="ml-2 px-3 py-1 rounded bg-green-600 text-white font-bold hover:bg-green-700 text-xs">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto"><table id="coursesTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-monitors" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <input type="text" id="monitorSearch" placeholder="Search monitors..." class="px-2 py-1 border rounded w-full max-w-xs">
+                    <button onclick="exportCSV('monitors')" class="ml-2 px-3 py-1 rounded bg-yellow-600 text-white font-bold hover:bg-yellow-700 text-xs">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto"><table id="monitorsTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-requests" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <input type="text" id="requestSearch" placeholder="Search requests..." class="px-2 py-1 border rounded w-full max-w-xs">
+                    <button onclick="exportCSV('requests')" class="ml-2 px-3 py-1 rounded bg-purple-600 text-white font-bold hover:bg-purple-700 text-xs">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto"><table id="requestsTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-payments" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <input type="text" id="paymentSearch" placeholder="Search payments..." class="px-2 py-1 border rounded w-full max-w-xs">
+                    <button onclick="exportCSV('payments')" class="ml-2 px-3 py-1 rounded bg-pink-600 text-white font-bold hover:bg-pink-700 text-xs">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto"><table id="paymentsTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-trends" class="tab-content hidden">
+                <h3 class="text-lg font-bold mb-4 text-indigo-700">Most Popular Courses (Current)</h3>
+                <canvas id="coursePopularityChart" height="120"></canvas>
+            </div>
+            <div id="tab-scheduled" class="tab-content hidden">
+                <h3 class="text-lg font-bold mb-4 text-orange-700">Schedule a Notification</h3>
+                <form id="scheduleNotifForm" class="mb-6 flex flex-col md:flex-row gap-2 items-end">
+                    <input type="text" id="notifMessage" placeholder="Message" class="flex-1 px-2 py-1 border rounded" required>
+                    <select id="notifType" class="px-2 py-1 border rounded">
+                        <option value="email">Email/SMS</option>
+                    </select>
+                    <select id="notifTarget" class="px-2 py-1 border rounded">
+                        <option value="all">All Users</option>
+                        <!-- Optionally add user IDs dynamically -->
+                    </select>
+                    <input type="datetime-local" id="notifTime" class="px-2 py-1 border rounded" required>
+                    <button type="submit" class="px-4 py-1 rounded bg-orange-600 text-white font-bold hover:bg-orange-700">Schedule</button>
+                </form>
+                <div class="mb-2 text-sm text-green-700" id="notifMsg"></div>
+                <h3 class="text-md font-bold mb-2 text-orange-700">Scheduled Notifications</h3>
+                <div class="overflow-x-auto"><table id="scheduledNotifsTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-templates" class="tab-content hidden">
+                <h3 class="text-lg font-bold mb-4 text-gray-700">Notification Templates</h3>
+                <form id="templateForm" class="mb-6 flex flex-col md:flex-row gap-2 items-end">
+                    <input type="hidden" id="templateId">
+                    <input type="text" id="templateName" placeholder="Name" class="px-2 py-1 border rounded" required>
+                    <input type="text" id="templateSubject" placeholder="Subject" class="px-2 py-1 border rounded" required>
+                    <input type="text" id="templateType" placeholder="Type (email/sms)" class="px-2 py-1 border rounded" required>
+                    <textarea id="templateBody" placeholder="Body" class="px-2 py-1 border rounded" required></textarea>
+                    <button type="submit" class="px-4 py-1 rounded bg-gray-600 text-white font-bold hover:bg-gray-700">Save</button>
+                </form>
+                <div class="mb-2 text-sm text-green-700" id="templateMsg"></div>
+                <div class="overflow-x-auto"><table id="templatesTable" class="min-w-full text-xs"></table></div>
+            </div>
+            <div id="tab-server" class="tab-content hidden">
+                <h3 class="text-lg font-bold mb-4 text-lime-700">Server Health Dashboard</h3>
+                <div id="serverHealthStats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Modals for user management actions -->
+    <div id="editUserModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-xl p-8 max-w-md w-full text-left">
+        <h3 class="text-xl font-bold mb-4">Edit User</h3>
+        <form id="editUserForm" class="space-y-3">
+          <input type="hidden" name="user_id" id="editUserId">
+          <label>Email: <input type="email" name="email" id="editUserEmail" class="w-full border rounded px-2 py-1"></label>
+          <label>Phone: <input type="tel" name="phone" id="editUserPhone" class="w-full border rounded px-2 py-1"></label>
+          <label>Account Type: <select name="account_type" id="editUserAccountType" class="w-full border rounded px-2 py-1"><option value="free">Free</option><option value="paid">Paid</option><option value="admin">Admin</option></select></label>
+          <label>Paid Slots: <input type="number" name="paid_class_count" id="editUserSlots" class="w-full border rounded px-2 py-1"></label>
+          <div class="flex gap-2 mt-4">
+            <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-bold hover:bg-blue-700">Save</button>
+            <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded bg-gray-300 text-gray-800 font-bold hover:bg-gray-400">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="resetPwModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-xl p-8 max-w-xs w-full text-center">
+        <h3 class="text-xl font-bold mb-4">Reset Password</h3>
+        <form id="resetPwForm" class="space-y-3">
+          <input type="hidden" name="user_id" id="resetPwUserId">
+          <input type="password" name="new_password" id="resetPwInput" class="w-full border rounded px-2 py-1" placeholder="New password">
+          <div class="flex gap-2 mt-4 justify-center">
+            <button type="submit" class="px-4 py-2 rounded bg-yellow-600 text-white font-bold hover:bg-yellow-700">Reset</button>
+            <button type="button" onclick="closeResetModal()" class="px-4 py-2 rounded bg-gray-300 text-gray-800 font-bold hover:bg-gray-400">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="impersonateModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-xl p-8 max-w-xs w-full text-center">
+        <h3 class="text-xl font-bold mb-4">Impersonate User</h3>
+        <p>Are you sure you want to impersonate this user?</p>
+        <div class="flex gap-2 mt-4 justify-center">
+          <button id="impersonateConfirmBtn" class="px-4 py-2 rounded bg-purple-600 text-white font-bold hover:bg-purple-700">Impersonate</button>
+          <button type="button" onclick="closeImpersonateModal()" class="px-4 py-2 rounded bg-gray-300 text-gray-800 font-bold hover:bg-gray-400">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="banModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-xl p-8 max-w-xs w-full text-center">
+        <h3 class="text-xl font-bold mb-4">Ban/Unban User</h3>
+        <p id="banModalText">Are you sure you want to ban this user?</p>
+        <div class="flex gap-2 mt-4 justify-center">
+          <button id="banConfirmBtn" class="px-4 py-2 rounded bg-red-600 text-white font-bold hover:bg-red-700">Ban/Unban</button>
+          <button type="button" onclick="closeBanModal()" class="px-4 py-2 rounded bg-gray-300 text-gray-800 font-bold hover:bg-gray-400">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="notifyModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-xl p-8 max-w-md w-full text-left">
+        <h3 class="text-xl font-bold mb-4">Send Notification</h3>
+        <form id="notifyForm" class="space-y-3">
+          <input type="hidden" name="user_id" id="notifyUserId">
+          <label>Message: <textarea name="message" id="notifyMessage" class="w-full border rounded px-2 py-1"></textarea></label>
+          <div class="flex gap-2 mt-4">
+            <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white font-bold hover:bg-green-700">Send</button>
+            <button type="button" onclick="closeNotifyModal()" class="px-4 py-2 rounded bg-gray-300 text-gray-800 font-bold hover:bg-gray-400">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    function deleteUser(userId, email) {
+        if (!confirm(`Are you sure you want to delete user ${email}? This cannot be undone.`)) return;
+        fetch('/admin/delete_user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ user_id: userId })
+        }).then(res => res.json()).then(data => {
+            if (data.message) {
+                alert('User deleted!');
+                location.reload();
+            } else {
+                alert(data.error || 'Failed to delete user.');
+            }
+        });
+    }
+    document.getElementById('viewAdminLogsBtn').onclick = async function() {
+        document.getElementById('adminLogsModal').classList.remove('hidden');
+        const resp = await fetch('/admin/logs');
+        const data = await resp.json();
+        document.getElementById('adminLogsContent').textContent = data.entries.join('');
+    };
+    document.getElementById('closeAdminLogsModal').onclick = function() {
+        document.getElementById('adminLogsModal').classList.add('hidden');
+    };
+    // Modal open/close logic
+    function openEditModal(userId) {
+        // Find the row for this user
+        const row = [...document.querySelectorAll('tr')].find(tr => tr.querySelector(`button[onclick*="openEditModal('${userId}')"]`));
+        if (!row) return;
+        document.getElementById('editUserId').value = userId;
+        document.getElementById('editUserEmail').value = row.children[0].textContent.trim();
+        document.getElementById('editUserPhone').value = row.children[1].textContent.trim();
+        document.getElementById('editUserAccountType').value = row.children[3].textContent.trim().toLowerCase();
+        document.getElementById('editUserSlots').value = row.children[4].textContent.trim();
+        document.getElementById('editUserModal').classList.remove('hidden');
+    }
+    function closeEditModal() { document.getElementById('editUserModal').classList.add('hidden'); }
+    function openResetModal(userId) {
+        document.getElementById('resetPwUserId').value = userId;
+        document.getElementById('resetPwInput').value = '';
+        document.getElementById('resetPwModal').classList.remove('hidden');
+    }
+    function closeResetModal() { document.getElementById('resetPwModal').classList.add('hidden'); }
+    function openImpersonateModal(userId) {
+        document.getElementById('impersonateConfirmBtn').setAttribute('data-user', userId);
+        document.getElementById('impersonateModal').classList.remove('hidden');
+    }
+    function closeImpersonateModal() { document.getElementById('impersonateModal').classList.add('hidden'); }
+    function openBanModal(userId) {
+        document.getElementById('banConfirmBtn').setAttribute('data-user', userId);
+        document.getElementById('banModal').classList.remove('hidden');
+    }
+    function closeBanModal() { document.getElementById('banModal').classList.add('hidden'); }
+    function openNotifyModal(userId) {
+        document.getElementById('notifyUserId').value = userId;
+        document.getElementById('notifyMessage').value = '';
+        document.getElementById('notifyModal').classList.remove('hidden');
+    }
+    function closeNotifyModal() { document.getElementById('notifyModal').classList.add('hidden'); }
+    // AJAX for Edit User
+    const editUserForm = document.getElementById('editUserForm');
+    editUserForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const data = {
+            user_id: document.getElementById('editUserId').value,
+            email: document.getElementById('editUserEmail').value,
+            phone: document.getElementById('editUserPhone').value,
+            account_type: document.getElementById('editUserAccountType').value,
+            paid_class_count: document.getElementById('editUserSlots').value
+        };
+        const resp = await fetch('/admin/edit_user', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        });
+        const res = await resp.json();
+        if (res.message) { alert('User updated!'); location.reload(); }
+        else alert(res.error || 'Failed to update user.');
+    };
+    // AJAX for Reset Password
+    const resetPwForm = document.getElementById('resetPwForm');
+    resetPwForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const data = {
+            user_id: document.getElementById('resetPwUserId').value,
+            new_password: document.getElementById('resetPwInput').value
+        };
+        const resp = await fetch('/admin/reset_password', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        });
+        const res = await resp.json();
+        if (res.message) { alert('Password reset!'); closeResetModal(); }
+        else alert(res.error || 'Failed to reset password.');
+    };
+    // AJAX for Impersonate
+    const impersonateBtn = document.getElementById('impersonateConfirmBtn');
+    impersonateBtn.onclick = async function() {
+        const userId = impersonateBtn.getAttribute('data-user');
+        const resp = await fetch('/admin/impersonate_user', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({user_id: userId})
+        });
+        const res = await resp.json();
+        if (res.redirect) { window.location = res.redirect; }
+        else alert(res.error || 'Failed to impersonate user.');
+    };
+    // AJAX for Ban/Unban
+    const banBtn = document.getElementById('banConfirmBtn');
+    banBtn.onclick = async function() {
+        const userId = banBtn.getAttribute('data-user');
+        const resp = await fetch('/admin/ban_user', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({user_id: userId})
+        });
+        const res = await resp.json();
+        if (res.message) { alert(res.message); location.reload(); }
+        else alert(res.error || 'Failed to ban/unban user.');
+    };
+    // AJAX for Notify
+    const notifyForm = document.getElementById('notifyForm');
+    notifyForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const data = {
+            user_id: document.getElementById('notifyUserId').value,
+            message: document.getElementById('notifyMessage').value
+        };
+        const resp = await fetch('/admin/notify_user', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        });
+        const res = await resp.json();
+        if (res.message) { alert('Notification sent!'); closeNotifyModal(); }
+        else alert(res.error || 'Failed to send notification.');
+    };
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.onclick = function() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('bg-blue-500', 'text-white'));
+            btn.classList.add('bg-blue-500', 'text-white');
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+        };
+    });
+    // Helper: render table
+    function renderTable(tableId, data, columns) {
+        const table = document.getElementById(tableId);
+        let html = '<thead><tr>' + columns.map(c => `<th class="px-2 py-1">${c.label}</th>`).join('') + '<th class="px-2 py-1">Actions</th></tr></thead><tbody>';
+        for (const row of data) {
+            html += '<tr>' + columns.map(c => `<td class="px-2 py-1">${row[c.key] ?? ''}</td>`).join('') + `<td class="px-2 py-1"><button class='text-blue-600 underline font-bold' onclick='viewUserTimeline(${row.id})'>View Timeline</button></td></tr>`;
+        }
+        html += '</tbody>';
+        table.innerHTML = html;
+    }
+    // Load Users
+    fetch('/admin/data/users').then(r=>r.json()).then(data => {
+        renderTable('usersTable', data.users, [
+            {key:'id',label:'ID'},{key:'email',label:'Email'},{key:'netid',label:'NetID'},{key:'is_admin',label:'Admin'},{key:'last_login',label:'Last Login'},{key:'account_type',label:'Type'},{key:'paid_class_count',label:'Slots'},{key:'phone',label:'Phone'},{key:'phone_notifications',label:'SMS'}
+        ]);
+    });
+    // Load Courses
+    fetch('/admin/data/courses').then(r=>r.json()).then(data => {
+        renderTable('coursesTable', data.courses, [
+            {key:'index',label:'Course Index'},{key:'monitored_by',label:'Monitored By'},{key:'users',label:'User IDs'}
+        ]);
+    });
+    // Load Monitors
+    fetch('/admin/data/monitors').then(r=>r.json()).then(data => {
+        renderTable('monitorsTable', data.monitors, [
+            {key:'user_id',label:'User ID'},{key:'course_index',label:'Course Index'}
+        ]);
+    });
+    // Load Requests
+    fetch('/admin/data/requests').then(r=>r.json()).then(data => {
+        renderTable('requestsTable', data.requests, [
+            {key:'user_id',label:'User ID'},{key:'index',label:'Course Index'},{key:'status',label:'Status'},{key:'timestamp',label:'Timestamp'},{key:'reason',label:'Reason'}
+        ]);
+    });
+    // Load Payments
+    fetch('/admin/data/payments').then(r=>r.json()).then(data => {
+        renderTable('paymentsTable', data.payments, [
+            {key:'id',label:'ID'},{key:'user_id',label:'User ID'},{key:'email',label:'Email'},{key:'amount',label:'Amount'},{key:'currency',label:'Currency'},{key:'status',label:'Status'},{key:'timestamp',label:'Timestamp'},{key:'stripe_id',label:'Stripe ID'}
+        ]);
+    });
+    // Load and render course popularity chart
+    fetch('/admin/data/course_popularity').then(r=>r.json()).then(data => {
+        const ctx = document.getElementById('coursePopularityChart').getContext('2d');
+        const labels = data.courses.map(c => c.index);
+        const counts = data.courses.map(c => c.count);
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Users Monitoring',
+                    data: counts,
+                    backgroundColor: 'rgba(99,102,241,0.7)',
+                    borderColor: 'rgba(99,102,241,1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, precision:0 } }
+            }
+        });
+    });
+    // Simple search/filter for each table
+    function addSearch(inputId, tableId) {
+        document.getElementById(inputId).addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            document.querySelectorAll(`#${tableId} tbody tr`).forEach(tr => {
+                tr.style.display = [...tr.children].some(td => td.textContent.toLowerCase().includes(val)) ? '' : 'none';
+            });
+        });
+    }
+    addSearch('userSearch','usersTable');
+    addSearch('courseSearch','coursesTable');
+    addSearch('monitorSearch','monitorsTable');
+    addSearch('requestSearch','requestsTable');
+    addSearch('paymentSearch','paymentsTable');
+    // Timeline modal logic
+    function viewUserTimeline(userId) {
+        document.getElementById('userTimelineModal').classList.remove('hidden');
+        document.getElementById('userTimelineContent').textContent = 'Loading...';
+        fetch(`/admin/user_timeline/${userId}`).then(r=>r.json()).then(data => {
+            document.getElementById('userTimelineContent').textContent = data.entries.join('');
+        });
+    }
+    function closeUserTimelineModal() {
+        document.getElementById('userTimelineModal').classList.add('hidden');
+    }
+    // Export CSV logic
+    function exportCSV(type) {
+        fetch(`/admin/export_csv/${type}`).then(resp => resp.blob()).then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${type}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        });
+    }
+    // Scheduled Notifications logic
+    function loadScheduledNotifs() {
+        fetch('/admin/scheduled_notifications').then(r=>r.json()).then(data => {
+            const table = document.getElementById('scheduledNotifsTable');
+            let html = '<thead><tr><th>Message</th><th>Type</th><th>Target</th><th>Scheduled Time</th><th>Sent</th><th>Actions</th></tr></thead><tbody>';
+            for (const n of data.notifications) {
+                html += `<tr><td>${n.message}</td><td>${n.notif_type}</td><td>${n.target}</td><td>${n.scheduled_time}</td><td>${n.sent ? 'Yes' : 'No'}</td><td><button onclick="deleteNotif(${n.id})" class='text-red-600 underline font-bold'>Delete</button></td></tr>`;
+            }
+            html += '</tbody>';
+            table.innerHTML = html;
+        });
+    }
+    loadScheduledNotifs();
+    document.getElementById('scheduleNotifForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const msg = document.getElementById('notifMsg');
+        msg.textContent = '';
+        const data = {
+            message: document.getElementById('notifMessage').value,
+            notif_type: document.getElementById('notifType').value,
+            target: document.getElementById('notifTarget').value,
+            scheduled_time: document.getElementById('notifTime').value.replace('T',' ')
+        };
+        const resp = await fetch('/admin/scheduled_notifications', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        });
+        const res = await resp.json();
+        if (res.message) { msg.textContent = 'Notification scheduled!'; loadScheduledNotifs(); this.reset(); }
+        else msg.textContent = res.error || 'Failed to schedule.';
+    };
+    window.deleteNotif = async function(id) {
+        if (!confirm('Delete this scheduled notification?')) return;
+        await fetch('/admin/scheduled_notifications?id='+id, {method:'DELETE'});
+        loadScheduledNotifs();
+    };
+    // Templates logic
+    function loadTemplates() {
+        fetch('/admin/templates').then(r=>r.json()).then(data => {
+            const table = document.getElementById('templatesTable');
+            let html = '<thead><tr><th>Name</th><th>Subject</th><th>Type</th><th>Body</th><th>Actions</th></tr></thead><tbody>';
+            for (const t of data.templates) {
+                html += `<tr><td>${t.name}</td><td>${t.subject}</td><td>${t.type}</td><td><pre class='whitespace-pre-wrap'>${t.body}</pre></td><td><button onclick="editTemplate(${t.id},'${encodeURIComponent(t.name)}','${encodeURIComponent(t.subject)}','${encodeURIComponent(t.type)}','${encodeURIComponent(t.body)}')" class='text-blue-600 underline font-bold'>Edit</button> <button onclick="deleteTemplate(${t.id})" class='text-red-600 underline font-bold'>Delete</button></td></tr>`;
+            }
+            html += '</tbody>';
+            table.innerHTML = html;
+        });
+    }
+    loadTemplates();
+    document.getElementById('templateForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const msg = document.getElementById('templateMsg');
+        msg.textContent = '';
+        const id = document.getElementById('templateId').value;
+        const data = {
+            id,
+            name: document.getElementById('templateName').value,
+            subject: document.getElementById('templateSubject').value,
+            type: document.getElementById('templateType').value,
+            body: document.getElementById('templateBody').value
+        };
+        const method = id ? 'PUT' : 'POST';
+        const resp = await fetch('/admin/templates', {
+            method, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        });
+        const res = await resp.json();
+        if (res.message) { msg.textContent = id ? 'Template updated!' : 'Template created!'; loadTemplates(); this.reset(); }
+        else msg.textContent = res.error || 'Failed to save.';
+    };
+    window.editTemplate = function(id, name, subject, type, body) {
+        document.getElementById('templateId').value = id;
+        document.getElementById('templateName').value = decodeURIComponent(name);
+        document.getElementById('templateSubject').value = decodeURIComponent(subject);
+        document.getElementById('templateType').value = decodeURIComponent(type);
+        document.getElementById('templateBody').value = decodeURIComponent(body);
+    };
+    window.deleteTemplate = async function(id) {
+        if (!confirm('Delete this template?')) return;
+        await fetch('/admin/templates?id='+id, {method:'DELETE'});
+        loadTemplates();
+    };
+    // Server Health logic
+    function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024, dm = 2, sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+    function formatUptime(seconds) {
+        const d = Math.floor(seconds / 86400);
+        const h = Math.floor((seconds % 86400) / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = seconds % 60;
+        return `${d}d ${h}h ${m}m ${s}s`;
+    }
+    function loadServerHealth() {
+        fetch('/admin/server_health').then(r=>r.json()).then(data => {
+            const stats = [
+                {label:'CPU Usage', value:data.cpu+'%', color:'bg-lime-200 text-lime-800'},
+                {label:'RAM Usage', value:`${formatBytes(data.memory.used)} / ${formatBytes(data.memory.total)} (${data.memory.percent}%)`, color:'bg-blue-100 text-blue-800'},
+                {label:'Disk Usage', value:`${formatBytes(data.disk.used)} / ${formatBytes(data.disk.total)} (${data.disk.percent}%)`, color:'bg-pink-100 text-pink-800'},
+                {label:'Uptime', value:formatUptime(data.uptime), color:'bg-yellow-100 text-yellow-800'},
+                {label:'Platform', value:data.platform, color:'bg-gray-100 text-gray-800'}
+            ];
+            document.getElementById('serverHealthStats').innerHTML = stats.map(s => `<div class="rounded-lg p-4 shadow ${s.color}"><div class="font-semibold mb-1">${s.label}</div><div class="text-xl font-bold">${s.value}</div></div>`).join('');
+        });
+    }
+    setInterval(loadServerHealth, 5000);
+    loadServerHealth();
+    // Add session status refresh functionality
+    async function refreshSessionStatus(userId) {
+        try {
+            const resp = await fetch('/admin/check_session/' + userId);
+            const data = await resp.json();
+            const statusDiv = document.getElementById('session-status-' + userId);
+            if (statusDiv) {
+                statusDiv.innerHTML = `
+                    <span class="w-2 h-2 rounded-full ${data.active ? 'bg-green-500' : 'bg-red-500'} mr-1"></span>
+                    <span>${data.active ? 'Active' : 'Inactive'}</span>
+                `;
+            }
+        } catch (error) {
+            console.error('Error refreshing session status:', error);
+        }
+    }
+    // Auto-refresh session statuses every 30 seconds
+    setInterval(async () => {
+        const resp = await fetch('/admin/sessions');
+        const data = await resp.json();
+        data.sessions.forEach(session => {
+            const statusDiv = document.getElementById('session-status-' + session.user_id);
+            if (statusDiv) {
+                statusDiv.innerHTML = `
+                    <span class="w-2 h-2 rounded-full ${session.active ? 'bg-green-500' : 'bg-red-500'} mr-1"></span>
+                    <span>${session.active ? 'Active' : 'Inactive'}</span>
+                `;
+            }
+        });
+    }, 30000);
+    </script>
+</body>
+</html> 
