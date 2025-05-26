@@ -1727,10 +1727,23 @@ def join_waitlist():
         conn.commit()
         print(f"[DEBUG] Added to waitlist: {first_name} {last_name}, {email}, {netid}")
         conn.close()
-        # Send confirmation email
+        
+        # Send confirmation email to user
         subject = "Welcome to the ScarletSniper Waitlist!"
         body = f"""Dear {first_name},\n\nThank you for your interest in ScarletSniper! We've received your waitlist application and will review it shortly.\n\nYour application details:\n- Name: {first_name} {last_name}\n- NetID: {netid}\n- Email: {email}\n\nWe'll notify you via email once your application has been reviewed.\n\nBest regards,\nThe ScarletSniper Team"""
         send_email(subject, body, email)
+        
+        # Send notification email to admin (shaheersaud2004@gmail.com)
+        admin_subject = "New Waitlist Application Received"
+        admin_body = f"""A new waitlist application has been received:\n\n
+Name: {first_name} {last_name}
+Email: {email}
+NetID: {netid}
+Phone: {phone}
+Reason: {reason}\n\n
+Please review this application in the admin dashboard."""
+        send_email(admin_subject, admin_body, "shaheersaud2004@gmail.com")
+        
         return jsonify({'message': 'Successfully joined waitlist'}), 200
     except Exception as e:
         print(f"Error in join_waitlist: {str(e)}")
