@@ -1,10 +1,27 @@
 services:
   - type: web
-    name: coursesniper
+    name: ss1
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
-    healthCheckPath: / 
+      - key: GUNICORN_CMD_ARGS
+        value: "--workers=2 --threads=4 --timeout=120 --max-requests=1000 --max-requests-jitter=50"
+      - key: CHROME_BIN
+        value: /usr/bin/google-chrome
+      - key: CHROMEDRIVER_PATH
+        value: /usr/local/bin/chromedriver
+    plan: standard
+    disk:
+      name: ss1-disk
+      mountPath: /opt/render/project/src
+      sizeGB: 10
+    healthCheckPath: /admin/server_health
+    autoDeploy: true
+    scaling:
+      minInstances: 1
+      maxInstances: 2
+      targetMemoryPercent: 70
+      targetCPUPercent: 70 
